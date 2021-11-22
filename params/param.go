@@ -32,16 +32,18 @@ const (
 	ForkResolveInterval = 1 * time.Hour // fork resolve interval time
 
 	// helper const var
-	Committee  = "committee"
-	Proposer   = "proposer"
-	OraclePeer = "oraclepeer"
+	Committee           = "committee"
+	Proposer            = "proposer"
+	OraclePeer          = "oraclepeer"
+	OracleBlockProposer = "oracleproposer"
 
 	// step
-	Oracle        = "EVT_ORACLE"
-	PROPOSE       = "EVT_PROPOSE"
-	REDUCTION_ONE = "EVT_RED_1"
-	REDUCTION_TWO = "EVT_RED_2"
-	FINAL         = "EVT_FINAL"
+	ORACLE              = "EVT_ORACLE"
+	ORACLE_BLK_PROPOSAL = "oracleblkproposal"
+	PROPOSE             = "EVT_PROPOSE"
+	REDUCTION_ONE       = "EVT_RED_1"
+	REDUCTION_TWO       = "EVT_RED_2"
+	FINAL               = "EVT_FINAL"
 
 	FINAL_CONSENSUS     = 0
 	TENTATIVE_CONSENSUS = 1

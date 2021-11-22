@@ -1,5 +1,6 @@
-package oracle 
+package oracle
 
+/*
 type Response struct {
 
 }
@@ -12,3 +13,4 @@ type  struct {
 
 
 var URL map[string]
+*/

@@ -13,6 +13,7 @@ require (
 	github.com/spf13/viper v1.9.0
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/urfave/cli v1.22.5
+	github.com/wealdtech/go-merkletree v1.0.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
 	google.golang.org/grpc v1.42.0
 	google.golang.org/protobuf v1.27.1

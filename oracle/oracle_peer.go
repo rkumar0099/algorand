@@ -113,7 +113,7 @@ type SortitionSeed func(uint64) []byte
 func (op *OraclePeer) proposeBlock(nonce uint64, ss SortitionSeed, blkChan chan *FinalBlock,
 	epoch uint64, res map[uint64][][]byte) {
 	//salt, _ := op.privkey.Sign(cmn.Uint2Bytes(epoch))
-	role := role(params.OracleBlockProposer, epoch, params.ORACLE_BLOCK_PROPOSAL)
+	role := role(params.OracleBlockProposer, epoch, params.ORACLE_BLK_PROPOSAL)
 	seed := ss(epoch)
 	finalSeed := bytes.Join([][]byte{
 		seed,

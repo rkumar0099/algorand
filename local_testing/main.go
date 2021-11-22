@@ -9,8 +9,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/gossip"
+	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/message"
+	"github.com/rkumar0099/algorand/oracle"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/rkumar0099/algorand/peer"
 	"github.com/urfave/cli"
@@ -88,21 +90,18 @@ func regularRun(c *cli.Context) {
 		neighbors = append(neighbors, gossip.NewNodeId(Id))
 		node := peer.New(Id, params.Honest)
 		addrPeers = append(addrPeers, node.Address().Bytes())
-		//stores = append(stores, node.GetStore())
-		//go node.Start([]gossip.NodeId{bootNodeId})
 		nodes = append(nodes, node)
 	}
 
-	//oracle := oracle.NewOracle()
 	for _, p := range nodes {
 		go p.Start(addrPeers)
-
 	}
 	time.Sleep(2 * time.Second)
-	m := manage.New(neighbors, addrPeers)
+	lm := logs.New()
+	m := manage.New(neighbors, addrPeers, lm)
+	oracle := oracle.New()
 	for _, p := range nodes {
-		p.AddManage(m)
-
+		p.AddManage(m, lm, oracle)
 	}
 
 	for _, p := range nodes {
@@ -121,14 +120,15 @@ func regularRun(c *cli.Context) {
 	for count > 0 {
 		go proposeTransactions(nodes)
 		count -= 1
-		time.Sleep(5 * time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }
 
 func proposeTransactions(peers []*peer.Peer) {
 	for i := 0; i < 20; i++ {
 		ind := rand.Intn(50)
-		peers[ind].TopupTransaction(uint64(10))
+		val := rand.Intn(100)
+		peers[ind].TopupTransaction(uint64(val))
 	}
 }
 

@@ -10,6 +10,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/gossip"
+	"github.com/rkumar0099/algorand/logs"
 	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
 	"github.com/rkumar0099/algorand/mpt/mpt"
@@ -33,27 +34,25 @@ type Manage struct {
 	count         int
 	storage       kvstore.KVStore
 	recentMPT     *mpt.Trie
+	lm            *logs.LogManager
 }
 
-func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
+func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Manage {
 	nodeId := gossip.NewNodeId("127.0.0.1:9000")
 	m := &Manage{
 		Id:   nodeId,
 		node: gossip.New(nodeId, "transaction"),
 		lock: &sync.Mutex{},
 		txs:  make([]*msg.Transaction, 0),
-		//shCount:       make(map[uint64]map[cmn.Hash]uint64),
-		//responses:     make(map[uint64]bool),
-		stateHash: make(map[cmn.Hash]uint64),
-		//finalTxSet:    make(map[uint64]*msg.ProposedTx),
+
+		stateHash:     make(map[cmn.Hash]uint64),
 		epoch:         0,
 		connPool:      make(map[gossip.NodeId]*grpc.ClientConn),
 		proposedTxSet: make(chan *msg.ProposedTx, 1),
 		count:         0,
-		//storage:       kvstore.NewMemKVStore(),
-		//Ids:       make([]gossip.NodeId, 0),
+		lm:            lm,
 	}
-	m.storage, _ = kvstore.NewLevelDB("../database/manage")
+	m.storage = kvstore.NewMemKVStore() // manage storage to execute Tx set and generate Hash
 	m.grpcServer = grpc.NewServer()
 	m.ServiceServer = service.NewServer(
 		nodeId,
@@ -63,12 +62,10 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 	)
 	m.node.Register(m.grpcServer)
 	m.ServiceServer.Register(m.grpcServer)
-	//m.msgAgent.Register(msg.STATEHASH, m.handleSH)
 	m.addPeers(peers)
 	m.initializeMPT(peerAddresses)
 	lis, _ := net.Listen("tcp", m.Id.String())
 	go m.grpcServer.Serve(lis)
-	//go m.propose()
 	return m
 }
 
@@ -107,7 +104,7 @@ func (m *Manage) Run() {
 
 func (m *Manage) propose() {
 	for {
-		time.Sleep(1 * time.Minute)
+		time.Sleep(30 * time.Second)
 		m.epoch += 1
 		go m.proposeTxs()
 	}
@@ -132,16 +129,16 @@ func (m *Manage) proposeTxs() {
 		Txs:   txs,
 	}
 
-	m.proposedTxSet <- pt
+	//m.proposedTxSet <- pt
 	st, sh := m.executeTxSet(pt)
 	m.sendContributionToPeers(pt)
-	time.Sleep(20 * time.Second)
+	time.Sleep(10 * time.Second)
 	res := m.validate(sh)
 	log.Println("Response for epoch ", m.epoch, res)
 
 	if res {
-		m.sendFinalContribution(<-m.proposedTxSet)
-		time.Sleep(10 * time.Second)
+		m.sendFinalContribution(pt)
+		time.Sleep(5 * time.Second)
 		st.Commit()
 		m.recentMPT = st
 		log.Printf("[Manage] Epoch %d", m.epoch)
@@ -201,6 +198,7 @@ func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
 	for _, conn := range m.connPool {
 		go service.SendFinalContribution(conn, data)
 	}
+	m.lm.AddFinalTxLog(txSet.Txs)
 }
 
 func (m *Manage) LastState() []byte {

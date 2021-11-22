@@ -3,6 +3,7 @@ package message
 import (
 	"bytes"
 	"errors"
+	"log"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/rkumar0099/algorand/common"
@@ -174,4 +175,17 @@ func (prTx *ProposedTx) Serialize() ([]byte, error) {
 
 func (prTx *ProposedTx) Deserialize(data []byte) error {
 	return proto.Unmarshal(data, prTx)
+}
+
+func (opp *OraclePeerProposal) pubkey() *crypto.PublicKey {
+	return &crypto.PublicKey{Pk: opp.Pubkey}
+}
+
+func (opp *OraclePeerProposal) Verify(message []byte) error {
+	pubkey := opp.pubkey()
+	if err := pubkey.VerifyVRF(opp.Proof, message); err != nil {
+		return err
+	}
+	log.Printf("Oracle peer proposal successfully verified\n")
+	return nil
 }

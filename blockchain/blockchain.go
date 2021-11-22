@@ -6,7 +6,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/rkumar0099/algorand/mpt/kvstore"
+	"github.com/syndtr/goleveldb/leveldb"
 
 	"github.com/rkumar0099/algorand/common"
 	msg "github.com/rkumar0099/algorand/message"
@@ -16,17 +16,17 @@ import (
 type Blockchain struct {
 	Last            *msg.Block
 	Genesis         *msg.Block
-	persistKv       kvstore.KVStore
+	db              *leveldb.DB
 	blockCache      *pool.RingBuffer
 	blockCacheIndex map[common.Hash]*msg.Block
 	cacheLock       *sync.Mutex
 }
 
-const cacheSize = 10
+const cacheSize = 5
 
-func NewBlockchain(persistKv kvstore.KVStore) *Blockchain {
+func NewBlockchain(persistBlkStorage *leveldb.DB) *Blockchain {
 	bc := &Blockchain{
-		persistKv:       persistKv,
+		db:              persistBlkStorage,
 		blockCache:      pool.NewRingBuffer(cacheSize),
 		blockCacheIndex: make(map[common.Hash]*msg.Block),
 		cacheLock:       &sync.Mutex{},
@@ -50,7 +50,7 @@ func (bc *Blockchain) Get(hash common.Hash) (*msg.Block, error) {
 	if ok {
 		return blk, nil
 	}
-	data, err := bc.persistKv.Get(hash.Bytes())
+	data, err := bc.db.Get(hash.Bytes(), nil)
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found: %s", hash.Hex(), err.Error()))
 	}
@@ -76,7 +76,7 @@ func (bc *Blockchain) GetByRound(round uint64) *msg.Block {
 
 func (bc *Blockchain) Add(blk *msg.Block) {
 	data, _ := blk.Serialize()
-	bc.persistKv.Put(blk.Hash().Bytes(), data)
+	bc.db.Put(blk.Hash().Bytes(), data, nil)
 	if bc.Last == nil || blk.Round > bc.Last.Round {
 		bc.Last = blk
 	}

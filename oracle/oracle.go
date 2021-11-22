@@ -75,23 +75,26 @@ func (o *Oracle) Address() []byte {
 func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
 	o.lock.Lock()
 	defer o.lock.Unlock()
-	round := opp.Round
-	if o.prevepoch == o.epoch {
+	if o.epoch < opp.Epoch {
+		if o.epoch > 1 {
+			go o.RunOracle(o.peers[o.epoch], o.epoch)
+		}
 		o.epoch += 1
 	}
+
 	//log.Println("Current epoch ", o.epoch)
 	if _, ok := o.peers[o.epoch]; !ok {
 		o.peers[o.epoch] = make([]*OraclePeer, 0)
 		log.Println("Make peer array again")
 	}
-	seed := o.sortitionSeed(round)
-	role := role(params.OraclePeer, round, params.ORACLE)
-	if err := opp.Verify(opp.Proof, constructSeed(seed, role)); err != nil {
+	seed := o.sortitionSeed(o.epoch)
+	role := role(params.OraclePeer, o.epoch, params.ORACLE)
+	m := constructSeed(seed, role)
+	if err := opp.Verify(m); err != nil {
 		return
 	}
 
 	o.peers[o.epoch] = append(o.peers[o.epoch], newOraclePeer(o.epoch))
-	//log.Println(len(o.peers[o.epoch]))
 }
 
 func (o *Oracle) AddBlk(blk *message.Block) {
@@ -154,13 +157,7 @@ func constructSeed(seed, role []byte) []byte {
 	return bytes.Join([][]byte{seed, role}, nil)
 }
 
-func (o *Oracle) RunOracle() *FinalBlock {
-	//for {
-	//time.Sleep(30 * time.Second)
-	epoch := o.epoch
-	peers := o.peers[epoch]
-	//log.Println(len(peers))
-
+func (o *Oracle) RunOracle(peers []*OraclePeer, epoch uint64) {
 	var (
 		tx  *message.PendingRequest
 		txs []*message.PendingRequest
@@ -169,9 +166,8 @@ func (o *Oracle) RunOracle() *FinalBlock {
 		tx, o.txs = o.txs[0], o.txs[1:]
 		txs = append(txs, tx)
 	}
-	return o.process(epoch, peers, txs)
-	//o.prevepoch = o.epoch
-	//}
+	finalBlk := o.process(epoch, peers, txs)
+	o.finalBlks[o.epoch] = finalBlk
 }
 
 func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.PendingRequest) *FinalBlock {

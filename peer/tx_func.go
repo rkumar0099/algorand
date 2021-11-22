@@ -20,7 +20,7 @@ func (p *Peer) handleFinalContribution(data []byte) error {
 	if err != nil {
 		return err
 	}
-	st := p.executeTxSet(txSet, p.lastState, p.transactionStorage)
+	st := p.executeTxSet(txSet, p.lastState, p.tempTxStorage)
 	p.lastState = st.RootHash()
 	st.Commit()
 	p.finalContributions <- txSet
@@ -39,7 +39,7 @@ func (p *Peer) handleContribution(data []byte) ([]byte, error) {
 	}
 
 	//log.Println("Got contribution of size ", len(txSet.Txs))
-	st := p.executeTxSet(txSet, p.lastState, p.transactionStorage)
+	st := p.executeTxSet(txSet, p.lastState, p.tempTxStorage)
 	res := &msg.StateHash{
 		Epoch:     txSet.Epoch,
 		StateHash: st.RootHash(),

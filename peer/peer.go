@@ -13,19 +13,19 @@ import (
 	"sync"
 	"time"
 
+	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
-	"github.com/rkumar0099/algorand/mpt/mpt"
+	"github.com/rkumar0099/algorand/oracle"
+	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
 
-	"github.com/golang-collections/collections/set"
 	"github.com/golang/protobuf/proto"
 
 	"github.com/rkumar0099/algorand/blockchain"
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
-	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
 
 	//"github.com/rkumar0099/algorand/oracle"
@@ -43,14 +43,12 @@ type Peer struct {
 	privkey *crypto.PrivateKey
 	pubkey  *crypto.PublicKey
 
-	storage     kvstore.KVStore
-	chain       *blockchain.Blockchain
-	quitCh      chan struct{}
-	hangForever chan struct{}
+	permanentTxStorage kvstore.KVStore
+	chain              *blockchain.Blockchain
+	quitCh             chan struct{}
+	hangForever        chan struct{}
 
-	node   *gossip.Node
-	txNode *gossip.Node
-	//oracleNode    *gossip.Node
+	node          *gossip.Node
 	grpcServer    *grpc.Server
 	msgAgent      *msg.MsgAgent
 	ServiceServer *service.Server
@@ -59,44 +57,42 @@ type Peer struct {
 	votePool     *pool.VotePool
 	proposalPool *pool.ProposalPool
 
-	txSet     *set.Set
-	txSetLock *sync.Mutex
+	//txSet     *set.Set
+	//txSetLock *sync.Mutex
 
-	manage            *manage.Manage
-	oraclePeerRunning bool
-	//oracle            *oracle.Oracle
+	manage *manage.Manage
+	oracle *oracle.Oracle
+	lm     *logs.LogManager
 
-	epoch      uint64
-	txMsgAgent *message.MsgAgent
+	txEpoch uint64
 
-	recentMPT *mpt.Trie
-
-	finalContributions chan *msg.ProposedTx
+	finalContributions       chan *msg.ProposedTx
+	oracleFinalContributions chan [][]byte
 
 	lastState  []byte
 	startState []byte
 
-	transactionStorage kvstore.KVStore
-
-	//oracleMsgAgent    *message.MsgAgent
+	tempTxStorage kvstore.KVStore
+	oracleEpoch   uint64
 }
 
 //const memPoolCap = 512
 const votePoolCap = params.ExpectedCommitteeMembers * 2
-const cleanTimeout = time.Minute * 10
+const cleanTimeout = time.Minute * 1
 
 func New(addr string, maliciousType int) *Peer {
 	peer := &Peer{
-		Id:                 gossip.NewNodeId(addr),
-		quitCh:             make(chan struct{}),
-		hangForever:        make(chan struct{}),
-		grpcServer:         grpc.NewServer(),
-		txSet:              set.New(),
-		txSetLock:          &sync.Mutex{},
-		maliciousType:      params.Honest,
-		oraclePeerRunning:  false,
-		epoch:              0,
-		finalContributions: make(chan *msg.ProposedTx, 1000),
+		Id:          gossip.NewNodeId(addr),
+		quitCh:      make(chan struct{}),
+		hangForever: make(chan struct{}),
+		grpcServer:  grpc.NewServer(),
+		//txSet:              set.New(),
+		//txSetLock:          &sync.Mutex{},
+		maliciousType:            params.Honest,
+		txEpoch:                  0,
+		oracleEpoch:              0,
+		finalContributions:       make(chan *msg.ProposedTx, 1000),
+		oracleFinalContributions: make(chan [][]byte, 1000),
 		//transactionStorage: kvstore.NewMemKVStore(),
 	}
 	// gossip node
@@ -107,16 +103,15 @@ func New(addr string, maliciousType int) *Peer {
 	// pubkey and privkey
 	rand.Seed(time.Now().UnixNano())
 	peer.pubkey, peer.privkey, _ = crypto.NewKeyPair()
-	var err error
-	peer.storage, err = kvstore.NewLevelDB(fmt.Sprintf("../database/%s", addr))
-	if err != nil {
-		os.Exit(1)
-	}
+	peer.permanentTxStorage = kvstore.NewMemKVStore()
 
-	peer.transactionStorage = kvstore.NewMemKVStore()
+	peer.tempTxStorage = kvstore.NewMemKVStore()
 
-	// blockchain structure
-	peer.chain = blockchain.NewBlockchain(peer.storage)
+	// separate database to store blk on disk rather than in run-time stack
+	var path string = fmt.Sprintf("../database/%s", peer.Id.String())
+	os.RemoveAll(path)
+	db, _ := leveldb.OpenFile(path, nil)
+	peer.chain = blockchain.NewBlockchain(db)
 
 	// proposal pool
 	peer.proposalPool = pool.NewProposalPool(cleanTimeout, peer.proposalVerifier)
@@ -154,8 +149,8 @@ func (p *Peer) Start(addr [][]byte) error {
 	go p.msgAgent.Handle()
 	//go p.txMsgAgent.Handle()
 
-	p.initialize(addr, p.storage)
-	p.initialize(addr, p.transactionStorage)
+	p.initialize(addr, p.permanentTxStorage)
+	p.initialize(addr, p.tempTxStorage)
 	//go p.Run()
 	return nil
 }
@@ -164,8 +159,12 @@ func (p *Peer) JoinPeers(bootNode []gossip.NodeId) {
 	p.node.Join(bootNode)
 }
 
-func (p *Peer) AddManage(m *manage.Manage) {
+func (p *Peer) AddManage(m *manage.Manage, lm *logs.LogManager, oracle *oracle.Oracle) {
 	p.manage = m
+	p.oracle = oracle
+	p.lm = lm
+	blk, _ := p.chain.GetByRound(0).Serialize()
+	p.lm.AddFinalBlk(cmn.BytesToHash(blk), 0)
 }
 
 func (p *Peer) StartServices(bootNode []gossip.NodeId) error {
@@ -284,7 +283,8 @@ func (p *Peer) Run() {
 	// sleep 1 second for all peers ready.
 	time.Sleep(3 * time.Second)
 	//log.Printf("[alogrand] [%s] found %d peers", p.Id.String(), p.node.GetNeighborList().Len())
-
+	go p.proposeOraclePeer()
+	go p.sendBalance()
 	go p.forkLoop()
 
 	// propose block
@@ -355,12 +355,9 @@ func (p *Peer) processMain() {
 		}
 	*/
 	if len(block.Txs) > 0 {
-		if len(p.finalContributions) > 0 {
-			<-p.finalContributions
-		}
 		parentBlk := p.lastBlock()
-		txSet := &msg.ProposedTx{Epoch: p.epoch, Txs: block.Txs}
-		st := p.executeTxSet(txSet, parentBlk.StateHash, p.storage)
+		txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
+		st := p.executeTxSet(txSet, parentBlk.StateHash, p.permanentTxStorage)
 		//st := p.recentMPT
 
 		if bytes.Equal(block.StateHash, st.RootHash()) {
@@ -368,8 +365,7 @@ func (p *Peer) processMain() {
 		} else {
 			block.StateHash = parentBlk.StateHash
 		}
-		p.epoch = block.Epoch
-		log.Printf("%d, %s, Epoch: %d\n", block.Round, p.Id.String(), p.epoch)
+		p.txEpoch = block.Epoch
 	}
 
 	//log.Println("State Hash for block Round 1 is", block.StateHash)
@@ -401,7 +397,7 @@ func (p *Peer) processForkResolve() {
 func (p *Peer) proposeBlock() *msg.Block {
 	currRound := p.round() + 1
 	parentBlk := p.lastBlock()
-	p.recentMPT = nil
+	//p.recentMPT = nil
 	seed, proof, err := p.vrfSeed(currRound)
 	if err != nil {
 		return p.emptyBlock(currRound, p.lastBlock().Hash())
@@ -422,7 +418,7 @@ func (p *Peer) proposeBlock() *msg.Block {
 	if len(p.finalContributions) > 0 {
 		txSet := <-p.finalContributions
 		blk.Txs = txSet.Txs
-		st := p.executeTxSet(txSet, blk.StateHash, p.storage)
+		st := p.executeTxSet(txSet, blk.StateHash, p.permanentTxStorage)
 		blk.StateHash = st.RootHash()
 		blk.Epoch = txSet.Epoch
 		//p.recentMPT = st
@@ -524,27 +520,25 @@ func (p *Peer) verifySort(vrf, proof, seed, role []byte, expectedNum int) int {
 
 func (p *Peer) gossip(typ int, data []byte) {
 	message := &msg.Msg{
+		PID:  p.Id.String(),
 		Type: int32(typ),
 		Data: data,
 	}
 	switch typ {
 	case msg.BLOCK:
-		//log.Printf("[debug] [%s] gossip block", p.Id.String())
+		log.Printf("[debug] [%s] gossip block", p.Id.String())
 	case msg.BLOCK_PROPOSAL:
-		//log.Printf("[debug] [%s] gossip block proposal", p.Id.String())
+		log.Printf("[debug] [%s] gossip block proposal", p.Id.String())
 	case msg.VOTE:
-		//log.Printf("[debug] [%s] gossip vote", p.Id.String())
-	case msg.STATEHASH:
-		//log.Printf("[debug] [%s] gossip state hash", p.Id.String())
+		log.Printf("[debug] [%s] gossip vote", p.Id.String())
 	}
 	msgBytes, err := proto.Marshal(message)
 	if err != nil {
-		//log.Printf("[alogrand] [%s] cannot gossip message: %s", err.Error())
-	} else if typ == msg.STATEHASH {
-		p.txNode.Gossip(msgBytes)
+		log.Printf("[alogrand] [%s] cannot gossip message: %s", err.Error())
 	} else {
 		p.node.Gossip(msgBytes)
 	}
+	p.lm.AddProcessLog(message)
 }
 
 // committeeVote votes for `value`.
@@ -979,6 +973,13 @@ func (p *Peer) getIncomingMsgs(round uint64, step int) []interface{} {
 	return l.list
 }
 */
+
+func (p *Peer) sendBalance() {
+	for {
+		time.Sleep(9 * time.Second)
+		p.lm.AddBalance(p.Id.String(), p.GetBalance())
+	}
+}
 
 // send topup transction
 

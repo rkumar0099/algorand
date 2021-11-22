@@ -9,7 +9,6 @@ import (
 
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
-	"github.com/rkumar0099/algorand/gossip"
 	"github.com/rkumar0099/algorand/message"
 )
 
@@ -26,7 +25,6 @@ var (
 )
 
 type LogManager struct {
-	node        *gossip.Node
 	txLock      *sync.Mutex
 	blkLock     *sync.Mutex
 	processLock *sync.Mutex
@@ -37,9 +35,8 @@ type LogManager struct {
 	balances    map[string]uint64
 }
 
-func New(bootNode *gossip.Node) *LogManager {
+func New() *LogManager {
 	lm := &LogManager{
-		node:        bootNode,
 		txLock:      &sync.Mutex{},
 		blkLock:     &sync.Mutex{},
 		processLock: &sync.Mutex{},
@@ -89,6 +86,7 @@ func (lm *LogManager) AddProcessLog(msg *message.Msg) {
 	for len(lm.buffer) > 0 {
 		newChan <- <-lm.buffer
 	}
+	lm.buffer <- msg
 	go lm.writeProcessLog(newChan)
 }
 
@@ -118,17 +116,17 @@ func (lm *LogManager) writeProcessLog(logs chan *message.Msg) {
 		case message.FORK_PROPOSAL:
 			bp := &message.Proposal{}
 			if err := bp.Deserialize(msg.Data); err != nil {
-				latestLog += "[" + time.Now().String() + "] " + pid + ": Invalid fork proposal: " + err.Error() + "\n"
+				latestLog += "[" + time.Now().String() + "] " + string(pid) + ": Invalid fork proposal: " + err.Error() + "\n"
 			} else {
-				latestLog += "[" + time.Now().String() + "] " + pid + ": propose fork " + common.BytesToHash(bp.Hash).Hex() + "\n"
+				latestLog += "[" + time.Now().String() + "] " + string(pid) + ": propose fork " + common.BytesToHash(bp.Hash).Hex() + "\n"
 			}
 
 		case message.VOTE:
 			vote := &message.VoteMessage{}
 			if err := vote.Deserialize(msg.Data); err != nil {
-				latestLog += "[" + time.Now().String() + "] " + pid + ": Invalid vote " + err.Error() + "\n"
+				latestLog += "[" + time.Now().String() + "] " + string(pid) + ": Invalid vote " + err.Error() + "\n"
 			} else {
-				latestLog += "[" + time.Now().String() + "] " + fmt.Sprintf("%s: vote in %d:%d %s\n", pid, vote.Round, 5, common.BytesToHash(vote.Hash).Hex())
+				latestLog += "[" + time.Now().String() + "] " + fmt.Sprintf("%d: vote in %d:%d %s\n", pid, vote.Round, 5, common.BytesToHash(vote.Hash).Hex())
 			}
 		}
 	}
@@ -151,21 +149,8 @@ func (lm *LogManager) AddTxLog(hash cmn.Hash) {
 	for len(lm.txBuffer) > 0 {
 		newChan <- <-lm.txBuffer
 	}
-
+	lm.txBuffer <- hash
 	go lm.writeTxLog(newChan)
-}
-
-func (lm *LogManager) AddFinalTxLog(txs []*message.Transaction) {
-	lm.txLock.Lock()
-	latestLog := ""
-	for _, tx := range txs {
-		finaltxcount += 1
-		latestLog += "Transaction " + strconv.Itoa(finaltxcount) + " finalized, Hash: " + tx.Hash().Hex() + "\n"
-	}
-	f, _ := os.OpenFile("../logs/txs.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
-	f.WriteString(latestLog)
-	f.Close()
-	lm.txLock.Unlock()
 }
 
 func (lm *LogManager) writeTxLog(txs chan cmn.Hash) {
@@ -183,6 +168,19 @@ func (lm *LogManager) writeTxLog(txs chan cmn.Hash) {
 	f.Close()
 }
 
+func (lm *LogManager) AddFinalTxLog(txs []*message.Transaction) {
+	lm.txLock.Lock()
+	defer lm.txLock.Unlock()
+	latestLog := ""
+	for _, tx := range txs {
+		finaltxcount += 1
+		latestLog += "Transaction " + strconv.Itoa(finaltxcount) + " finalized, Hash: " + tx.Hash().Hex() + "\n"
+	}
+	f, _ := os.OpenFile("../logs/txs.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	f.WriteString(latestLog)
+	f.Close()
+}
+
 func (lm *LogManager) AddFinalBlk(blkHash cmn.Hash, round uint64) {
 	lm.blkLock.Lock()
 	defer lm.blkLock.Unlock()
@@ -190,18 +188,18 @@ func (lm *LogManager) AddFinalBlk(blkHash cmn.Hash, round uint64) {
 		lm.finalBlk[round] = blkHash
 		blkcount += 1
 		if blkcount%10 == 0 {
-			go lm.writeBlkLog(&lm.finalBlk, startRound, endRound)
+			go lm.writeBlkLog(lm.finalBlk, startRound, endRound)
 			startRound = uint64(blkcount)
 		}
 		endRound += 1
 	}
 }
 
-func (lm *LogManager) writeBlkLog(finalBlk *map[uint64]cmn.Hash, sr uint64, er uint64) {
+func (lm *LogManager) writeBlkLog(finalBlk map[uint64]cmn.Hash, sr uint64, er uint64) {
 	latestLog := ""
 	for sr <= er {
-		latestLog += "Block " + strconv.Itoa(int(sr)) + " added to blockchain, Hash: " + (*finalBlk)[sr].Hex() + "\n"
-		delete((*finalBlk), sr)
+		latestLog += "Block " + strconv.Itoa(int(sr)) + " added to blockchain, Hash: " + finalBlk[sr].Hex() + "\n"
+		delete(finalBlk, sr)
 		sr += 1
 	}
 
