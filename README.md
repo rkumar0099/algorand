@@ -1,2 +1,2 @@
-# algorand
-Algorand blockchain implementation with Go 1.13+ with real-transaction support and built-in oracle functionality using commit-reveal scheme.
+# go-algorand
+Algorand blockchain implementation in Go 1.13+ with built-in oracle support
