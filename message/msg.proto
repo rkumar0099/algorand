@@ -58,6 +58,8 @@ message Block {
     bytes Data = 12;
     repeated PendingRequest Reqs = 13;
     repeated bytes ResHash = 14;
+    uint64 txEpoch = 15;
+    uint64 oracleEpoch = 16;
 }
 
 message AccessResponse {
