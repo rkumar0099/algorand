@@ -77,10 +77,3 @@ func RecoverPubkey(sign []byte) *PublicKey {
 	pubkey := sign[:ed25519.PublicKeySize]
 	return &PublicKey{pubkey}
 }
-
-func MyKey() (a string, b string, err error) {
-	a = "Rabindar"
-	b = "Kumar"
-	err = nil
-	return
-}

@@ -3,12 +3,11 @@ package blockchain
 import (
 	"errors"
 	"fmt"
-	"log"
 	"sync"
 
-	"github.com/syndtr/goleveldb/leveldb"
-
 	"github.com/rkumar0099/algorand/common"
+	cmn "github.com/rkumar0099/algorand/common"
+	"github.com/rkumar0099/algorand/manage"
 	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/pool"
 )
@@ -16,20 +15,23 @@ import (
 type Blockchain struct {
 	Last            *msg.Block
 	Genesis         *msg.Block
-	db              *leveldb.DB
+	persistKv       map[cmn.Hash][]byte
 	blockCache      *pool.RingBuffer
 	blockCacheIndex map[common.Hash]*msg.Block
 	cacheLock       *sync.Mutex
+	hashes          []cmn.Hash
+	manage          *manage.Manage
 }
 
-const cacheSize = 5
+const cacheSize = 10
 
-func NewBlockchain(persistBlkStorage *leveldb.DB) *Blockchain {
+func NewBlockchain() *Blockchain {
 	bc := &Blockchain{
-		db:              persistBlkStorage,
 		blockCache:      pool.NewRingBuffer(cacheSize),
 		blockCacheIndex: make(map[common.Hash]*msg.Block),
 		cacheLock:       &sync.Mutex{},
+		hashes:          make([]cmn.Hash, 0),
+		persistKv:       make(map[cmn.Hash][]byte),
 	}
 	emptyHash := common.Sha256([]byte{})
 	bc.Genesis = &msg.Block{
@@ -37,10 +39,17 @@ func NewBlockchain(persistBlkStorage *leveldb.DB) *Blockchain {
 		Seed:       emptyHash.Bytes(),
 		ParentHash: emptyHash.Bytes(),
 		Author:     common.HashToAddr(emptyHash).Bytes(),
-		StateHash:  nil,
 	}
-	bc.Add(bc.Genesis)
+	bc.addGenesis(bc.Genesis)
 	return bc
+}
+
+func (bc *Blockchain) addGenesis(blk *msg.Block) {
+	data, _ := blk.Serialize()
+	bc.persistKv[blk.Hash()] = data
+	bc.hashes = append(bc.hashes, blk.Hash())
+	bc.Last = blk
+	bc.CacheBlock(blk)
 }
 
 func (bc *Blockchain) Get(hash common.Hash) (*msg.Block, error) {
@@ -50,12 +59,12 @@ func (bc *Blockchain) Get(hash common.Hash) (*msg.Block, error) {
 	if ok {
 		return blk, nil
 	}
-	data, err := bc.db.Get(hash.Bytes(), nil)
-	if err != nil {
-		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found: %s", hash.Hex(), err.Error()))
+	data, ok := bc.persistKv[hash]
+	if !ok {
+		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found", hash.Hex()))
 	}
 	blk = &msg.Block{}
-	err = blk.Deserialize(data)
+	err := blk.Deserialize(data)
 	if err != nil {
 		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found: %s", hash.Hex(), err.Error()))
 	}
@@ -75,8 +84,16 @@ func (bc *Blockchain) GetByRound(round uint64) *msg.Block {
 }
 
 func (bc *Blockchain) Add(blk *msg.Block) {
+	hash := blk.Hash()
+	if len(bc.hashes) >= 10 {
+		var removedHash cmn.Hash
+		removedHash, bc.hashes = bc.hashes[0], bc.hashes[1:]
+		delete(bc.persistKv, removedHash)
+	}
+	bc.hashes = append(bc.hashes, hash)
 	data, _ := blk.Serialize()
-	bc.db.Put(blk.Hash().Bytes(), data, nil)
+	go bc.manage.AddBlk(hash, data)
+	bc.persistKv[hash] = data
 	if bc.Last == nil || blk.Round > bc.Last.Round {
 		bc.Last = blk
 	}
@@ -100,10 +117,6 @@ func (bc *Blockchain) ResolveFork(fork *msg.Block) {
 	bc.Last = fork
 }
 
-func (bc *Blockchain) PrintState(round uint64) {
-	//for round > 0 {
-	blk := bc.GetByRound(round)
-	log.Printf("State Hash round %d is %s\n", round, common.BytesToHash(blk.StateHash).Hex())
-	//round -= 1
-	//}
+func (bc *Blockchain) SetManage(m *manage.Manage) {
+	bc.manage = m
 }

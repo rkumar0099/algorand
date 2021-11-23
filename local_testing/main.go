@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -84,51 +85,47 @@ func regularRun(c *cli.Context) {
 		addrPeers [][]byte
 		//stores    []kvstore.KVStore
 		neighbors []gossip.NodeId
+		num       = 0
 	)
-	for ; uint64(i) <= params.UserAmount-params.Malicious; i++ {
+
+	for ; uint64(i) < params.UserAmount-params.Malicious; i++ {
 		Id := fmt.Sprintf("127.0.0.1:%d", 8000+i)
 		neighbors = append(neighbors, gossip.NewNodeId(Id))
 		node := peer.New(Id, params.Honest)
+		num += 1
 		addrPeers = append(addrPeers, node.Address().Bytes())
 		nodes = append(nodes, node)
 	}
 
 	for _, p := range nodes {
-		go p.Start(addrPeers)
+		go p.Start(neighbors, addrPeers)
 	}
-	time.Sleep(2 * time.Second)
+	time.Sleep(5 * time.Second)
+
 	lm := logs.New()
 	m := manage.New(neighbors, addrPeers, lm)
 	oracle := oracle.New()
 	for _, p := range nodes {
 		p.AddManage(m, lm, oracle)
-	}
-
-	for _, p := range nodes {
-		go p.JoinPeers(neighbors)
-	}
-	time.Sleep(2 * time.Second)
-
-	for _, p := range nodes {
 		go p.Run()
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(5 * time.Second)
 
 	go m.Run()
 
 	count := 20
 	for count > 0 {
 		go proposeTransactions(nodes)
+		log.Println("Proposing Transactions")
+		time.Sleep(5 * time.Second)
 		count -= 1
-		time.Sleep(10 * time.Second)
 	}
 }
 
 func proposeTransactions(peers []*peer.Peer) {
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 10; i++ {
 		ind := rand.Intn(50)
-		val := rand.Intn(100)
-		peers[ind].TopupTransaction(uint64(val))
+		peers[ind].TopupTransaction(uint64(10))
 	}
 }
 

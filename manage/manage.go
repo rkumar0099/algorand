@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"log"
 	"net"
+	"os"
+	"strconv"
 	"sync"
 	"time"
 
@@ -17,6 +19,7 @@ import (
 	"github.com/rkumar0099/algorand/params"
 	"github.com/rkumar0099/algorand/service"
 	"github.com/rkumar0099/algorand/transaction"
+	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
 )
 
@@ -24,7 +27,8 @@ type Manage struct {
 	Id            gossip.NodeId
 	node          *gossip.Node
 	txs           []*msg.Transaction
-	lock          *sync.Mutex
+	txLock        *sync.Mutex
+	shLock        *sync.Mutex
 	epoch         uint64
 	stateHash     map[cmn.Hash]uint64
 	connPool      map[gossip.NodeId]*grpc.ClientConn
@@ -35,15 +39,19 @@ type Manage struct {
 	storage       kvstore.KVStore
 	recentMPT     *mpt.Trie
 	lm            *logs.LogManager
+	blkLock       *sync.Mutex
+	db            *leveldb.DB
+	lastHash      []byte
 }
 
 func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Manage {
 	nodeId := gossip.NewNodeId("127.0.0.1:9000")
 	m := &Manage{
-		Id:   nodeId,
-		node: gossip.New(nodeId, "transaction"),
-		lock: &sync.Mutex{},
-		txs:  make([]*msg.Transaction, 0),
+		Id:     nodeId,
+		node:   gossip.New(nodeId, "transaction"),
+		txLock: &sync.Mutex{},
+		shLock: &sync.Mutex{},
+		txs:    make([]*msg.Transaction, 0),
 
 		stateHash:     make(map[cmn.Hash]uint64),
 		epoch:         0,
@@ -51,6 +59,7 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 		proposedTxSet: make(chan *msg.ProposedTx, 1),
 		count:         0,
 		lm:            lm,
+		blkLock:       &sync.Mutex{},
 	}
 	m.storage = kvstore.NewMemKVStore() // manage storage to execute Tx set and generate Hash
 	m.grpcServer = grpc.NewServer()
@@ -66,6 +75,10 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 	m.initializeMPT(peerAddresses)
 	lis, _ := net.Listen("tcp", m.Id.String())
 	go m.grpcServer.Serve(lis)
+
+	os.Remove("../logs/manage.txt")
+	os.RemoveAll("../database/blockchain")
+	m.db, _ = leveldb.OpenFile("../database/blockchain", nil)
 	return m
 }
 
@@ -92,10 +105,13 @@ func (m *Manage) initializeMPT(addr [][]byte) {
 }
 
 func (m *Manage) AddTransaction(tx *msg.Transaction) {
-	m.lock.Lock()
-	defer m.lock.Unlock()
+	m.txLock.Lock()
+	defer m.txLock.Unlock()
+	if err := tx.VerifySign(); err != nil {
+		log.Printf("[algorand] Received invalid transaction: %s", err.Error())
+		return
+	}
 	m.txs = append(m.txs, tx)
-	//log.Println("Transaction added")
 }
 
 func (m *Manage) Run() {
@@ -104,7 +120,7 @@ func (m *Manage) Run() {
 
 func (m *Manage) propose() {
 	for {
-		time.Sleep(30 * time.Second)
+		time.Sleep(20 * time.Second)
 		m.epoch += 1
 		go m.proposeTxs()
 	}
@@ -118,7 +134,7 @@ func (m *Manage) proposeTxs() {
 	for len(m.txs) > 0 {
 		tx, m.txs = m.txs[0], m.txs[1:]
 		txs = append(txs, tx)
-		if len(txs) >= 20 {
+		if len(txs) > 40 {
 			break
 		}
 	}
@@ -132,17 +148,15 @@ func (m *Manage) proposeTxs() {
 	//m.proposedTxSet <- pt
 	st, sh := m.executeTxSet(pt)
 	m.sendContributionToPeers(pt)
-	time.Sleep(10 * time.Second)
-	res := m.validate(sh)
-	log.Println("Response for epoch ", m.epoch, res)
+	time.Sleep(5 * time.Second)
+	res, c := m.validate(sh)
+	go m.writeLog(sh, m.stateHash[sh], res, c)
 
 	if res {
 		m.sendFinalContribution(pt)
 		time.Sleep(5 * time.Second)
 		st.Commit()
 		m.recentMPT = st
-		log.Printf("[Manage] Epoch %d", m.epoch)
-		log.Println(st.RootHash())
 	} else {
 		copy(m.txs, txs)
 	}
@@ -182,15 +196,15 @@ func (m *Manage) sendContribution(conn *grpc.ClientConn, data []byte) {
 }
 
 func (m *Manage) addStateHash(hash cmn.Hash) {
-	m.lock.Lock()
-	defer m.lock.Unlock()
+	m.shLock.Lock()
+	defer m.shLock.Unlock()
 	m.stateHash[hash] += 1
 }
 
-func (m *Manage) validate(hash cmn.Hash) bool {
+func (m *Manage) validate(hash cmn.Hash) (bool, uint64) {
 	count := m.stateHash[hash]
-	ans := uint64(float64(2)/float64(3) + float64(params.UserAmount) + 0.5)
-	return uint64(count) >= ans
+	ans := uint64(2 * int(params.UserAmount) / 3)
+	return count >= ans, ans
 }
 
 func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
@@ -203,4 +217,29 @@ func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
 
 func (m *Manage) LastState() []byte {
 	return m.recentMPT.RootHash()
+}
+
+func (m *Manage) AddBlk(hash cmn.Hash, data []byte) {
+	m.blkLock.Lock()
+	defer m.blkLock.Unlock()
+	if !bytes.Equal(m.lastHash, hash.Bytes()) {
+		m.db.Put(hash.Bytes(), data, nil)
+		m.lastHash = hash.Bytes()
+	}
+}
+
+func (m *Manage) writeLog(hash cmn.Hash, count uint64, res bool, c uint64) {
+	f, err := os.OpenFile("../logs/manage.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return
+	}
+	latestLog := ""
+	if res {
+		latestLog += "True. "
+	} else {
+		latestLog += "False. "
+	}
+	latestLog += "Count is " + strconv.Itoa(int(count)) + "Res is " + strconv.Itoa(int(c)) + " for hash " + hash.Hex() + "\n"
+	f.WriteString(latestLog)
+	f.Close()
 }

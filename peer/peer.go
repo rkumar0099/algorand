@@ -8,16 +8,13 @@ import (
 	"log"
 	"math/rand"
 	"net"
-	"os"
 	"strconv"
-	"sync"
 	"time"
 
 	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
 	"github.com/rkumar0099/algorand/oracle"
-	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
 
 	"github.com/golang/protobuf/proto"
@@ -28,7 +25,6 @@ import (
 	"github.com/rkumar0099/algorand/crypto"
 	msg "github.com/rkumar0099/algorand/message"
 
-	//"github.com/rkumar0099/algorand/oracle"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/rkumar0099/algorand/pool"
 	"github.com/rkumar0099/algorand/service"
@@ -44,21 +40,19 @@ type Peer struct {
 	pubkey  *crypto.PublicKey
 
 	permanentTxStorage kvstore.KVStore
-	chain              *blockchain.Blockchain
-	quitCh             chan struct{}
-	hangForever        chan struct{}
+	tempTxStorage      kvstore.KVStore
+
+	chain       *blockchain.Blockchain
+	quitCh      chan struct{}
+	hangForever chan struct{}
 
 	node          *gossip.Node
 	grpcServer    *grpc.Server
 	msgAgent      *msg.MsgAgent
 	ServiceServer *service.Server
 
-	//memPool      *pool.MemPool
 	votePool     *pool.VotePool
 	proposalPool *pool.ProposalPool
-
-	//txSet     *set.Set
-	//txSetLock *sync.Mutex
 
 	manage *manage.Manage
 	oracle *oracle.Oracle
@@ -67,51 +61,41 @@ type Peer struct {
 	txEpoch uint64
 
 	finalContributions       chan *msg.ProposedTx
-	oracleFinalContributions chan [][]byte
+	oracleFinalContributions chan []byte
 
 	lastState  []byte
 	startState []byte
 
-	tempTxStorage kvstore.KVStore
-	oracleEpoch   uint64
+	oracleEpoch uint64
 }
 
 //const memPoolCap = 512
 const votePoolCap = params.ExpectedCommitteeMembers * 2
-const cleanTimeout = time.Minute * 1
+const cleanTimeout = time.Minute * 2
 
 func New(addr string, maliciousType int) *Peer {
 	peer := &Peer{
-		Id:          gossip.NewNodeId(addr),
-		quitCh:      make(chan struct{}),
-		hangForever: make(chan struct{}),
-		grpcServer:  grpc.NewServer(),
-		//txSet:              set.New(),
-		//txSetLock:          &sync.Mutex{},
+		Id:                       gossip.NewNodeId(addr),
+		quitCh:                   make(chan struct{}),
+		hangForever:              make(chan struct{}),
+		grpcServer:               grpc.NewServer(),
 		maliciousType:            params.Honest,
 		txEpoch:                  0,
 		oracleEpoch:              0,
-		finalContributions:       make(chan *msg.ProposedTx, 1000),
-		oracleFinalContributions: make(chan [][]byte, 1000),
-		//transactionStorage: kvstore.NewMemKVStore(),
+		finalContributions:       make(chan *msg.ProposedTx, 10),
+		oracleFinalContributions: make(chan []byte, 10),
 	}
 	// gossip node
 	peer.node = gossip.New(peer.Id, "algorand")
-	//peer.txNode = gossip.New(peer.Id, "transaction")
-	//peer.oracleNode = gossip.New(peer.Id, "oracle")
 
 	// pubkey and privkey
 	rand.Seed(time.Now().UnixNano())
 	peer.pubkey, peer.privkey, _ = crypto.NewKeyPair()
-	peer.permanentTxStorage = kvstore.NewMemKVStore()
 
+	peer.permanentTxStorage = kvstore.NewMemKVStore()
 	peer.tempTxStorage = kvstore.NewMemKVStore()
 
-	// separate database to store blk on disk rather than in run-time stack
-	var path string = fmt.Sprintf("../database/%s", peer.Id.String())
-	os.RemoveAll(path)
-	db, _ := leveldb.OpenFile(path, nil)
-	peer.chain = blockchain.NewBlockchain(db)
+	peer.chain = blockchain.NewBlockchain()
 
 	// proposal pool
 	peer.proposalPool = pool.NewProposalPool(cleanTimeout, peer.proposalVerifier)
@@ -123,48 +107,40 @@ func New(addr string, maliciousType int) *Peer {
 	// register the same grpc server for service and gossip
 	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleContribution, peer.handleFinalContribution)
 	peer.node.Register(peer.grpcServer)
-	//peer.txNode.Register(peer.grpcServer)
-	//peer.oracleNode.Register(peer.grpcServer)
 	peer.ServiceServer.Register(peer.grpcServer)
 
 	// msg agent and register handlers
 	peer.msgAgent = msg.NewMsgAgent(peer.node.GetMsgChan())
-	//peer.oracleMsgAgent = msg.NewMsgAgent(peer.oracleNode.GetMsgChan())
 	peer.msgAgent.Register(msg.VOTE, peer.handleVote)
 	peer.msgAgent.Register(msg.BLOCK, peer.handleBlock)
 	peer.msgAgent.Register(msg.BLOCK_PROPOSAL, peer.handleBlockProposal)
 	peer.msgAgent.Register(msg.FORK_PROPOSAL, peer.handleForkProposal)
-	//peer.txMsgAgent.Register(msg.CONTRIBUTION, peer.handleContribution)
-	//peer.msgAgent.Register(msg.TRANSACTION, peer.handleTx)
 	return peer
 }
 
-func (p *Peer) Start(addr [][]byte) error {
+func (p *Peer) Start(neighbors []gossip.NodeId, addr [][]byte) error {
 	lis, err := net.Listen("tcp", p.Id.String())
 	if err != nil {
 		log.Printf("[algorand] [%s] Cannot start peer: %s", p.Id.String(), err.Error())
 		return errors.New(fmt.Sprintf("Cannot start algorand peer: %s", err.Error()))
 	}
 	go p.grpcServer.Serve(lis)
+	p.node.Join(neighbors)
 	go p.msgAgent.Handle()
-	//go p.txMsgAgent.Handle()
 
 	p.initialize(addr, p.permanentTxStorage)
 	p.initialize(addr, p.tempTxStorage)
-	//go p.Run()
 	return nil
-}
-
-func (p *Peer) JoinPeers(bootNode []gossip.NodeId) {
-	p.node.Join(bootNode)
 }
 
 func (p *Peer) AddManage(m *manage.Manage, lm *logs.LogManager, oracle *oracle.Oracle) {
 	p.manage = m
 	p.oracle = oracle
 	p.lm = lm
-	blk, _ := p.chain.GetByRound(0).Serialize()
-	p.lm.AddFinalBlk(cmn.BytesToHash(blk), 0)
+	p.chain.SetManage(m)
+	blk := p.chain.GetByRound(0)
+	go p.lm.AddFinalBlk(blk.Hash(), 0)
+	go p.oracle.AddBlk(blk)
 }
 
 func (p *Peer) StartServices(bootNode []gossip.NodeId) error {
@@ -281,13 +257,13 @@ func (p *Peer) Address() cmn.Address {
 // run performs the all procedures of Algorand algorithm in infinite loop.
 func (p *Peer) Run() {
 	// sleep 1 second for all peers ready.
-	time.Sleep(3 * time.Second)
-	//log.Printf("[alogrand] [%s] found %d peers", p.Id.String(), p.node.GetNeighborList().Len())
-	go p.proposeOraclePeer()
-	go p.sendBalance()
-	go p.forkLoop()
+	time.Sleep(5 * time.Second)
+	log.Printf("[alogrand] [%s] found %d peers", p.Id.String(), p.node.GetNeighborList().Len())
 
 	// propose block
+	//go p.proposeOraclePeer()
+	//go p.sendBalance()
+	go p.forkLoop()
 	for {
 		select {
 		case <-p.quitCh:
@@ -320,40 +296,19 @@ func (p *Peer) processMain() {
 		cmn.MetricsRound = p.round() + 1
 	}
 	currRound := p.round() + 1
-	/*
-
-		if p.manage.EnoughEWTransactions() && !p.oraclePeerRunning {
-			//nonce := currRound
-			seed, _, _ := p.vrfSeed(currRound)
-			oracleRole := role(params.OraclePeer, currRound, params.Oracle)
-			vrf, proof, selected := p.sortition(seed, oracleRole, params.ExpectedOraclePeers, p.tokenOwn())
-			if selected > 0 {
-				op := p.NewOraclePeer(vrf, proof, p.manage.ProposeEWTransactions(), currRound)
-				p.oracle.AddOraclePeer(op)
-				p.oraclePeerRunning = true
-			}
-		}
-	*/
-
 	block := p.blockProposal(false)
-
-	//log.Printf("[algorand] [%s] init BA with block #%d %s (%d txs), is empty? %v", p.Id.String(), block.Round, block.Hash(), len(block.Txs), block.Signature == nil)
+	log.Printf("[algorand] [%s] init BA with block #%d %s (%d txs), is empty? %v", p.Id.String(), block.Round, block.Hash(), len(block.Txs), block.Signature == nil)
 
 	// 2. init BA with block with the highest priority.
 	consensusType, block := p.BA(currRound, block)
 
 	// 3. reach consensus on a FINAL or TENTATIVE new block.
 	if consensusType == params.FINAL_CONSENSUS {
-		//	log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+		log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
 	} else {
-		//log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+		log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
 	}
-	/*
-		st := p.executeTxSet(p.manage.TransactionSet(p.epoch))
-		if bytes.Equal(st.RootHash(), block.StateHash) {
-			st.Commit()
-		}
-	*/
+
 	if len(block.Txs) > 0 {
 		parentBlk := p.lastBlock()
 		txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
@@ -365,12 +320,12 @@ func (p *Peer) processMain() {
 		} else {
 			block.StateHash = parentBlk.StateHash
 		}
-		p.txEpoch = block.Epoch
 	}
 
-	//log.Println("State Hash for block Round 1 is", block.StateHash)
-	//log.Println("num of transactions executed are ", len(block.Txs))
 	p.chain.Add(block)
+	go p.lm.AddFinalBlk(block.Hash(), block.Round)
+	go p.oracle.AddBlk(block)
+	//time.Sleep(5 * time.Second) // sleep to allow all peers add block to their storage, we change params.R and simulate the algorand with changing seed
 }
 
 // processForkResolve performs a special algorand processing to resolve fork.
@@ -397,7 +352,6 @@ func (p *Peer) processForkResolve() {
 func (p *Peer) proposeBlock() *msg.Block {
 	currRound := p.round() + 1
 	parentBlk := p.lastBlock()
-	//p.recentMPT = nil
 	seed, proof, err := p.vrfSeed(currRound)
 	if err != nil {
 		return p.emptyBlock(currRound, p.lastBlock().Hash())
@@ -414,17 +368,16 @@ func (p *Peer) proposeBlock() *msg.Block {
 		Data:       nil,
 		StateHash:  parentBlk.StateHash,
 	}
+
 	//var txSet *msg.ProposedTx
 	if len(p.finalContributions) > 0 {
 		txSet := <-p.finalContributions
 		blk.Txs = txSet.Txs
 		st := p.executeTxSet(txSet, blk.StateHash, p.permanentTxStorage)
 		blk.StateHash = st.RootHash()
-		blk.Epoch = txSet.Epoch
-		//p.recentMPT = st
+		blk.TxEpoch = txSet.Epoch
 	}
-	//txSet := p.manage.TransactionSet(p.epoch)
-	//blk.Txs = txSet.Txs
+
 	bhash := blk.Hash()
 	sign, _ := p.privkey.Sign(bhash.Bytes())
 	blk.Signature = sign
@@ -599,7 +552,7 @@ func (p *Peer) BA(round uint64, block *msg.Block) (int8, *msg.Block) {
 		var err error
 		newBlk, err = p.getBlock(hash)
 		if err != nil {
-			//log.Printf("[Algorand] [%s] hang forever becaue BA error: %s", p.Id.String(), err.Error())
+			log.Printf("[Algorand] [%s] hang forever becaue BA error: %s", p.Id.String(), err.Error())
 			<-p.hangForever
 		}
 	}
@@ -645,7 +598,7 @@ func (p *Peer) binaryBA(round uint64, hash cmn.Hash) cmn.Hash {
 	)
 	empty := p.emptyHash(round, p.chain.Last.Hash())
 	defer func() {
-		//log.Printf("[algorand] [%s] complete binaryBA with %d steps", p.Id.String(), step)
+		log.Printf("[algorand] [%s] complete binaryBA with %d steps", p.Id.String(), step)
 	}()
 	for step < params.MAXSTEPS {
 		p.committeeVote(round, strconv.Itoa(step), params.ExpectedCommitteeMembers, r)
@@ -692,41 +645,6 @@ func (p *Peer) binaryBA(round uint64, hash cmn.Hash) cmn.Hash {
 	return common.Hash{}
 }
 
-/*
-// countVotes counts votes for round and step.
-func (p *Peer) countVotes(round uint64, step int, threshold float64, expectedNum int, timeout time.Duration) (common.Hash, error) {
-	expired := time.NewTimer(timeout)
-	counts := make(map[common.Hash]int)
-	voters := make(map[string]struct{})
-	it := p.voteIterator(round, step)
-	for {
-		message := it.next()
-		if message == nil {
-			select {
-			case <-expired.C:
-				// timeout
-				return common.Hash{}, cmn.ErrCountVotesTimeout
-			default:
-			}
-		} else {
-			voteMsg := message.(*msg.VoteMessage)
-			votes, hash, _ := p.processMsg(message.(*msg.VoteMessage), expectedNum)
-			pubkey := voteMsg.RecoverPubkey()
-			if _, exist := voters[string(pubkey.Pk)]; exist || votes == 0 {
-				continue
-			}
-			voters[string(pubkey.Pk)] = struct{}{}
-			counts[hash] += votes
-			// if we got enough votes, then output the target hash
-			//log.Printf("node %d receive votes %v,threshold %v at step %d", alg.id, counts[hash], uint64(float64(expectedNum)*threshold), step)
-			if uint64(counts[hash]) >= uint64(float64(expectedNum)*threshold) {
-				return hash, nil
-			}
-		}
-	}
-}
-*/
-
 func (p *Peer) voteVerifier(vote *msg.VoteMessage, expectedNum int) int {
 	if err := vote.VerifySign(); err != nil {
 		return 0
@@ -739,47 +657,6 @@ func (p *Peer) voteVerifier(vote *msg.VoteMessage, expectedNum int) int {
 
 	return p.verifySort(vote.VRF, vote.Proof, p.sortitionSeed(vote.Round), role(params.Committee, vote.Round, vote.Event), expectedNum)
 }
-
-/*
-// processMsg validates incoming vote message.
-func (p *Peer) processMsg(message *msg.VoteMessage, expectedNum int) (votes int, hash common.Hash, vrf []byte) {
-	if err := message.VerifySign(); err != nil {
-		return 0, common.Hash{}, nil
-	}
-
-	// discard messages that do not extend this chain
-	prevHash := common.BytesToHash(message.ParentHash)
-	if prevHash != p.chain.Last.Hash() {
-		return 0, common.Hash{}, nil
-	}
-
-	votes = p.verifySort(message.VRF, message.Proof, p.sortitionSeed(message.Round), role(params.Committee, message.Round, message.Event), expectedNum)
-	hash = common.BytesToHash(message.Hash)
-	vrf = message.VRF
-	return
-}
-*/
-
-// commonCoin computes a coin common to all users.
-// It is a procedure to help Algorand recover if an adversary sends faulty messages to the network and prevents the network from coming to consensus.
-/*
-func (p *Peer) commonCoin(round uint64, step int, expectedNum int) int64 {
-	minhash := new(big.Int).Exp(big.NewInt(2), big.NewInt(common.HashLength), big.NewInt(0))
-	msgList := p.getIncomingMsgs(round, step)
-	for _, m := range msgList {
-		msg := m.(*msg.VoteMessage)
-		votes := p.voteVerifier(msg, expectedNum)
-		vrf := msg.VRF
-		for j := 1; j < votes; j++ {
-			h := new(big.Int).SetBytes(common.Sha256(bytes.Join([][]byte{vrf, common.Uint2Bytes(uint64(j))}, nil)).Bytes())
-			if h.Cmp(minhash) < 0 {
-				minhash = h
-			}
-		}
-	}
-	return minhash.Mod(minhash, big.NewInt(2)).Int64()
-}
-*/
 
 // role returns the role bytes from current round and step
 func role(iden string, round uint64, event string) []byte {
@@ -797,30 +674,6 @@ func constructSeed(seed, role []byte) []byte {
 
 func (p *Peer) emptyHash(round uint64, prev common.Hash) common.Hash {
 	return p.emptyBlock(round, prev).Hash()
-}
-
-type List struct {
-	mu   sync.RWMutex
-	list []interface{}
-}
-
-func newList() *List {
-	return &List{}
-}
-
-func (l *List) add(el interface{}) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
-	l.list = append(l.list, el)
-}
-
-func (l *List) get(index int) interface{} {
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	if index >= len(l.list) {
-		return nil
-	}
-	return l.list[index]
 }
 
 func (p *Peer) handleBlock(data []byte) {
@@ -844,7 +697,7 @@ func (p *Peer) handleBlockProposal(data []byte) {
 func (p *Peer) handleForkProposal(data []byte) {
 	bp := &msg.Proposal{}
 	if err := bp.Deserialize(data); err != nil {
-		//log.Printf("[algorand] [%s] Received invalid proposal message: %s", p.Id.String(), err.Error())
+		log.Printf("[algorand] [%s] Received invalid proposal message: %s", p.Id.String(), err.Error())
 		return
 	}
 	p.proposalPool.Update(bp, msg.FORK_PROPOSAL)
@@ -878,7 +731,7 @@ func (p *Peer) getBlock(hash common.Hash) (*msg.Block, error) {
 	// find  locally
 	blk, err := p.chain.Get(hash)
 	if err != nil {
-		//log.Printf("[algorand] [%s] cannot get block %s locally: %s, try to find from other peers", p.Id.String(), hash.Hex(), err.Error())
+		log.Printf("[algorand] [%s] cannot get block %s locally: %s, try to find from other peers", p.Id.String(), hash.Hex(), err.Error())
 	} else {
 		return blk, nil
 	}
@@ -926,115 +779,13 @@ func (p *Peer) getBlock(hash common.Hash) (*msg.Block, error) {
 		return nil, errors.New(fmt.Sprintf("[algorand] [%s] cannot get block %s from other peers: %s", p.Id.String(), hash.Hex(), err.Error()))
 	}
 	p.chain.CacheBlock(blk)
-	//log.Printf("[debug] [%s] cached block %s", p.Id.String(), hash.Hex())
+	log.Printf("[debug] [%s] cached block %s", p.Id.String(), hash.Hex())
 	return blk, nil
 }
 
-/*
-func (p *Peer) voteIterator(round uint64, step int) *Iterator {
-	key := constructVoteKey(round, step)
-	p.vmu.RLock()
-	list, ok := p.incomingVotes[key]
-	p.vmu.RUnlock()
-	if !ok {
-		list = newList()
-		p.vmu.Lock()
-		p.incomingVotes[key] = list
-		p.vmu.Unlock()
-	}
-	return &Iterator{
-		list: list,
-	}
-}
-
-
-type Iterator struct {
-	list  *List
-	index int
-}
-
-func (it *Iterator) next() interface{} {
-	el := it.list.get(it.index)
-	if el == nil {
-		return nil
-	}
-	it.index++
-	return el
-}
-*/
-/*
-func (p *Peer) getIncomingMsgs(round uint64, step int) []interface{} {
-	p.vmu.RLock()
-	defer p.vmu.RUnlock()
-	l := p.incomingVotes[constructVoteKey(round, step)]
-	if l == nil {
-		return nil
-	}
-	return l.list
-}
-*/
-
 func (p *Peer) sendBalance() {
 	for {
-		time.Sleep(9 * time.Second)
+		time.Sleep(5 * time.Second)
 		p.lm.AddBalance(p.Id.String(), p.GetBalance())
 	}
 }
-
-// send topup transction
-
-/*
-
-func (p *Peer) EWTransaction(url string, nonce uint64) {
-	tx := &msg.PendingRequest{
-		URL:   url,
-		Nonce: nonce,
-	}
-	p.manage.AddEWTransaction(tx)
-}
-
-func (p *Peer) GetBalance() uint64 {
-	return p.manage.GetBalance(p.round(), p.pubkey.Address().Bytes())
-}
-
-func (p *Peer) GetStore() kvstore.KVStore {
-	return p.storage
-}
-
-func (p *Peer) PrintState() {
-	p.chain.PrintState(p.round())
-}
-
-type OraclePeer struct {
-	malicious int
-
-	Id gossip.NodeId
-	Sk *crypto.PrivateKey
-	Pk *crypto.PublicKey
-
-	Storage kvstore.KVStore
-
-	Node *gossip.Node
-
-	Txs   []*msg.PendingRequest
-	Nonce uint64
-}
-
-func (p *Peer) NewOraclePeer(vrf, proof []byte, txs []*msg.PendingRequest, nonce uint64) *OraclePeer {
-	pk, sk, _ := crypto.NewKeyPair()
-	op := &OraclePeer{
-		malicious: 0,
-
-		Sk: sk,
-		Pk: pk,
-
-		Storage: kvstore.NewMemKVStore(),
-
-		Txs:   txs,
-		Nonce: nonce,
-	}
-
-	return op
-}
-
-*/

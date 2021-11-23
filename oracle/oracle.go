@@ -2,6 +2,7 @@ package oracle
 
 import (
 	"bytes"
+	"os"
 
 	"log"
 	"math/rand"
@@ -22,9 +23,7 @@ type Oracle struct {
 	privkey   *crypto.PrivateKey
 	peers     map[uint64][]*OraclePeer
 	round     uint64
-	genesis   bool
 	epoch     uint64
-	prevepoch uint64
 	lock      *sync.Mutex
 	txLock    *sync.Mutex
 	txs       []*message.PendingRequest
@@ -55,7 +54,6 @@ func New() *Oracle {
 		lock:      &sync.Mutex{},
 		round:     0,
 		epoch:     0,
-		prevepoch: 0,
 		txLock:    &sync.Mutex{},
 		commit:    make(map[uint64]map[cmn.Hash][]byte),
 		reveal:    make(map[uint64]map[cmn.Hash]*Reveal),
@@ -63,6 +61,7 @@ func New() *Oracle {
 		finalBlks: make(map[uint64]*FinalBlock),
 	}
 	//oracle.blockchain = blockchain.NewBlockchain(oracle.store)
+	os.RemoveAll("../oracle/blockDB")
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
 	oracle.db, _ = leveldb.OpenFile("../oracle/blockDB", nil)
 	return oracle
@@ -77,7 +76,8 @@ func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
 	defer o.lock.Unlock()
 	if o.epoch < opp.Epoch {
 		if o.epoch > 1 {
-			go o.RunOracle(o.peers[o.epoch], o.epoch)
+			//go o.RunOracle(o.peers[o.epoch], o.epoch)
+			log.Println("Oracle epoch, when called run ", o.epoch)
 		}
 		o.epoch += 1
 	}
@@ -93,7 +93,6 @@ func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
 	if err := opp.Verify(m); err != nil {
 		return
 	}
-
 	o.peers[o.epoch] = append(o.peers[o.epoch], newOraclePeer(o.epoch))
 }
 
@@ -103,6 +102,7 @@ func (o *Oracle) AddBlk(blk *message.Block) {
 	if o.round < blk.Round {
 		data, _ := blk.Serialize()
 		o.db.Put(cmn.Uint2Bytes(blk.Round), data, nil)
+		o.round = blk.Round
 	}
 }
 
@@ -113,7 +113,10 @@ func (o *Oracle) GetPeers() ([]*OraclePeer, uint64) {
 func (o *Oracle) GetBlkByRound(round uint64) *message.Block {
 	blk := &message.Block{}
 	data, _ := o.db.Get(cmn.Uint2Bytes(round), nil)
-	blk.Deserialize(data)
+	err := blk.Deserialize(data)
+	if err != nil {
+		return nil
+	}
 	return blk
 }
 
@@ -134,13 +137,6 @@ func (o *Oracle) sortitionSeed(round uint64) []byte {
 	}
 	blk := o.GetBlkByRound(realR)
 	return blk.Seed
-}
-
-// sortition runs cryptographic selection procedure and returns vrf,proof and amount of selected sub-users.
-func (o *Oracle) sortition(seed, role []byte, expectedNum int, weight uint64) (vrf, proof []byte, selected int) {
-	vrf, proof, _ = o.privkey.Evaluate(constructSeed(seed, role))
-	selected = cmn.SubUsers(expectedNum, weight, vrf)
-	return
 }
 
 // role returns the role bytes from current round and step
@@ -216,9 +212,9 @@ func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.Pendi
 					go p.reveal(epoch, jobIds[cut+1:], o.reveal[epoch])
 				}
 			}
-			time.Sleep(1 * time.Second)
+			time.Sleep(2 * time.Second)
 			o.verifyCommitReveal(epoch)
-			time.Sleep(8 * time.Second)
+			time.Sleep(5 * time.Second)
 			log.Println("Reveal phase and verifying phase completed")
 		}
 	}

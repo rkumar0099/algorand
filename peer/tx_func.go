@@ -24,10 +24,6 @@ func (p *Peer) handleFinalContribution(data []byte) error {
 	p.lastState = st.RootHash()
 	st.Commit()
 	p.finalContributions <- txSet
-	//st := p.executeTxSet(txSet)
-	//p.lastState = st.RootHash()
-	//st.Commit()
-	//log.Println("Final contributions are: ", len(p.finalContributions))
 	return nil
 }
 
@@ -49,8 +45,6 @@ func (p *Peer) handleContribution(data []byte) ([]byte, error) {
 }
 
 func (p *Peer) executeTxSet(txSet *msg.ProposedTx, rootHash []byte, store kvstore.KVStore) *mpt.Trie {
-	/*blk := p.lastBlock()
-	sh := blk.StateHash */
 	rootNode := mpt.HashNode(rootHash)
 	st := mpt.New(&rootNode, store)
 	p.execute(st, txSet.Txs, txSet.Epoch)
@@ -86,10 +80,6 @@ func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
 }
 
 func (p *Peer) TopupTransaction(value uint64) {
-	//txTopup := transaction.TxTopup{
-	//	Value: value,
-	//}
-	//data, _ := proto.Marshal(&txTopup)
 	tx := &msg.Transaction{
 		From:  p.pubkey.Address().Bytes(),
 		To:    nil,
@@ -97,17 +87,15 @@ func (p *Peer) TopupTransaction(value uint64) {
 		Type:  transaction.TOPUP,
 		Data:  cmn.Uint2Bytes(value),
 	}
-	p.manage.AddTransaction(tx)
 
-	//tx.Sign(p.privkey)
-	//txMsg, _ := tx.Serialize()
-	//p.gossip(msg.TRANSACTION, txMsg)
+	tx.Sign(p.privkey)
+	p.manage.AddTransaction(tx)
 }
 
 func (p *Peer) GetBalance() uint64 {
 	blk := p.lastBlock()
 	hn := mpt.HashNode(blk.StateHash)
-	st := mpt.New(&hn, p.storage)
+	st := mpt.New(&hn, p.tempTxStorage)
 	addr := bytes.Join([][]byte{
 		p.Address().Bytes(),
 		[]byte("value"),
