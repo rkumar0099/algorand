@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -105,6 +104,8 @@ func regularRun(c *cli.Context) {
 	lm := logs.New()
 	m := manage.New(neighbors, addrPeers, lm)
 	oracle := oracle.New()
+	go oracle.Run()
+
 	for _, p := range nodes {
 		p.AddManage(m, lm, oracle)
 		go p.Run()
@@ -112,20 +113,55 @@ func regularRun(c *cli.Context) {
 	time.Sleep(5 * time.Second)
 
 	go m.Run()
+	go proposeEWTxs(nodes)
+	go proposeTopUpTransactions(nodes)
+	go proposeTransferTransactions(nodes)
 
-	count := 20
-	for count > 0 {
-		go proposeTransactions(nodes)
-		log.Println("Proposing Transactions")
+	time.Sleep(2 * time.Minute)
+
+	/*
+		count := 50
+		for count > 0 {
+			go proposeTransactions(nodes)
+			log.Println("Proposing Transactions")
+			time.Sleep(5 * time.Second)
+			count -= 1
+		}
+	*/
+
+}
+
+func proposeEWTxs(peers []*peer.Peer) {
+	for {
 		time.Sleep(5 * time.Second)
-		count -= 1
+		for i := 0; i < 10; i++ {
+			ind := rand.Intn(50)
+			peers[ind].ExternalWorldTransaction("", oracle.CURRENCY_EXCHANGE)
+		}
 	}
 }
 
-func proposeTransactions(peers []*peer.Peer) {
-	for i := 0; i < 10; i++ {
-		ind := rand.Intn(50)
-		peers[ind].TopupTransaction(uint64(10))
+func proposeTopUpTransactions(peers []*peer.Peer) {
+	for {
+		time.Sleep(5 * time.Second)
+		for i := 0; i < 5; i++ {
+			ind := rand.Intn(50)
+			peers[ind].TopupTransaction(uint64(10))
+		}
+	}
+}
+
+func proposeTransferTransactions(peers []*peer.Peer) {
+	for {
+		time.Sleep(5 * time.Second)
+		for i := 0; i < 5; i++ {
+			ind := rand.Intn(50)
+			to := rand.Intn(50)
+			for to == ind {
+				to = rand.Intn(50)
+			}
+			peers[ind].TransferTransaction(uint64(10), peers[to].Address())
+		}
 	}
 }
 

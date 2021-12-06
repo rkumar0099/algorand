@@ -41,6 +41,7 @@ message PendingRequest {
     uint64 Nonce = 1;
     string URL = 2;
     uint64 Id = 3;
+    uint64 Type = 4;
 }
 
 message Block {

@@ -261,8 +261,7 @@ func (p *Peer) Run() {
 	log.Printf("[alogrand] [%s] found %d peers", p.Id.String(), p.node.GetNeighborList().Len())
 
 	// propose block
-	//go p.proposeOraclePeer()
-	//go p.sendBalance()
+	go p.proposeOraclePeer()
 	go p.forkLoop()
 	for {
 		select {

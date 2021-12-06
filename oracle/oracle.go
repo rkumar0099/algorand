@@ -5,13 +5,14 @@ import (
 	"os"
 
 	"log"
-	"math/rand"
 	"sync"
 	"time"
 
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
+
+	//"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/syndtr/goleveldb/leveldb"
@@ -31,6 +32,7 @@ type Oracle struct {
 	reveal    map[uint64]map[cmn.Hash]*Reveal
 	results   map[uint64]map[uint64][][]byte
 	finalBlks map[uint64]*FinalBlock
+	count     uint64
 	db        *leveldb.DB
 }
 
@@ -59,10 +61,11 @@ func New() *Oracle {
 		reveal:    make(map[uint64]map[cmn.Hash]*Reveal),
 		results:   make(map[uint64]map[uint64][][]byte),
 		finalBlks: make(map[uint64]*FinalBlock),
+		count:     0,
 	}
-	//oracle.blockchain = blockchain.NewBlockchain(oracle.store)
-	os.RemoveAll("../oracle/blockDB")
+
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
+	os.RemoveAll("../oracle/blockDB")
 	oracle.db, _ = leveldb.OpenFile("../oracle/blockDB", nil)
 	return oracle
 }
@@ -74,26 +77,21 @@ func (o *Oracle) Address() []byte {
 func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
 	o.lock.Lock()
 	defer o.lock.Unlock()
-	if o.epoch < opp.Epoch {
-		if o.epoch > 1 {
-			//go o.RunOracle(o.peers[o.epoch], o.epoch)
-			log.Println("Oracle epoch, when called run ", o.epoch)
-		}
-		o.epoch += 1
-	}
+	epoch := opp.Epoch
 
 	//log.Println("Current epoch ", o.epoch)
-	if _, ok := o.peers[o.epoch]; !ok {
-		o.peers[o.epoch] = make([]*OraclePeer, 0)
-		log.Println("Make peer array again")
+	if _, ok := o.peers[epoch]; !ok {
+		o.peers[epoch] = make([]*OraclePeer, 0)
+		//log.Println("Make peer array again")
 	}
-	seed := o.sortitionSeed(o.epoch)
-	role := role(params.OraclePeer, o.epoch, params.ORACLE)
+	seed := o.sortitionSeed(epoch)
+	role := role(params.OraclePeer, epoch, params.ORACLE)
 	m := constructSeed(seed, role)
 	if err := opp.Verify(m); err != nil {
 		return
 	}
-	o.peers[o.epoch] = append(o.peers[o.epoch], newOraclePeer(o.epoch))
+	o.peers[epoch] = append(o.peers[epoch], newOraclePeer(epoch))
+	//log.Println("The number of oracle peers ", len(o.peers[epoch]))
 }
 
 func (o *Oracle) AddBlk(blk *message.Block) {
@@ -123,6 +121,8 @@ func (o *Oracle) GetBlkByRound(round uint64) *message.Block {
 func (o *Oracle) AddEWTx(tx *message.PendingRequest) {
 	o.txLock.Lock()
 	defer o.txLock.Unlock()
+	o.count += 1
+	tx.Id = o.count
 	o.txs = append(o.txs, tx)
 }
 
@@ -153,71 +153,90 @@ func constructSeed(seed, role []byte) []byte {
 	return bytes.Join([][]byte{seed, role}, nil)
 }
 
-func (o *Oracle) RunOracle(peers []*OraclePeer, epoch uint64) {
-	var (
-		tx  *message.PendingRequest
-		txs []*message.PendingRequest
-	)
-	for len(txs) < 20 && len(o.txs) > 0 {
-		tx, o.txs = o.txs[0], o.txs[1:]
-		txs = append(txs, tx)
+func (o *Oracle) Run() {
+	for {
+
+		time.Sleep(10 * time.Second)
+		o.epoch += 1
+
+		var (
+			tx  *message.PendingRequest
+			txs []*message.PendingRequest
+		)
+
+		for len(txs) < 10 && len(o.txs) > 0 {
+			tx, o.txs = o.txs[0], o.txs[1:]
+			txs = append(txs, tx)
+		}
+		log.Println("Oracle run: ", o.epoch, len(txs), len(o.peers[o.epoch]))
+		finalBlk := o.process(o.epoch, o.peers[o.epoch], txs)
+		o.finalBlks[o.epoch] = finalBlk
+		time.Sleep(2 * time.Minute)
+
 	}
-	finalBlk := o.process(epoch, peers, txs)
-	o.finalBlks[o.epoch] = finalBlk
 }
 
 func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.PendingRequest) *FinalBlock {
-	log.Println(len(peers), len(txs), epoch)
+	//log.Println(len(peers), len(txs), epoch)
 	var jobIds []uint64
 	for _, tx := range txs {
 		jobIds = append(jobIds, tx.Id)
 	}
+
 	for i := 1; i <= 5; i++ {
-		if i%2 != 0 {
-			if i == 1 {
-				o.commit[epoch] = make(map[cmn.Hash][]byte)
-				for _, p := range peers {
-					go p.commit(epoch, txs, o.commit[epoch])
-				}
-				time.Sleep(5 * time.Second)
-				log.Println("Commit phase completed")
-			} else if i == 3 {
-				nonce := uint64(0)
-				for {
-					blkChan := make(chan *FinalBlock, 1)
-					nonce += 1
-					for _, p := range peers {
-						go p.proposeBlock(nonce, o.sortitionSeed, blkChan, epoch, o.results[epoch])
-					}
-					time.Sleep(1 * time.Second)
-					if len(blkChan) == 1 {
-						o.finalBlks[epoch] = <-blkChan
-						break
-					}
-				}
-				log.Println("Propose block phase compeleted")
-			} else {
-				// submit final block for this epoch process to all the peers
-				log.Println("Step 5 reached for epcch ", epoch)
-				return o.finalBlks[epoch]
-			}
-		} else if i == 2 {
-			o.reveal[epoch] = make(map[cmn.Hash]*Reveal)
-			cut := rand.Intn(len(txs))
-			choice := rand.Intn(2)
+
+		if i == 1 {
+			// commit phase
+			o.commit[epoch] = make(map[cmn.Hash][]byte)
 			for _, p := range peers {
-				if choice == 0 {
-					go p.reveal(epoch, jobIds[0:cut+1], o.reveal[epoch])
-				} else {
-					go p.reveal(epoch, jobIds[cut+1:], o.reveal[epoch])
+				go p.commit(epoch, txs, o.commit[epoch])
+			}
+			time.Sleep(5 * time.Second)
+			log.Println("Commit phase completed")
+		} else if i == 2 {
+			// reveal phase
+			o.reveal[epoch] = make(map[cmn.Hash]*Reveal)
+
+			for _, p := range peers {
+				go p.reveal(epoch, jobIds, o.reveal[epoch]) // oracle peers reveal about all jobs for current epoch
+			}
+
+			time.Sleep(1 * time.Second)
+			log.Println("Reveal phase completed")
+			o.verifyCommitReveal(epoch)
+			log.Println("Verifying phase completed")
+
+		} else if i == 3 {
+			// select a proposer using nonce different nonce, we can also consider max priority approach
+			// of algorand to choose a final proposal from a list of different oracle block proposers
+
+			nonce := uint64(0)
+			for {
+				blkChan := make(chan *FinalBlock, 1)
+				nonce += 1
+				for _, p := range peers {
+					go p.proposeBlock(nonce, o.sortitionSeed, blkChan, epoch, o.results[epoch])
+				}
+				time.Sleep(1 * time.Second)
+				if len(blkChan) == 1 {
+					o.finalBlks[epoch] = <-blkChan
+					delete(o.results, epoch)
+					break
 				}
 			}
-			time.Sleep(2 * time.Second)
-			o.verifyCommitReveal(epoch)
-			time.Sleep(5 * time.Second)
-			log.Println("Reveal phase and verifying phase completed")
+			log.Println("Propose block phase compeleted")
+			log.Println("Final block is ", o.finalBlks[epoch])
+		} else if i == 4 {
+			// dispute phase, out of scope for this term
+			log.Println("Dispute phase")
+		} else {
+			// submit the block to all blockchain peers using service
+			//blk := o.finalBlks[epoch]
+			//o.lm.AddOracleBlk(blk)
+			delete(o.finalBlks, epoch)
 		}
 	}
+
 	return nil
 }
 
@@ -226,21 +245,26 @@ func (o *Oracle) verifyCommitReveal(epoch uint64) {
 	reveal := o.reveal[epoch]
 	o.results[epoch] = make(map[uint64][][]byte)
 	finalResult := o.results[epoch]
+
 	for addr, root := range commit {
 		if val, ok := reveal[addr]; ok && bytes.Equal(root, val.tree.Root()) {
 			for Id, res := range val.results {
-				proof, err := val.tree.GenerateProof(res)
+				dataCommit := bytes.Join([][]byte{
+					res,
+					cmn.Uint2Bytes(Id),
+				}, nil)
+				proof, err := val.tree.GenerateProof(dataCommit)
 				if err != nil {
 					log.Println("Error generating proof for tx with Id ", Id)
 					panic(err)
 				}
-				verification, err := mt.VerifyProof(res, proof, val.tree.Root())
+				verification, err := mt.VerifyProof(dataCommit, proof, val.tree.Root())
 				if err != nil {
-					log.Println("Error generating the verification for res")
+					log.Println("Error generating the verification for tx with Id ", Id)
 					panic(err)
 				}
 				if !verification {
-					log.Println("failed to verify the proof for res")
+					log.Println("failed to verify the proof for tx with Id ", Id)
 				}
 				finalResult[Id] = append(finalResult[Id], res)
 			}

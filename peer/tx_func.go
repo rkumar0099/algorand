@@ -7,6 +7,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	cmn "github.com/rkumar0099/algorand/common"
+	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
 	"github.com/rkumar0099/algorand/mpt/mpt"
@@ -92,6 +93,18 @@ func (p *Peer) TopupTransaction(value uint64) {
 	p.manage.AddTransaction(tx)
 }
 
+func (p *Peer) TransferTransaction(value uint64, to cmn.Address) {
+	tx := &msg.Transaction{
+		From:  p.pubkey.Address().Bytes(),
+		To:    to.Bytes(),
+		Nonce: rand.Uint64(),
+		Type:  transaction.TRNASFER,
+		Data:  cmn.Uint2Bytes(value),
+	}
+	tx.Sign(p.privkey)
+	p.manage.AddTransaction(tx)
+}
+
 func (p *Peer) GetBalance() uint64 {
 	blk := p.lastBlock()
 	hn := mpt.HashNode(blk.StateHash)
@@ -110,4 +123,12 @@ func (p *Peer) GetLastState() []byte {
 
 func (p *Peer) GetStartState() []byte {
 	return p.chain.Genesis.StateHash
+}
+
+func (p *Peer) ExternalWorldTransaction(url string, reqType int) {
+	pr := &message.PendingRequest{
+		URL:  url,
+		Type: uint64(reqType),
+	}
+	p.oracle.AddEWTx(pr)
 }

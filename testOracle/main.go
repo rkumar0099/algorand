@@ -1,17 +1,11 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
-	"time"
 
-	"github.com/rkumar0099/algorand/message"
+	"github.com/golang/protobuf/proto"
 	"github.com/rkumar0099/algorand/oracle"
-	"github.com/rkumar0099/algorand/params"
 )
 
 type Blk struct {
@@ -26,49 +20,37 @@ type BTC_TO_CUR struct {
 	Rate float64 `json:"rate"`
 }
 
+type Res struct {
+	data []byte
+}
+
 var (
-	assets = "https://rest.coinapi.io/v1/exchangerate/BTC/CAD?apikey=34CD7A19-89E3-4004-A2D3-9B330C62D8FB"
+	assets = "https://rest.coinapi.io/v1/exchangerate/BTC/USD?apikey=34CD7A19-89E3-4004-A2D3-9B330C62D8FB"
 )
 
 func main() {
-	/*
-		resp, _ := http.Get(assets)
-		respBytes, _ := ioutil.ReadAll(resp.Body)
-		res := &BTC_TO_CUR{}
 
-		json.Unmarshal(respBytes, res)
-		os.Remove("./data.txt")
-		f, err := os.OpenFile("./data.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-		if err == nil {
-			data, _ := json.Marshal(res)
-			f.Write(data)
-		}
-	*/
-	//testOracle()
-	//testFile()
-	//testAddBlk()
-	res, _ := http.Get(assets)
-	respBytes, _ := ioutil.ReadAll(res.Body)
-	log.Println(string(respBytes))
-	//testProposeOraclePeer()
+	testOracle()
+
 }
 
 func testOracle() {
-	o := oracle.New()
-	for i := 0; i < 5; i++ {
-		pr := &message.PendingRequest{
-			URL: assets,
-			Id:  uint64(i),
-		}
-		o.AddEWTx(pr)
+	//res := &oracle.CurrencyExchange{}
+	buffer := make([]byte, 1024)
+	f, _ := os.OpenFile("./data.txt", os.O_RDONLY|os.O_CREATE, 0644)
+	n, _ := f.Read(buffer)
+
+	response := &oracle.Response{
+		Data: buffer[0:n],
+		Type: 2,
+		Id:   4,
 	}
-	for i := 0; i < 2; i++ {
-		opp := &message.OraclePeerProposal{}
-		o.AddOPP(opp)
-	}
-	o.RunOracle()
-	time.Sleep(1 * time.Minute)
+
+	data, _ := proto.Marshal(response)
+	log.Println(data)
 }
+
+/*
 
 func testFile() {
 	var blocks map[int]int = make(map[int]int)
@@ -107,8 +89,8 @@ func testAddBlk() {
 			round := uint64(rand.Intn(10000))
 			log.Println(o.GetBlkByRound(round))
 		}
-	*/
-}
+	}
+
 
 func testProposeOraclePeer() {
 	o := oracle.New()
@@ -154,5 +136,6 @@ func testProposeOraclePeer() {
 			}
 			///log.Println(len(blkChan))
 		}
-	*/
-}
+	}
+
+*/

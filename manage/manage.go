@@ -111,6 +111,7 @@ func (m *Manage) AddTransaction(tx *msg.Transaction) {
 		log.Printf("[algorand] Received invalid transaction: %s", err.Error())
 		return
 	}
+	m.lm.AddTxLog(tx.Hash())
 	m.txs = append(m.txs, tx)
 }
 

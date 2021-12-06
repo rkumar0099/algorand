@@ -1,7 +1,6 @@
 package peer
 
 import (
-	"log"
 	"time"
 
 	msg "github.com/rkumar0099/algorand/message"
@@ -9,11 +8,11 @@ import (
 )
 
 func (p *Peer) proposeOraclePeer() {
-	time.Sleep(10 * time.Minute)
+	time.Sleep(10 * time.Second)
 	for {
-		time.Sleep(30 * time.Second)
+		time.Sleep(5 * time.Second)
 		p.oracleEpoch += 1
-		seed := p.sortitionSeed(p.oracleEpoch)
+		seed := p.oracle.SortitionSeed(p.oracleEpoch)
 		role := role(params.OraclePeer, p.oracleEpoch, params.ORACLE)
 		vrf, proof, usr := p.sortition(seed, role, params.ExpectedOraclePeers, p.tokenOwn())
 		if usr > 0 {
@@ -24,8 +23,8 @@ func (p *Peer) proposeOraclePeer() {
 				Epoch:  p.oracleEpoch,
 				Weight: p.tokenOwn(),
 			}
-			log.Println(opp)
-			//p.oracle.AddOPP(opp)
+			//log.Println(opp)
+			p.oracle.AddOPP(opp)
 		}
 	}
 }

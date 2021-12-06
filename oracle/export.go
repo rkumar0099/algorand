@@ -43,3 +43,10 @@ func Role(iden string, round uint64, event string) []byte {
 func ConstructSeed(seed, role []byte) []byte {
 	return bytes.Join([][]byte{seed, role}, nil)
 }
+
+func (o *Oracle) CheckSelected(epoch uint64) (vrf, proof []byte, selected int) {
+	seed := o.sortitionSeed(epoch)
+	role := role(params.OraclePeer, epoch, params.ORACLE)
+	vrf, proof, selected = o.Sortition(seed, role, params.ExpectedOraclePeers, uint64(10000))
+	return
+}

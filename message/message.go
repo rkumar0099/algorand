@@ -3,7 +3,6 @@ package message
 import (
 	"bytes"
 	"errors"
-	"log"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/rkumar0099/algorand/common"
@@ -186,6 +185,6 @@ func (opp *OraclePeerProposal) Verify(message []byte) error {
 	if err := pubkey.VerifyVRF(opp.Proof, message); err != nil {
 		return err
 	}
-	log.Printf("Oracle peer proposal successfully verified\n")
+	//log.Printf("Oracle peer proposal successfully verified\n")
 	return nil
 }

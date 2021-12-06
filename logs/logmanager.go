@@ -10,6 +10,7 @@ import (
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/message"
+	"github.com/rkumar0099/algorand/oracle"
 )
 
 const bufferCap = 100
@@ -228,4 +229,8 @@ func (lm *LogManager) writeBalances() {
 		f.WriteString(latestLog)
 		f.Close()
 	}
+}
+
+func (lm *LogManager) AddOracleBlk(blk *oracle.FinalBlock) {
+
 }
