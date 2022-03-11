@@ -31,6 +31,12 @@ var (
 func main() {
 
 	testOracle()
+	runOracle()
+
+}
+
+func runOracle() {
+	o := oracle.New()
 
 }
 

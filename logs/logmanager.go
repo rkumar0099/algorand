@@ -62,14 +62,14 @@ func (lm *LogManager) init() {
 	os.Remove("../logs/balance.txt")
 	os.Create("../logs/balance.txt")
 
-	os.Remove("../logs/oracle.txt")
-	os.Create("../logs/oracle.txt")
+	//os.Remove("../logs/oracle.txt")
+	//os.Create("../logs/oracle.txt")
 
 	os.Remove("../logs/txs.txt")
 	os.Create("../logs/txs.txt")
 
-	os.Remove("../logs/externalData.txt")
-	os.Create("../logs/externalData.txt")
+	//os.Remove("../logs/externalData.txt")
+	//os.Create("../logs/externalData.txt")
 
 	os.Remove("../logs/peers.txt")
 	os.Create("../logs/peers.txt")

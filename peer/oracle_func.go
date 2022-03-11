@@ -8,11 +8,11 @@ import (
 )
 
 func (p *Peer) proposeOraclePeer() {
-	time.Sleep(10 * time.Second)
+	time.Sleep(5 * time.Second)
 	for {
 		time.Sleep(5 * time.Second)
 		p.oracleEpoch += 1
-		seed := p.oracle.SortitionSeed(p.oracleEpoch)
+		seed := p.oracle.SortitionSeed(1)
 		role := role(params.OraclePeer, p.oracleEpoch, params.ORACLE)
 		vrf, proof, usr := p.sortition(seed, role, params.ExpectedOraclePeers, p.tokenOwn())
 		if usr > 0 {

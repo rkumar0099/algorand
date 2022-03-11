@@ -1,0 +1,10 @@
+
+Oracle block for epoch 1 Finalized
+Oracle block for epoch 2 Finalized
+Oracle block for epoch 3 Finalized
+Oracle block for epoch 1 Finalized
+Oracle block for epoch 2 Finalized
+Oracle block for epoch 3 Finalized
+Oracle block for epoch 5 Finalized
+Oracle block for epoch 4 Finalized
+Oracle block for epoch 6 Finalized

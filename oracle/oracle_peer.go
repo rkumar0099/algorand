@@ -50,6 +50,7 @@ func (op *OraclePeer) commit(epoch uint64, txs []*message.PendingRequest, res ma
 	op.tree, _ = mt.New(op.data)
 	log.Println(op.tree)
 	res[cmn.BytesToHash(op.pubkey.Bytes())] = op.tree.Root()
+	log.Println("Commit results = ", len(op.results), len(txs))
 }
 
 func (op *OraclePeer) fetchFile(url string, Id uint64, reqType uint64) {

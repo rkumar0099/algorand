@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/golang-collections/collections v0.0.0-20130729185459-604e922904d3
 	github.com/golang/protobuf v1.5.2
+	github.com/hashicorp/hcl v1.0.0
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/r2ishiguro/vrf v0.0.0-20180716233122-192de52975eb
 	github.com/razor-network/goInfo v0.0.0-20200404012835-b5f882ee2288

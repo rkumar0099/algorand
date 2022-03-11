@@ -61,7 +61,7 @@ type Peer struct {
 	txEpoch uint64
 
 	finalContributions       chan *msg.ProposedTx
-	oracleFinalContributions chan []byte
+	oracleFinalContributions chan []byte //make struct for oracle response
 
 	lastState  []byte
 	startState []byte
@@ -139,7 +139,7 @@ func (p *Peer) AddManage(m *manage.Manage, lm *logs.LogManager, oracle *oracle.O
 	p.lm = lm
 	p.chain.SetManage(m)
 	blk := p.chain.GetByRound(0)
-	go p.lm.AddFinalBlk(blk.Hash(), 0)
+	//go p.lm.AddFinalBlk(blk.Hash(), 0)
 	go p.oracle.AddBlk(blk)
 }
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -117,7 +118,8 @@ func regularRun(c *cli.Context) {
 	go proposeTopUpTransactions(nodes)
 	go proposeTransferTransactions(nodes)
 
-	time.Sleep(2 * time.Minute)
+	time.Sleep(1 * time.Minute)
+	//showBalances(nodes)
 
 	/*
 		count := 50
@@ -162,6 +164,12 @@ func proposeTransferTransactions(peers []*peer.Peer) {
 			}
 			peers[ind].TransferTransaction(uint64(10), peers[to].Address())
 		}
+	}
+}
+
+func showBalances(peers []*peer.Peer) {
+	for _, p := range peers {
+		log.Printf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
 	}
 }
 
