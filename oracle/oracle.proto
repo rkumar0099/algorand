@@ -1,6 +1,10 @@
 syntax = "proto3";
 option go_package = "/oracle";
 
+service RPCService {
+    rpc sendOPP(ReqOPP) returns(ResOPP) {}
+}
+
 message Response {
     bytes Data = 1;
     int32 Type = 2;
