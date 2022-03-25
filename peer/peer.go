@@ -42,6 +42,7 @@ type Peer struct {
 	grpcServer    *grpc.Server
 	msgAgent      *msg.MsgAgent
 	ServiceServer *service.Server
+	OracleService *oracle.OracleServiceServer
 
 	votePool     *pool.VotePool
 	proposalPool *pool.ProposalPool
@@ -99,6 +100,7 @@ func New(addr string, maliciousType int) *Peer {
 
 	// register the same grpc server for service and gossip
 	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleContribution, peer.handleFinalContribution)
+	peer.OracleService = oracle.NewServer(peer.Id, peer.proposeOraclePeer())
 	peer.node.Register(peer.grpcServer)
 	peer.ServiceServer.Register(peer.grpcServer)
 

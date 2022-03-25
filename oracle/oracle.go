@@ -2,6 +2,7 @@ package oracle
 
 import (
 	"bytes"
+	"context"
 	"os"
 	"strconv"
 
@@ -23,23 +24,6 @@ import (
 	mt "github.com/wealdtech/go-merkletree"
 )
 
-type OracleServiceServer struct {
-	UnimplementedRPCOracleServiceServer
-	nodeId gossip.NodeId
-	OPPResult	func() ([]byte, error)
-}
-
-func NewServer(id gossip.NodeId, opp func() ([]byte, error)) *OracleServiceServer {
-	return &OracleServiceServer{
-		UnimplementedRPCOracleServiceServer{},
-		id,
-		opp,
-	}
-} 
-
-func (server *OracleServiceServer) Register(grpcServer *grpc.Server) {
-	RegisterRPCOracleServiceServer(grpcServer, server)
-}
 
 type Oracle struct {
 	pubkey      *crypto.PublicKey

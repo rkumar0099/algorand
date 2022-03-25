@@ -1,32 +1,24 @@
 package peer
 
 import (
-	"time"
-
-	msg "github.com/rkumar0099/algorand/message"
+	"github.com/rkumar0099/algorand/oracle"
 	"github.com/rkumar0099/algorand/params"
 )
 
-func (p *Peer) proposeOraclePeer() {
-	time.Sleep(5 * time.Second)
-	for {
-		time.Sleep(5 * time.Second)
-		p.oracleEpoch += 1
-		seed := p.oracle.SortitionSeed(1)
-		role := role(params.OraclePeer, p.oracleEpoch, params.ORACLE)
-		vrf, proof, usr := p.sortition(seed, role, params.ExpectedOraclePeers, p.tokenOwn())
-		if usr > 0 {
-			opp := &msg.OraclePeerProposal{
-				Pubkey: p.pubkey.Bytes(),
-				Proof:  proof,
-				Vrf:    vrf,
-				Epoch:  p.oracleEpoch,
-				Weight: p.tokenOwn(),
-			}
-			//log.Println(opp)
-			p.oracle.AddOPP(opp)
+func (p *Peer) proposeOraclePeer() (*oracle.ResOPP, error) {
+	seed := p.oracle.SortitionSeed(1)
+	role := role(params.OraclePeer, p.oracleEpoch, params.ORACLE)
+	vrf, proof, usr := p.sortition(seed, role, params.ExpectedOraclePeers, p.tokenOwn())
+	if usr > 0 {
+		opp := &oracle.ResOPP{
+			Proof:  proof,
+			VRF:    vrf,
+			Pubkey: p.pubkey.Bytes(),
+			Weight: p.tokenOwn(),
 		}
+		return opp, nil
 	}
+	return nil, nil
 }
 
 func (p *Peer) handleOracleBlk(data []byte) {

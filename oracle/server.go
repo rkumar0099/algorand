@@ -8,23 +8,23 @@ import (
 )
 
 type OracleServiceServer struct {
-	UnimplementedRPCServiceServer
-	nodeId    gossip.NodeId
-	OPPResult func() ([]byte, error)
+	UnimplementedRPCOracleServiceServer
+	nodeId         gossip.NodeId
+	sendOPPHandler func(uint64) (*ResOPP, error)
 }
 
-func NewServer(id gossip.NodeId, opp func() ([]byte, error)) *OracleServiceServer {
+func NewServer(id gossip.NodeId, oppHandler func(uint64) (*ResOPP, error)) *OracleServiceServer {
 	return &OracleServiceServer{
-		UnimplementedRPCServiceServer{},
+		UnimplementedRPCOracleServiceServer{},
 		id,
-		opp,
+		oppHandler,
 	}
 }
 
 func (server *OracleServiceServer) Register(grpcServer *grpc.Server) {
-	RegisterRPCServiceServer(grpcServer, server)
+	RegisterRPCOracleServiceServer(grpcServer, server)
 }
 
-func (s *OracleServiceServer) OPP(ctx context.Context) ([]byte, error) {
-
+func (s *OracleServiceServer) SendOPP(ctx context.Context, req *ReqOPP) (*ResOPP, error) {
+	return s.sendOPPHandler(req.Epoch)
 }

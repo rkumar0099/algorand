@@ -1,8 +1,8 @@
 syntax = "proto3";
 option go_package = "/oracle";
 
-service RPCService {
-    rpc sendOPP(ReqOPP) returns(ResOPP) {}
+service RPCOracleService {
+    rpc SendOPP(ReqOPP) returns(ResOPP) {}
 }
 
 message Response {
@@ -19,5 +19,5 @@ message ResOPP {
     bytes Proof = 1;
     bytes VRF = 2;
     bytes Pubkey = 3;
-    uint64 weight = 4;
+    uint64 Weight = 4;
 }

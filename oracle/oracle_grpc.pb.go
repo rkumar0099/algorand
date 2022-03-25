@@ -14,86 +14,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// RPCServiceClient is the client API for RPCService service.
+// RPCOracleServiceClient is the client API for RPCOracleService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RPCServiceClient interface {
+type RPCOracleServiceClient interface {
 	SendOPP(ctx context.Context, in *ReqOPP, opts ...grpc.CallOption) (*ResOPP, error)
 }
 
-type rPCServiceClient struct {
+type rPCOracleServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewRPCServiceClient(cc grpc.ClientConnInterface) RPCServiceClient {
-	return &rPCServiceClient{cc}
+func NewRPCOracleServiceClient(cc grpc.ClientConnInterface) RPCOracleServiceClient {
+	return &rPCOracleServiceClient{cc}
 }
 
-func (c *rPCServiceClient) SendOPP(ctx context.Context, in *ReqOPP, opts ...grpc.CallOption) (*ResOPP, error) {
+func (c *rPCOracleServiceClient) SendOPP(ctx context.Context, in *ReqOPP, opts ...grpc.CallOption) (*ResOPP, error) {
 	out := new(ResOPP)
-	err := c.cc.Invoke(ctx, "/RPCService/sendOPP", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/RPCOracleService/SendOPP", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// RPCServiceServer is the server API for RPCService service.
-// All implementations must embed UnimplementedRPCServiceServer
+// RPCOracleServiceServer is the server API for RPCOracleService service.
+// All implementations must embed UnimplementedRPCOracleServiceServer
 // for forward compatibility
-type RPCServiceServer interface {
+type RPCOracleServiceServer interface {
 	SendOPP(context.Context, *ReqOPP) (*ResOPP, error)
-	mustEmbedUnimplementedRPCServiceServer()
+	mustEmbedUnimplementedRPCOracleServiceServer()
 }
 
-// UnimplementedRPCServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedRPCServiceServer struct {
+// UnimplementedRPCOracleServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedRPCOracleServiceServer struct {
 }
 
-func (UnimplementedRPCServiceServer) SendOPP(context.Context, *ReqOPP) (*ResOPP, error) {
+func (UnimplementedRPCOracleServiceServer) SendOPP(context.Context, *ReqOPP) (*ResOPP, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendOPP not implemented")
 }
-func (UnimplementedRPCServiceServer) mustEmbedUnimplementedRPCServiceServer() {}
+func (UnimplementedRPCOracleServiceServer) mustEmbedUnimplementedRPCOracleServiceServer() {}
 
-// UnsafeRPCServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to RPCServiceServer will
+// UnsafeRPCOracleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RPCOracleServiceServer will
 // result in compilation errors.
-type UnsafeRPCServiceServer interface {
-	mustEmbedUnimplementedRPCServiceServer()
+type UnsafeRPCOracleServiceServer interface {
+	mustEmbedUnimplementedRPCOracleServiceServer()
 }
 
-func RegisterRPCServiceServer(s grpc.ServiceRegistrar, srv RPCServiceServer) {
-	s.RegisterService(&RPCService_ServiceDesc, srv)
+func RegisterRPCOracleServiceServer(s grpc.ServiceRegistrar, srv RPCOracleServiceServer) {
+	s.RegisterService(&RPCOracleService_ServiceDesc, srv)
 }
 
-func _RPCService_SendOPP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RPCOracleService_SendOPP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqOPP)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RPCServiceServer).SendOPP(ctx, in)
+		return srv.(RPCOracleServiceServer).SendOPP(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/RPCService/sendOPP",
+		FullMethod: "/RPCOracleService/SendOPP",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RPCServiceServer).SendOPP(ctx, req.(*ReqOPP))
+		return srv.(RPCOracleServiceServer).SendOPP(ctx, req.(*ReqOPP))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// RPCService_ServiceDesc is the grpc.ServiceDesc for RPCService service.
+// RPCOracleService_ServiceDesc is the grpc.ServiceDesc for RPCOracleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var RPCService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "RPCService",
-	HandlerType: (*RPCServiceServer)(nil),
+var RPCOracleService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "RPCOracleService",
+	HandlerType: (*RPCOracleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "sendOPP",
-			Handler:    _RPCService_SendOPP_Handler,
+			MethodName: "SendOPP",
+			Handler:    _RPCOracleService_SendOPP_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
