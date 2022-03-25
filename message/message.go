@@ -168,12 +168,17 @@ func (pr *PendingRequest) Hash() common.Hash {
 	return common.Sha256(data)
 }
 
-func (prTx *ProposedTx) Serialize() ([]byte, error) {
-	return proto.Marshal(prTx)
+func (pt *ProposedTx) Serialize() ([]byte, error) {
+	return proto.Marshal(pt)
 }
 
-func (prTx *ProposedTx) Deserialize(data []byte) error {
-	return proto.Unmarshal(data, prTx)
+func (pt *ProposedTx) Deserialize(data []byte) error {
+	return proto.Unmarshal(data, pt)
+}
+
+func (pt *ProposedTx) Hash() common.Hash {
+	data, _ := pt.Serialize()
+	return common.Sha256(data)
 }
 
 func (opp *OraclePeerProposal) pubkey() *crypto.PublicKey {

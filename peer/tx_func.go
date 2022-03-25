@@ -21,9 +21,7 @@ func (p *Peer) handleFinalContribution(data []byte) error {
 	if err != nil {
 		return err
 	}
-	st := p.executeTxSet(txSet, p.lastState, p.tempTxStorage)
-	p.lastState = st.RootHash()
-	st.Commit()
+
 	p.finalContributions <- txSet
 	return nil
 }
@@ -36,7 +34,7 @@ func (p *Peer) handleContribution(data []byte) ([]byte, error) {
 	}
 
 	//log.Println("Got contribution of size ", len(txSet.Txs))
-	st := p.executeTxSet(txSet, p.lastState, p.tempTxStorage)
+	st := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
 	res := &msg.StateHash{
 		Epoch:     txSet.Epoch,
 		StateHash: st.RootHash(),
@@ -74,10 +72,11 @@ func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
 		}, nil)
 		st.Put(stateAddr, cmn.Uint2Bytes(0))
 	}
+	//log.Println("State trie is init")
 	p.chain.Genesis.StateHash = st.RootHash()
-	st.Commit()
 	p.startState = st.RootHash()
 	p.lastState = st.RootHash()
+	st.Commit()
 }
 
 func (p *Peer) TopupTransaction(value uint64) {
@@ -106,23 +105,15 @@ func (p *Peer) TransferTransaction(value uint64, to cmn.Address) {
 }
 
 func (p *Peer) GetBalance() uint64 {
-	blk := p.lastBlock()
-	hn := mpt.HashNode(blk.StateHash)
-	st := mpt.New(&hn, p.tempTxStorage)
+	//blk := p.lastBlock()
+	hn := mpt.HashNode(p.lastState)
+	st := mpt.New(&hn, p.permanentTxStorage)
 	addr := bytes.Join([][]byte{
 		p.Address().Bytes(),
 		[]byte("value"),
 	}, nil)
 	val, _ := st.Get(addr)
 	return cmn.Bytes2Uint(val)
-}
-
-func (p *Peer) GetLastState() []byte {
-	return p.lastBlock().StateHash
-}
-
-func (p *Peer) GetStartState() []byte {
-	return p.chain.Genesis.StateHash
 }
 
 func (p *Peer) ExternalWorldTransaction(url string, reqType int) {

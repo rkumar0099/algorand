@@ -20,82 +20,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ReqEmpty struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ReqEmpty) Reset() {
-	*x = ReqEmpty{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReqEmpty) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReqEmpty) ProtoMessage() {}
-
-func (x *ReqEmpty) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReqEmpty.ProtoReflect.Descriptor instead.
-func (*ReqEmpty) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{0}
-}
-
-type ResEmpty struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ResEmpty) Reset() {
-	*x = ResEmpty{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ResEmpty) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResEmpty) ProtoMessage() {}
-
-func (x *ResEmpty) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResEmpty.ProtoReflect.Descriptor instead.
-func (*ResEmpty) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{1}
-}
-
 type ReqHash struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -107,7 +31,7 @@ type ReqHash struct {
 func (x *ReqHash) Reset() {
 	*x = ReqHash{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[2]
+		mi := &file_rpc_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -120,7 +44,7 @@ func (x *ReqHash) String() string {
 func (*ReqHash) ProtoMessage() {}
 
 func (x *ReqHash) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[2]
+	mi := &file_rpc_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -133,7 +57,7 @@ func (x *ReqHash) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReqHash.ProtoReflect.Descriptor instead.
 func (*ReqHash) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{2}
+	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ReqHash) GetHash() []byte {
@@ -154,7 +78,7 @@ type ResData struct {
 func (x *ResData) Reset() {
 	*x = ResData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[3]
+		mi := &file_rpc_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -167,7 +91,7 @@ func (x *ResData) String() string {
 func (*ResData) ProtoMessage() {}
 
 func (x *ResData) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[3]
+	mi := &file_rpc_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -180,7 +104,7 @@ func (x *ResData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResData.ProtoReflect.Descriptor instead.
 func (*ResData) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{3}
+	return file_rpc_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ResData) GetData() []byte {
@@ -195,14 +119,13 @@ type ReqContribution struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Epoch uint64 `protobuf:"varint,1,opt,name=Epoch,proto3" json:"Epoch,omitempty"`
-	Data  []byte `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Data []byte `protobuf:"bytes,1,opt,name=Data,proto3" json:"Data,omitempty"`
 }
 
 func (x *ReqContribution) Reset() {
 	*x = ReqContribution{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[4]
+		mi := &file_rpc_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -215,7 +138,7 @@ func (x *ReqContribution) String() string {
 func (*ReqContribution) ProtoMessage() {}
 
 func (x *ReqContribution) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[4]
+	mi := &file_rpc_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -228,14 +151,7 @@ func (x *ReqContribution) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReqContribution.ProtoReflect.Descriptor instead.
 func (*ReqContribution) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ReqContribution) GetEpoch() uint64 {
-	if x != nil {
-		return x.Epoch
-	}
-	return 0
+	return file_rpc_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ReqContribution) GetData() []byte {
@@ -245,32 +161,29 @@ func (x *ReqContribution) GetData() []byte {
 	return nil
 }
 
-type ResStateHash struct {
+type ResContribution struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
-	Epoch     uint64 `protobuf:"varint,1,opt,name=Epoch,proto3" json:"Epoch,omitempty"`
-	StateHash []byte `protobuf:"bytes,2,opt,name=StateHash,proto3" json:"StateHash,omitempty"`
 }
 
-func (x *ResStateHash) Reset() {
-	*x = ResStateHash{}
+func (x *ResContribution) Reset() {
+	*x = ResContribution{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_rpc_proto_msgTypes[5]
+		mi := &file_rpc_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ResStateHash) String() string {
+func (x *ResContribution) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResStateHash) ProtoMessage() {}
+func (*ResContribution) ProtoMessage() {}
 
-func (x *ResStateHash) ProtoReflect() protoreflect.Message {
-	mi := &file_rpc_proto_msgTypes[5]
+func (x *ResContribution) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -281,53 +194,30 @@ func (x *ResStateHash) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResStateHash.ProtoReflect.Descriptor instead.
-func (*ResStateHash) Descriptor() ([]byte, []int) {
-	return file_rpc_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ResStateHash) GetEpoch() uint64 {
-	if x != nil {
-		return x.Epoch
-	}
-	return 0
-}
-
-func (x *ResStateHash) GetStateHash() []byte {
-	if x != nil {
-		return x.StateHash
-	}
-	return nil
+// Deprecated: Use ResContribution.ProtoReflect.Descriptor instead.
+func (*ResContribution) Descriptor() ([]byte, []int) {
+	return file_rpc_proto_rawDescGZIP(), []int{3}
 }
 
 var File_rpc_proto protoreflect.FileDescriptor
 
 var file_rpc_proto_rawDesc = []byte{
-	0x0a, 0x09, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x0a, 0x0a, 0x08, 0x52,
-	0x65, 0x71, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x0a, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x45, 0x6d,
-	0x70, 0x74, 0x79, 0x22, 0x1d, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x48, 0x61, 0x73, 0x68, 0x12, 0x12,
-	0x0a, 0x04, 0x48, 0x61, 0x73, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x48, 0x61,
-	0x73, 0x68, 0x22, 0x1d, 0x0a, 0x07, 0x52, 0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a,
-	0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x44, 0x61, 0x74,
-	0x61, 0x22, 0x3b, 0x0a, 0x0f, 0x52, 0x65, 0x71, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75,
-	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x04, 0x52, 0x05, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
-	0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x42,
-	0x0a, 0x0c, 0x52, 0x65, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61, 0x73, 0x68, 0x12, 0x14,
-	0x0a, 0x05, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x45,
-	0x70, 0x6f, 0x63, 0x68, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61, 0x73,
-	0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61,
-	0x73, 0x68, 0x32, 0xa2, 0x01, 0x0a, 0x0a, 0x52, 0x50, 0x43, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x0a, 0x09, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1d, 0x0a, 0x07, 0x52,
+	0x65, 0x71, 0x48, 0x61, 0x73, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x48, 0x61, 0x73, 0x68, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x48, 0x61, 0x73, 0x68, 0x22, 0x1d, 0x0a, 0x07, 0x52, 0x65,
+	0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x22, 0x25, 0x0a, 0x0f, 0x52, 0x65, 0x71,
+	0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04,
+	0x44, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61,
+	0x22, 0x11, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
+	0x69, 0x6f, 0x6e, 0x32, 0x72, 0x0a, 0x0a, 0x52, 0x50, 0x43, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x12, 0x25, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x48, 0x61,
 	0x73, 0x68, 0x12, 0x08, 0x2e, 0x52, 0x65, 0x71, 0x48, 0x61, 0x73, 0x68, 0x1a, 0x08, 0x2e, 0x52,
-	0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x12, 0x35, 0x0a, 0x10, 0x53, 0x65, 0x6e, 0x64,
-	0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x10, 0x2e, 0x52,
-	0x65, 0x71, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x0d,
-	0x2e, 0x52, 0x65, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61, 0x73, 0x68, 0x22, 0x00, 0x12,
-	0x36, 0x0a, 0x15, 0x53, 0x65, 0x6e, 0x64, 0x46, 0x69, 0x6e, 0x61, 0x6c, 0x43, 0x6f, 0x6e, 0x74,
-	0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x10, 0x2e, 0x52, 0x65, 0x71, 0x43, 0x6f,
-	0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x09, 0x2e, 0x52, 0x65, 0x73,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x42, 0x0a, 0x5a, 0x08, 0x2f, 0x73, 0x65, 0x72, 0x76,
+	0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x12, 0x3d, 0x0a, 0x15, 0x53, 0x65, 0x6e, 0x64,
+	0x46, 0x69, 0x6e, 0x61, 0x6c, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x10, 0x2e, 0x52, 0x65, 0x71, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
+	0x69, 0x6f, 0x6e, 0x1a, 0x10, 0x2e, 0x52, 0x65, 0x73, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x69, 0x62,
+	0x75, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x00, 0x42, 0x0a, 0x5a, 0x08, 0x2f, 0x73, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
@@ -343,24 +233,20 @@ func file_rpc_proto_rawDescGZIP() []byte {
 	return file_rpc_proto_rawDescData
 }
 
-var file_rpc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_rpc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_rpc_proto_goTypes = []interface{}{
-	(*ReqEmpty)(nil),        // 0: ReqEmpty
-	(*ResEmpty)(nil),        // 1: ResEmpty
-	(*ReqHash)(nil),         // 2: ReqHash
-	(*ResData)(nil),         // 3: ResData
-	(*ReqContribution)(nil), // 4: ReqContribution
-	(*ResStateHash)(nil),    // 5: ResStateHash
+	(*ReqHash)(nil),         // 0: ReqHash
+	(*ResData)(nil),         // 1: ResData
+	(*ReqContribution)(nil), // 2: ReqContribution
+	(*ResContribution)(nil), // 3: ResContribution
 }
 var file_rpc_proto_depIdxs = []int32{
-	2, // 0: RPCService.GetDataByHash:input_type -> ReqHash
-	4, // 1: RPCService.SendContribution:input_type -> ReqContribution
-	4, // 2: RPCService.SendFinalContribution:input_type -> ReqContribution
-	3, // 3: RPCService.GetDataByHash:output_type -> ResData
-	5, // 4: RPCService.SendContribution:output_type -> ResStateHash
-	1, // 5: RPCService.SendFinalContribution:output_type -> ResEmpty
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	0, // 0: RPCService.GetDataByHash:input_type -> ReqHash
+	2, // 1: RPCService.SendFinalContribution:input_type -> ReqContribution
+	1, // 2: RPCService.GetDataByHash:output_type -> ResData
+	3, // 3: RPCService.SendFinalContribution:output_type -> ResContribution
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -373,30 +259,6 @@ func file_rpc_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_rpc_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReqEmpty); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_rpc_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResEmpty); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_rpc_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReqHash); i {
 			case 0:
 				return &v.state
@@ -408,7 +270,7 @@ func file_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_rpc_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ResData); i {
 			case 0:
 				return &v.state
@@ -420,7 +282,7 @@ func file_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_rpc_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReqContribution); i {
 			case 0:
 				return &v.state
@@ -432,8 +294,8 @@ func file_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_rpc_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResStateHash); i {
+		file_rpc_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ResContribution); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -451,7 +313,7 @@ func file_rpc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_rpc_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -12,14 +12,34 @@ import (
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
+	"github.com/rkumar0099/algorand/gossip"
 	"google.golang.org/protobuf/proto"
 
-	//"github.com/rkumar0099/algorand/logs"
+	"github.com/rkumar0099/algorand/logs"
+	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/syndtr/goleveldb/leveldb"
 	mt "github.com/wealdtech/go-merkletree"
 )
+
+type OracleServiceServer struct {
+	UnimplementedRPCOracleServiceServer
+	nodeId gossip.NodeId
+	OPPResult	func() ([]byte, error)
+}
+
+func NewServer(id gossip.NodeId, opp func() ([]byte, error)) *OracleServiceServer {
+	return &OracleServiceServer{
+		UnimplementedRPCOracleServiceServer{},
+		id,
+		opp,
+	}
+} 
+
+func (server *OracleServiceServer) Register(grpcServer *grpc.Server) {
+	RegisterRPCOracleServiceServer(grpcServer, server)
+}
 
 type Oracle struct {
 	pubkey      *crypto.PublicKey
@@ -38,6 +58,8 @@ type Oracle struct {
 	db          *leveldb.DB
 	running     bool
 	confirmedId int
+	lm          *logs.LogManager
+	m           *manage.Manage
 }
 
 type Reveal struct {
@@ -54,7 +76,7 @@ type FinalBlock struct {
 	Epoch   uint64
 }
 
-func New() *Oracle {
+func New(lm *logs.LogManager, m *manage.Manage, addr ) *Oracle {
 	oracle := &Oracle{
 		peers:       make(map[uint64][]*OraclePeer),
 		lock:        &sync.Mutex{},
@@ -68,16 +90,23 @@ func New() *Oracle {
 		count:       0,
 		running:     false,
 		confirmedId: 0,
+		lm:          lm,
+		m:           m,
 	}
 
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
 	//os.RemoveAll("../oracle/blockDB")
-	oracle.db, _ = leveldb.OpenFile("../oracle/blockDB", nil)
+	//oracle.db, _ = leveldb.OpenFile("../oracle/blockDB", nil)
 	return oracle
 }
 
 func (o *Oracle) Address() []byte {
 	return o.pubkey.Bytes()
+}
+
+func (o *Oracle) preparePool() {
+	o.epoch += 1;
+	// send req to peer to send the result of proposal, see if it's selected
 }
 
 func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
@@ -143,6 +172,7 @@ func (o *Oracle) sortitionSeed(round uint64) []byte {
 	} else {
 		realR -= mod
 	}
+	// get block by manage
 	blk := o.GetBlkByRound(realR)
 	return blk.Seed
 }
@@ -159,6 +189,11 @@ func role(iden string, round uint64, event string) []byte {
 // constructSeed construct a new bytes for vrf generation.
 func constructSeed(seed, role []byte) []byte {
 	return bytes.Join([][]byte{seed, role}, nil)
+}
+
+func (o *Oracle) completeEpoch() {
+	// once oracle peers are ready, ask all of them to fetch jobs and store the result in a merkle
+	// patricia tree 
 }
 
 func (o *Oracle) Run() {

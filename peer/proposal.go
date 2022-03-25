@@ -2,6 +2,7 @@ package peer
 
 import (
 	"encoding/hex"
+	"fmt"
 	"log"
 	"time"
 
@@ -98,9 +99,10 @@ func (p *Peer) proposeBlock() *msg.Block {
 
 	//var txSet *msg.ProposedTx
 	if len(p.finalContributions) > 0 {
-		txSet := <-p.finalContributions
+		p.pt = <-p.finalContributions
+		txSet := p.pt
 		blk.Txs = txSet.Txs
-		st := p.executeTxSet(txSet, blk.StateHash, p.permanentTxStorage)
+		st := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
 		blk.StateHash = st.RootHash()
 		blk.TxEpoch = txSet.Epoch
 	}
@@ -108,14 +110,19 @@ func (p *Peer) proposeBlock() *msg.Block {
 	bhash := blk.Hash()
 	sign, _ := p.privkey.Sign(bhash.Bytes())
 	blk.Signature = sign
-	log.Printf("[alogrand] [%s] propose a new block with %d txs: #%d %s, stateHash: %s, parent: %s", p.Id.String(), len(blk.Txs), blk.Round, blk.Hash(), hex.EncodeToString(blk.StateHash), hex.EncodeToString(blk.ParentHash))
+	s := fmt.Sprintf("[alogrand] [%s] propose a new block with %d txs: #%d %s, stateHash: %s, parent: %s\n", p.Id.String(), len(blk.Txs), blk.Round, blk.Hash(), hex.EncodeToString(blk.StateHash), hex.EncodeToString(blk.ParentHash))
+	log.Print(s)
+	p.lm.AddLog(s)
+	//log.Printf
 	return blk
 }
 
 func (p *Peer) handleBlockProposal(data []byte) {
 	bp := &msg.Proposal{}
 	if err := bp.Deserialize(data); err != nil {
-		//log.Printf("[algorand] [%s] Received invalid proposal message: %s", p.Id.String(), err.Error())
+		s := fmt.Sprintf("[algorand] [%s] Received invalid proposal message: %s", p.Id.String(), err.Error())
+		log.Print(s)
+		p.lm.AddLog(s)
 		return
 	}
 	p.proposalPool.Update(bp, msg.BLOCK_PROPOSAL)
@@ -123,7 +130,9 @@ func (p *Peer) handleBlockProposal(data []byte) {
 
 func (p *Peer) proposalVerifier(bp *msg.Proposal) bool {
 	if err := bp.Verify(p.weight(bp.Address()), constructSeed(p.sortitionSeed(bp.Round), role(params.Proposer, bp.Round, params.PROPOSE))); err != nil {
-		log.Printf("[algorand] [%s] Received invaild proposal: 5s", p.Id.String(), err.Error())
+		s := fmt.Sprintf("[algorand] [%s] Received invaild proposal: %5s\n", p.Id.String(), err.Error())
+		log.Print(s)
+		p.lm.AddLog(s)
 		return false
 	}
 	blk := &msg.Block{}

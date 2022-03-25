@@ -55,19 +55,7 @@ func (server *Server) GetDataByHash(ctx context.Context, in *ReqHash) (*ResData,
 	return &ResData{Data: data}, err
 }
 
-func (s *Server) SendContribution(ctx context.Context, req *ReqContribution) (*ResStateHash, error) {
-	data, err := s.sendContributionHandler(req.Data)
-	if err != nil {
-		return nil, err
-	}
-	res := &ResStateHash{
-		Epoch:     req.Epoch,
-		StateHash: data,
-	}
-	return res, nil
-}
-
-func (s *Server) SendFinalContribution(ctx context.Context, req *ReqContribution) (*ResEmpty, error) {
+func (s *Server) SendFinalContribution(ctx context.Context, req *ReqContribution) (*ResContribution, error) {
 	err := s.sendFinalContributionHandler(req.Data)
-	return &ResEmpty{}, err
+	return &ResContribution{}, err
 }

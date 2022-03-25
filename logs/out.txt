@@ -1,0 +1,1878 @@
+[alogrand] [127.0.0.1:8000] found 49 peers
+[alogrand] [127.0.0.1:8002] found 49 peers
+[alogrand] [127.0.0.1:8049] found 49 peers
+[alogrand] [127.0.0.1:8048] found 49 peers
+[alogrand] [127.0.0.1:8025] found 49 peers
+[alogrand] [127.0.0.1:8029] found 49 peers
+[alogrand] [127.0.0.1:8038] found 49 peers
+[alogrand] [127.0.0.1:8040] found 49 peers
+[alogrand] [127.0.0.1:8001] found 49 peers
+[alogrand] [127.0.0.1:8042] found 49 peers
+[alogrand] [127.0.0.1:8028] found 49 peers
+[alogrand] [127.0.0.1:8030] found 49 peers
+[alogrand] [127.0.0.1:8031] found 49 peers
+[alogrand] [127.0.0.1:8032] found 49 peers
+[alogrand] [127.0.0.1:8033] found 49 peers
+[alogrand] [127.0.0.1:8034] found 49 peers
+[alogrand] [127.0.0.1:8035] found 49 peers
+[alogrand] [127.0.0.1:8036] found 49 peers
+[alogrand] [127.0.0.1:8000] propose a new block with 0 txs: #1 fa7d13b60f97a9b0c432f5f30c63cd00b4a13764233e5f4cead8a546eb0c2b81, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8041] found 49 peers
+[alogrand] [127.0.0.1:8039] found 49 peers
+[alogrand] [127.0.0.1:8031] propose a new block with 0 txs: #1 d0d10913130093151d3dd4202354ea82054adaf95d465246e6b64ed5d1017433, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8031] gossip block proposal
+[alogrand] [127.0.0.1:8037] found 49 peers
+[alogrand] [127.0.0.1:8032] propose a new block with 0 txs: #1 061a5e94bc81008868fec97fd18d48225823fa0219b3ad25e980716b81b4f5dd, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8032] gossip block proposal
+[alogrand] [127.0.0.1:8033] propose a new block with 0 txs: #1 27878eda42261e8759ba03501dccfb7c2ece4b200d8da6d55d117c3ee9b6927c, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8033] gossip block proposal
+[alogrand] [127.0.0.1:8035] propose a new block with 0 txs: #1 3c4504a71cb4fdf87d929f78e7bb6a5bd4d5041bafc6b76adfe12c08b3044db4, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8035] gossip block proposal
+[alogrand] [127.0.0.1:8045] found 49 peers
+[alogrand] [127.0.0.1:8045] propose a new block with 0 txs: #1 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] gossip block proposal
+[alogrand] [127.0.0.1:8043] found 49 peers
+[alogrand] [127.0.0.1:8034] propose a new block with 0 txs: #1 1a692e6b0c3d14c2d8b63c0d5729e6e62c9fb82a4fd091b589096ab7b5d939ce, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8034] gossip block proposal
+[alogrand] [127.0.0.1:8044] found 49 peers
+[alogrand] [127.0.0.1:8047] found 49 peers
+[alogrand] [127.0.0.1:8046] found 49 peers
+[alogrand] [127.0.0.1:8046] propose a new block with 0 txs: #1 46a1f86b3f0838d25a389b22678cc8d5d0a69ac77263fe310ea35264982abbff, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8046] gossip block proposal
+[alogrand] [127.0.0.1:8026] found 49 peers
+[alogrand] [127.0.0.1:8014] found 49 peers
+[alogrand] [127.0.0.1:8003] found 49 peers
+[alogrand] [127.0.0.1:8004] found 49 peers
+[alogrand] [127.0.0.1:8005] found 49 peers
+[alogrand] [127.0.0.1:8006] found 49 peers
+[alogrand] [127.0.0.1:8007] found 49 peers
+[alogrand] [127.0.0.1:8008] found 49 peers
+[alogrand] [127.0.0.1:8009] found 49 peers
+[alogrand] [127.0.0.1:8010] found 49 peers
+[alogrand] [127.0.0.1:8011] found 49 peers
+[alogrand] [127.0.0.1:8012] found 49 peers
+[alogrand] [127.0.0.1:8013] found 49 peers
+[alogrand] [127.0.0.1:8020] found 49 peers
+[alogrand] [127.0.0.1:8015] found 49 peers
+[alogrand] [127.0.0.1:8016] found 49 peers
+[alogrand] [127.0.0.1:8017] found 49 peers
+[alogrand] [127.0.0.1:8018] found 49 peers
+[alogrand] [127.0.0.1:8019] found 49 peers
+[alogrand] [127.0.0.1:8023] found 49 peers
+[alogrand] [127.0.0.1:8021] found 49 peers
+[alogrand] [127.0.0.1:8022] found 49 peers
+[alogrand] [127.0.0.1:8024] found 49 peers
+[alogrand] [127.0.0.1:8027] found 49 peers
+[debug] [127.0.0.1:8000] gossip block proposal
+[alogrand] [127.0.0.1:8008] propose a new block with 0 txs: #1 321bb4a7ecc49095344d3683153fcc9dd9b0336fcc0a2d4c00beef50606bc204, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8008] gossip block proposal
+[alogrand] [127.0.0.1:8010] propose a new block with 0 txs: #1 e647e68ffaf24547724c665adf4f2a10e9d1a4f4a43a6d6e22bbc54a53537939, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8010] gossip block proposal
+[alogrand] [127.0.0.1:8011] propose a new block with 0 txs: #1 2b78f317ef3ad2996859d9abd4a9a9277abf69e47dec2d84b931b2f99647b04c, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8011] gossip block proposal
+[alogrand] [127.0.0.1:8044] propose a new block with 0 txs: #1 23b150b6cbe151e6e15657c4492b995e614346aed67ff6540152d3c41b1b6556, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] gossip block proposal
+[alogrand] [127.0.0.1:8024] propose a new block with 0 txs: #1 9c8e4af6a00fd3764898f3d22dc4d5f3f14c472ea75f6750ea4777ae8bf889e0, stateHash: c5a871c0cbbeffa3ed60e13b560d2f4346feb8b9f95b37b4babbe5013794fefa, parent: 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8024] gossip block proposal
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8001] gossip vote
+[debug] [127.0.0.1:8042] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[algorand] [127.0.0.1:8001] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8036] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8039] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8042] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8031] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8037] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8046] gossip vote
+[algorand] [127.0.0.1:8048] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8025] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8038] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8049] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8026] gossip vote
+[algorand] [127.0.0.1:8043] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8035] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8004] gossip vote
+[algorand] [127.0.0.1:8029] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8008] gossip vote
+[algorand] [127.0.0.1:8047] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8007] gossip vote
+[algorand] [127.0.0.1:8032] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8028] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8002] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8020] gossip vote
+[algorand] [127.0.0.1:8034] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8036] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8030] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8046] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8026] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8005] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8001] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8001] gossip vote
+[algorand] [127.0.0.1:8014] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8049] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8015] gossip vote
+[algorand] [127.0.0.1:8008] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8039] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8041] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8016] gossip vote
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8031] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8023]
+[debug] [127.0.0.1:8036] gossip vote
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8042] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8025] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8037] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8040] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8003] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8047] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8048] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8038] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8004] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8035] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8013] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8029] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8020] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8017]
+[algorand] [127.0.0.1:8010] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8012] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8034] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8045] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8002] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8018] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8023] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8028] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8009] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8000] gossip vote
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8032] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8032] gossip vote
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[algorand] [127.0.0.1:8044] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8026] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8033] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8038] gossip vote
+[algorand] [127.0.0.1:8007] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8043] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8014] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8008] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8030] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8005] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8046] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8003] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8003] gossip vote
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8007]
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8010] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[algorand] [127.0.0.1:8017] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8021] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[algorand] [127.0.0.1:8022] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8045] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] gossip vote
+[algorand] [127.0.0.1:8019] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8035] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8027] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[debug] [127.0.0.1:8041] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8011] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8024] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8006] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8013] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8037] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[algorand] [127.0.0.1:8001] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8029] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8025] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8040] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8009] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8015] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8012] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[debug] [127.0.0.1:8001] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8009] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8016] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8036] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8004] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8012]
+[debug] [127.0.0.1:8044] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8009] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[algorand] [127.0.0.1:8031] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8020] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[algorand] [127.0.0.1:8043] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8012]
+[debug] [127.0.0.1:8018] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8023] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8030] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[algorand] [127.0.0.1:8026] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8048] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[algorand] [127.0.0.1:8028] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[algorand] [127.0.0.1:8046] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8003] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8038] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8047] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8007] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8014] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8034] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[algorand] [127.0.0.1:8049] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8012]
+[debug] [127.0.0.1:8033] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8007]
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8011] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8024] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8045] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8027] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8000] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8022] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8035] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8006] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8017] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8039] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[algorand] [127.0.0.1:8008] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[algorand] [127.0.0.1:8032] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8021] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8019] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8015] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8037] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[algorand] [127.0.0.1:8002] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8003]
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8029] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8040] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8005] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8013] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8025] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[algorand] [127.0.0.1:8010] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8016] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8018] gossip vote
+[algorand] [127.0.0.1:8044] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8012] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8004] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[algorand] [127.0.0.1:8020] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8033] gossip vote
+[debug] [127.0.0.1:8011] gossip vote
+[algorand] [127.0.0.1:8023] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8036] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8007] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8024]
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8043] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8046] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8023]
+[debug] [127.0.0.1:8028] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8006] gossip vote
+[algorand] [127.0.0.1:8024] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8027] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8038] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8034] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8003]
+[debug] [127.0.0.1:8031] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8030] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[algorand] [127.0.0.1:8022] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8030]
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8048] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8011]
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8026] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8023]
+[debug] [127.0.0.1:8014] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8003] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8003]
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8023]
+[debug] [127.0.0.1:8045] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8047] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8037] gossip vote
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8039] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8000] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8008] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8032] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8040] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[algorand] [127.0.0.1:8019] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[debug] [127.0.0.1:8013] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8015] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[algorand] [127.0.0.1:8017] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8016] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8004] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8005]
+[debug] [127.0.0.1:8044] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8018] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8046] gossip vote
+[algorand] [127.0.0.1:8011] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8033] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8012] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8034]
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8010] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[debug] [127.0.0.1:8020] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8002] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8042] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8049] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8023] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8006] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8030] gossip vote
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8016]
+[debug] [127.0.0.1:8005] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8007] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8013] gossip vote
+[algorand] [127.0.0.1:8021] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8041] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8044] gossip vote
+[algorand] [127.0.0.1:8000] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8024] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8030]
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[debug] [127.0.0.1:8027] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8020] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8033] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8011] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8046] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8023] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8022] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8015] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[algorand] [127.0.0.1:8039] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8037] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8032] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[algorand] [127.0.0.1:8003] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8016] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8025] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8018] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8011]
+[algorand] [127.0.0.1:8047] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8046] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8030] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8034] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8008] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[algorand] [127.0.0.1:8023] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8037]
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8011]
+[debug] [127.0.0.1:8019] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[algorand] [127.0.0.1:8012] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8001] gossip vote
+[debug] [127.0.0.1:8036] gossip vote
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[algorand] [127.0.0.1:8029] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8002] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8039] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8037] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] gossip vote
+[algorand] [127.0.0.1:8032] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8033]
+[debug] [127.0.0.1:8017] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8000] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[debug] [127.0.0.1:8006] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8004] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8045] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8038] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8043] gossip vote
+[algorand] [127.0.0.1:8003] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8048] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8013] gossip vote
+[algorand] [127.0.0.1:8025] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8049] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8040] gossip vote
+[algorand] [127.0.0.1:8047] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8046] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8030] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8034] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8008] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8023] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8008]
+[algorand] [127.0.0.1:8012] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8014] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8001] gossip vote
+[algorand] [127.0.0.1:8036] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8005] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8009] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[algorand] [127.0.0.1:8029] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8002] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] gossip vote
+[algorand] [127.0.0.1:8032] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8026] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8031] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8037]
+[debug] [127.0.0.1:8042] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8004] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8045] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8038] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8043] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8048] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8027] gossip vote
+[algorand] [127.0.0.1:8033] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8049] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8040] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8041] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] gossip vote
+[algorand] [127.0.0.1:8035] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8014] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8001] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8036] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8005] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8009] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8021] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8028] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8026] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8031] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8042] gossip vote
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8037]
+[algorand] [127.0.0.1:8043] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8033] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8040] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8022] gossip vote
+[algorand] [127.0.0.1:8020] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8013] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8027] gossip vote
+[algorand] [127.0.0.1:8044] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8035] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8001] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8037] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8034]
+[debug] [127.0.0.1:8002] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8039] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8045] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8003] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8023]
+[debug] [127.0.0.1:8030] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8020]
+[debug] [127.0.0.1:8004] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8047]
+[debug] [127.0.0.1:8010] gossip vote
+[algorand] [127.0.0.1:8011] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8016] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8028] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8021] gossip vote
+[algorand] [127.0.0.1:8007] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8000] gossip vote
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8029] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8023] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8038] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8034] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8020] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8013] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8027] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8044] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8008] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8034]
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8014] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[algorand] [127.0.0.1:8030] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8018] gossip vote
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8012] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8010] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8011] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8016] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8025] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8049] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8007] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[algorand] [127.0.0.1:8022] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8009] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8000] gossip vote
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8005] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8029] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8030]
+[debug] [127.0.0.1:8048] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8046]
+[debug] [127.0.0.1:8047] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[algorand] [127.0.0.1:8027] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8008] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8018] gossip vote
+[algorand] [127.0.0.1:8012] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8010] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8037] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8022] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8002] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8024] gossip vote
+[algorand] [127.0.0.1:8039] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8009] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8038] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8000] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8047]
+[debug] [127.0.0.1:8032] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8005] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8003] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8004] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8015] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8019] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8049] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8048] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8006] gossip vote
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[algorand] [127.0.0.1:8045] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8023] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8017] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8034] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8018] gossip vote
+[algorand] [127.0.0.1:8014] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8033] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8024] gossip vote
+[algorand] [127.0.0.1:8021] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8046] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8000] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8025] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8036] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8015] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8019] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8040] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8006] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8017] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8041] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8018] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8004]
+[debug] [127.0.0.1:8026] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8031] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8042] gossip vote
+[algorand] [127.0.0.1:8033] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8021] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8013] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8044] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8040] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8006] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8047] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8041] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8018] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8035] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8042] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8043] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8046] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8042] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8028] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8032] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8036] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8028] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8026] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8005]
+[debug] [127.0.0.1:8010] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8010] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8031] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8007]
+[debug] [127.0.0.1:8001] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8001] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[debug] [127.0.0.1:8007] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[algorand] [127.0.0.1:8007] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[algorand] [127.0.0.1:8035] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8030] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8030] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8013] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8009] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8024] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8024] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8037] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8049] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8037] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8012] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8045] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8045] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8049] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8012] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8014] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8039] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8017] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8048] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8048] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8003] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8017] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8043] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8033] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8009] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8010] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[algorand] [127.0.0.1:8010] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8022] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8041] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8022] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8023] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8004] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8003] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[algorand] [127.0.0.1:8023] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8034] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8015] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8005] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[algorand] [127.0.0.1:8044] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8034] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8017]
+[debug] [127.0.0.1:8001] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8002] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8027] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8041] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8006] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8027] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8028] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8031] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[algorand] [127.0.0.1:8015] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8040] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8019] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8038] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8005] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8014] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8039]
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8044] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8001] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8024]
+[algorand] [127.0.0.1:8006] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8025] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8026] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8037] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8047] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8017]
+[debug] [127.0.0.1:8036] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8046] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8040]
+[debug] [127.0.0.1:8000] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8022] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8037] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8024]
+[debug] [127.0.0.1:8041] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8036] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[algorand] [127.0.0.1:8044] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8030] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8017] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8010] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8045] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8018] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8019] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8043] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8026] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8045] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8002] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[algorand] [127.0.0.1:8025] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8024] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8011]
+[debug] [127.0.0.1:8021] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8031] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8041] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8048] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8024]
+[debug] [127.0.0.1:8013] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8048] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8040] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8027] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8007] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8027]
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8033] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8034] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8037] propose a new block with 20 txs: #2 b03a5ecd943aad610742bdf60818ee77f511630fae7d5f33d22b0383b5cbe858, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8015] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8015] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8029] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8012]
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8006] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8016] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8029] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8000] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8044] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8044] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8030] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[alogrand] [127.0.0.1:8030] propose a new block with 20 txs: #2 8ad98dd2786076f27979673c4b9221eff1f38c329faa5dc78cc96580dc289359, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8017] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8010] propose a new block with 20 txs: #2 c51d2a01fc7c5399570a19f79770c1e2e819a94960d3411879595d40e26962e4, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[alogrand] [127.0.0.1:8045] propose a new block with 20 txs: #2 b3cc3894d02616d936cd89a777f334b075dad5c05a046a9b6a04a79c171da858, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8018] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8024]
+[debug] [127.0.0.1:8019] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8031]
+[debug] [127.0.0.1:8025] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8043] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[algorand] [127.0.0.1:8024] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8021] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8048] propose a new block with 20 txs: #2 a1f567c848da3e96f061befd07c151489e01587668250375f5f2c98bba70df0f, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8027] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[algorand] [127.0.0.1:8007] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8042] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8030]
+[debug] [127.0.0.1:8047] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8013] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[alogrand] [127.0.0.1:8034] propose a new block with 20 txs: #2 8a988dce1cd7f588aaf96d22793cf0d8d17f7c7663e6183e9618dc2cb3387caf, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8037] gossip block proposal
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8038] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8006] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8004] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8001]
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8023] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8014]
+[debug] [127.0.0.1:8000] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[algorand] [127.0.0.1:8016] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8030] gossip block proposal
+[alogrand] [127.0.0.1:8044] propose a new block with 20 txs: #2 5b9b533856c15051090dcf14c66a05bfc46c966110fe775320f15af537610f59, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8010] gossip block proposal
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8017] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8045] gossip block proposal
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8018] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8047]
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8012]
+[debug] [127.0.0.1:8019] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8029]
+[debug] [127.0.0.1:8020] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8025] propose a new block with 20 txs: #2 b9a0f4545f8fe36bace2f141ea6341cd72b318ac8c949a47785cb5ffb02bd430, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8047]
+[debug] [127.0.0.1:8043] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8043] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8048] gossip block proposal
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8024] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8036]
+[debug] [127.0.0.1:8007] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8016]
+[debug] [127.0.0.1:8028] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8049]
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8011] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8034] gossip block proposal
+[debug] [127.0.0.1:8022] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[algorand] [127.0.0.1:8042] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8023] propose a new block with 20 txs: #2 d7cf3d17eba9e4b5bb7872d85bc9b84991051d7931fd345abfec74756a526c0d, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8000] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8044] gossip block proposal
+[alogrand] [127.0.0.1:8017] propose a new block with 20 txs: #2 78bd8a7ea77344823ccb3dea11c93e8f4e079c4392275e7b6b843bca7804629c, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8018] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8021]
+[debug] [127.0.0.1:8027] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8006]
+[debug] [127.0.0.1:8025] gossip block proposal
+[algorand] [127.0.0.1:8024] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8007] propose a new block with 20 txs: #2 878442b037abdcfe032859896fb9e4d5af4a65e519b600498e28eeac1504ee7f, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8020] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8043] propose a new block with 20 txs: #2 d2336bf127c765937969c097659ec5493b0db8401058dfbb3013d11753ffb648, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8032] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8009]
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8035] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[algorand] [127.0.0.1:8011] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8023] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8023] gossip block proposal
+[debug] [127.0.0.1:8017] gossip block proposal
+[debug] [127.0.0.1:8034] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8026]
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8021] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8007] gossip block proposal
+[alogrand] [127.0.0.1:8027] propose a new block with 20 txs: #2 9d5690a01d1c5b1e482ae69e8902d13af96d268cabbd9770c8745e06bad33454, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8043] gossip block proposal
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8032]
+[algorand] [127.0.0.1:8035] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8032] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8010] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8022]
+[debug] [127.0.0.1:8027] gossip block proposal
+[debug] [127.0.0.1:8046] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8011]
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8017]
+[debug] [127.0.0.1:8024] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8042] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8025] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8005]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8045]
+[debug] [127.0.0.1:8020] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8018]
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8048]
+[debug] [127.0.0.1:8000] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8011] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8008] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8008] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8002]
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[algorand] [127.0.0.1:8020] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8037]
+[debug] [127.0.0.1:8035] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8024] propose a new block with 20 txs: #2 dd1493b0505db0c9ec69dae962eccd355dfd01ce9e186d0741bc513eaa3a36c6, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[algorand] [127.0.0.1:8042] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[alogrand] [127.0.0.1:8035] propose a new block with 20 txs: #2 1d0eddbe84b069c3c5844b0f3ee242fdef4a7005845b36dc99b75d5719f7d5e8, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8039] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8035] gossip block proposal
+[algorand] [127.0.0.1:8011] cannot get block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 locally: [Chain] block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 not found, try to find from other peers
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[alogrand] [127.0.0.1:8000] propose a new block with 20 txs: #2 b6c50389a7d88a1abdb4a653966292f771861da66255f8c94abbc39e603ebacd, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8000] gossip block proposal
+[debug] [127.0.0.1:8035] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8038]
+[debug] [127.0.0.1:8017] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8024] gossip block proposal
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8019]
+[debug] [127.0.0.1:8018] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8018] propose a new block with 20 txs: #2 a19f548ce93f379ed0b56014d979d34fde08d6b67aa611551bed9dc8d88a8591, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8018] gossip block proposal
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8043]
+[debug] [127.0.0.1:8020] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8020] propose a new block with 20 txs: #2 420f853ae788b58583f02bf752a63850f0edc130241d172e13efd8c0ac47fc20, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8020] gossip block proposal
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8010]
+[debug] [127.0.0.1:8042] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8042] propose a new block with 20 txs: #2 ae742f3651ee6b3744f89c01f20610efc70d78ec3ffed06073b4a66933a56044, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8042] gossip block proposal
+[debug] [127.0.0.1:8000] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8015]
+[debug] [127.0.0.1:8020] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8024] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8005]
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8042]
+[debug] [127.0.0.1:8016] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8021] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8016] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8000]
+[debug] [127.0.0.1:8027] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8035]
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8041]
+[debug] [127.0.0.1:8018] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8013]
+[debug] [127.0.0.1:8042] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8028]
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8025]
+[debug] [127.0.0.1:8011] cached block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449
+[alogrand] [127.0.0.1:8011] propose a new block with 20 txs: #2 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457, stateHash: 3c0dd626bef8953b330e4d5653c21d3c3f4102e34655fc33b39b8f899b1ec735, parent: 28bbd17618ab96efe7f4c1c4d413b88d88d364d6247e952eaf9f6bb972793fe2
+[debug] [127.0.0.1:8011] gossip block proposal
+[debug] [127.0.0.1:8011] got block 9b45d310a2ca8388a81ab18aab08ecd71753e8ccf9a36093a679f3eec9bd8449 from [127.0.0.1:8044]
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8003] gossip vote
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8037] gossip vote
+[debug] [127.0.0.1:8030] gossip vote
+[debug] [127.0.0.1:8030] gossip vote
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8001] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[algorand] [127.0.0.1:8041] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8037] gossip vote
+[debug] [127.0.0.1:8037] gossip vote
+[algorand] [127.0.0.1:8037] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8022] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[algorand] [127.0.0.1:8005] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[algorand] [127.0.0.1:8026] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8033] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8033] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[algorand] [127.0.0.1:8044] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8002] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[algorand] [127.0.0.1:8034] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8031] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8022] gossip vote
+[algorand] [127.0.0.1:8022] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8004] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8045] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8039] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8046] gossip vote
+[debug] [127.0.0.1:8046] gossip vote
+[algorand] [127.0.0.1:8046] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8036] gossip vote
+[debug] [127.0.0.1:8036] gossip vote
+[algorand] [127.0.0.1:8036] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8015] gossip vote
+[algorand] [127.0.0.1:8015] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8023] gossip vote
+[algorand] [127.0.0.1:8029] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8019] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8048] gossip vote
+[algorand] [127.0.0.1:8048] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8033] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8028] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[algorand] [127.0.0.1:8009] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8006] gossip vote
+[debug] [127.0.0.1:8006] gossip vote
+[algorand] [127.0.0.1:8006] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8013] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8003] gossip vote
+[debug] [127.0.0.1:8003] gossip vote
+[algorand] [127.0.0.1:8003] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8001] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8030] gossip vote
+[algorand] [127.0.0.1:8038] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8025] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8040] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8032] gossip vote
+[algorand] [127.0.0.1:8049] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8000] gossip vote
+[algorand] [127.0.0.1:8010] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8005] propose a new block with 20 txs: #3 430e850e56f8992579d03105fb0e0c5f96d03f1793fa5d0eddc8c17491df4913, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[alogrand] [127.0.0.1:8044] propose a new block with 20 txs: #3 61fc8eb91844006f505a11070c3f971951a961efcee4382f752245e8c922a2ff, stateHash: 90b2ba10788bc7678278682ba2b31ff40da71d43023fa2f9ff4306a2b2ccb7f3, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[algorand] [127.0.0.1:8047] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8014] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8018] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8030] gossip vote
+[alogrand] [127.0.0.1:8003] propose a new block with 20 txs: #3 f961adbccc91c0bcf0bf49ee219969c1e60dc1eb5995e344dd71e5d3d399d27c, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8016] gossip vote
+[alogrand] [127.0.0.1:8039] propose a new block with 20 txs: #3 448d3b49791b9b5bb645a0b77e824abd744a950fa138adffbacc6abfab28eac5, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[alogrand] [127.0.0.1:8025] propose a new block with 20 txs: #3 b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb, stateHash: 90b2ba10788bc7678278682ba2b31ff40da71d43023fa2f9ff4306a2b2ccb7f3, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8007] gossip vote
+[alogrand] [127.0.0.1:8022] propose a new block with 20 txs: #3 c968309953c9928910597ffe6b182a6299d72d56b4085b3ba72eb8c57891681f, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8020] gossip vote
+[alogrand] [127.0.0.1:8045] propose a new block with 20 txs: #3 4fd0384f4c63735cb3dd75812edeb4c001f4b0685c0560540490c0c307e291a0, stateHash: 90b2ba10788bc7678278682ba2b31ff40da71d43023fa2f9ff4306a2b2ccb7f3, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8005] gossip block proposal
+[debug] [127.0.0.1:8044] gossip block proposal
+[alogrand] [127.0.0.1:8002] propose a new block with 20 txs: #3 f2be17629aaaffb51a7e57b2a2ed9a2c2773ff20b4dbc5786c1d8721dca72a8c, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8023] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8032] gossip vote
+[algorand] [127.0.0.1:8012] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8030] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8003] gossip block proposal
+[debug] [127.0.0.1:8042] gossip vote
+[algorand] [127.0.0.1:8043] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8018] gossip vote
+[debug] [127.0.0.1:8039] gossip block proposal
+[debug] [127.0.0.1:8025] gossip block proposal
+[algorand] [127.0.0.1:8007] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8022] gossip block proposal
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8011] gossip vote
+[debug] [127.0.0.1:8016] gossip vote
+[debug] [127.0.0.1:8045] gossip block proposal
+[debug] [127.0.0.1:8002] gossip block proposal
+[debug] [127.0.0.1:8023] gossip vote
+[algorand] [127.0.0.1:8032] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8014] propose a new block with 20 txs: #3 5157701ff66a617c3681c658185ee2862d60e906385674e3646159f250ce65bd, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[algorand] [127.0.0.1:8000] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8020] gossip vote
+[algorand] [127.0.0.1:8021] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8017] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8023] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8014] gossip block proposal
+[debug] [127.0.0.1:8011] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[algorand] [127.0.0.1:8008] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8008] propose a new block with 20 txs: #3 2ae196b203e31bcec23ffdb2ff5aec451bac83a1e836c7a9c607abb7a5b3680c, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8008] gossip block proposal
+[debug] [127.0.0.1:8024] gossip vote
+[alogrand] [127.0.0.1:8012] propose a new block with 20 txs: #3 ba49383433fbc8d39bf4bc5205f0f390ebdd8270d47d2a32c727fd0a7e7e863a, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8012] gossip block proposal
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8042] gossip vote
+[algorand] [127.0.0.1:8042] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8027] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8035] gossip vote
+[algorand] [127.0.0.1:8035] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8032] propose a new block with 20 txs: #3 7d6db3f34bfc14e55b9477ea6bf4b6ae3329a217f28f95786aa02d71cd2c4ba6, stateHash: 86bc9d5f62375824084bf2345c15b41ec05a3322b06586dce61e2fe20d138b58, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8032] gossip block proposal
+[algorand] [127.0.0.1:8018] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8011] gossip vote
+[algorand] [127.0.0.1:8011] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8042] propose a new block with 20 txs: #3 ed38ac8d4d245e0139a3267a6638617fd485e383f132359fa49357cb543de234, stateHash: 90b2ba10788bc7678278682ba2b31ff40da71d43023fa2f9ff4306a2b2ccb7f3, parent: 10595bed49d15b99002695bb06c8fc45224ef87df1b3a2ee0db2d6ef9b4af457
+[debug] [127.0.0.1:8042] gossip block proposal
+[debug] [127.0.0.1:8016] gossip vote
+[algorand] [127.0.0.1:8016] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8020] gossip vote
+[algorand] [127.0.0.1:8020] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8024] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8022] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8022] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8000] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8033] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8022] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8003] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8023] gossip vote
+[algorand] [127.0.0.1:8003] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8002] gossip vote
+[algorand] [127.0.0.1:8002] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8032] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[algorand] [127.0.0.1:8021] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[algorand] [127.0.0.1:8043] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8030] gossip vote
+[debug] [127.0.0.1:8030] gossip vote
+[algorand] [127.0.0.1:8030] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[algorand] [127.0.0.1:8028] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8033] gossip vote
+[algorand] [127.0.0.1:8004] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[algorand] [127.0.0.1:8019] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[algorand] [127.0.0.1:8034] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8013] gossip vote
+[algorand] [127.0.0.1:8013] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8007] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[algorand] [127.0.0.1:8014] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8049] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8022] gossip vote
+[algorand] [127.0.0.1:8022] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[algorand] [127.0.0.1:8040] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8006] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[algorand] [127.0.0.1:8047] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8039] gossip vote
+[algorand] [127.0.0.1:8039] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[algorand] [127.0.0.1:8031] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8041] gossip vote
+[algorand] [127.0.0.1:8041] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8015] gossip vote
+[algorand] [127.0.0.1:8015] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8031] propose a new block with 20 txs: #4 f6cfbb186fbb3ac5253ecfc75b96d3627fd977e0f7b9cdf44fd9f974e65d0267, stateHash: eccc62eeac1b3806b2b56730b87c16dc480a81ea1e860944d6abcacc0d596ad6, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8031] gossip block proposal
+[debug] [127.0.0.1:8006] gossip vote
+[algorand] [127.0.0.1:8006] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8048] gossip vote
+[alogrand] [127.0.0.1:8021] propose a new block with 20 txs: #4 e2fb4700b3853ed49c8a0cc45b72aede2342b8f3d6e5efb2ac2e65709249e3ba, stateHash: eccc62eeac1b3806b2b56730b87c16dc480a81ea1e860944d6abcacc0d596ad6, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8021] gossip block proposal
+[algorand] [127.0.0.1:8026] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8042] gossip vote
+[alogrand] [127.0.0.1:8004] propose a new block with 20 txs: #4 ed6385747642ed7f3bf980459ea729d867ff8dfce90b22dd88a4ff881092e0bc, stateHash: eccc62eeac1b3806b2b56730b87c16dc480a81ea1e860944d6abcacc0d596ad6, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8004] gossip block proposal
+[algorand] [127.0.0.1:8033] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8044] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8038] gossip vote
+[algorand] [127.0.0.1:8038] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8000] gossip vote
+[algorand] [127.0.0.1:8000] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8029] gossip vote
+[algorand] [127.0.0.1:8029] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8045] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8046] gossip vote
+[debug] [127.0.0.1:8037] gossip vote
+[algorand] [127.0.0.1:8037] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8036] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8000] propose a new block with 20 txs: #4 d9ae5b58d2e4b860452f8c4ae9fc3d92f80a980e004dd526ae19f0f89cf948a1, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8000] gossip block proposal
+[algorand] [127.0.0.1:8025] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8027] gossip vote
+[algorand] [127.0.0.1:8027] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8023] gossip vote
+[algorand] [127.0.0.1:8023] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8008] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8001] gossip vote
+[algorand] [127.0.0.1:8001] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8005] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[algorand] [127.0.0.1:8010] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8024] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8039] propose a new block with 20 txs: #4 86b9f3ab6036a7a582d10665f2f4f91cb71509bba24cb4e25413915d22ad8193, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8039] gossip block proposal
+[alogrand] [127.0.0.1:8002] propose a new block with 20 txs: #4 ffe7500a1943bb610df4afd888b5878fcdbc51a331e81cf36c85de72116e526c, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8002] gossip block proposal
+[debug] [127.0.0.1:8018] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[algorand] [127.0.0.1:8012] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8046] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8032] gossip vote
+[algorand] [127.0.0.1:8032] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8016] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[alogrand] [127.0.0.1:8022] propose a new block with 20 txs: #4 8d59393139385b6cc83b81e3874b92d9b8b377385008305ba70bde218622153f, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[algorand] [127.0.0.1:8048] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8037] propose a new block with 20 txs: #4 9819af37688e409bd4b79e5e1112047bc059325bdf6788e4cd72799f39830d90, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[algorand] [127.0.0.1:8042] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8016] gossip vote
+[algorand] [127.0.0.1:8009] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8027] propose a new block with 20 txs: #4 da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8022] gossip block proposal
+[debug] [127.0.0.1:8037] gossip block proposal
+[debug] [127.0.0.1:8027] gossip block proposal
+[debug] [127.0.0.1:8017] gossip vote
+[algorand] [127.0.0.1:8016] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8017] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8009] propose a new block with 20 txs: #4 bf478a78a1cceddb2825b52b1e0bc01d7e0d823e6988aff7db3f3df3312e1147, stateHash: eccc62eeac1b3806b2b56730b87c16dc480a81ea1e860944d6abcacc0d596ad6, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8009] gossip block proposal
+[debug] [127.0.0.1:8018] gossip vote
+[debug] [127.0.0.1:8018] gossip vote
+[algorand] [127.0.0.1:8018] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8035] gossip vote
+[algorand] [127.0.0.1:8035] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8011] gossip vote
+[debug] [127.0.0.1:8011] gossip vote
+[algorand] [127.0.0.1:8011] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8042] propose a new block with 20 txs: #4 4ca6e724b1b13731e950e26cf4d1c97f7d5548004cad071071722f32463056ef, stateHash: 29096995cd50eae402473a7c628a715c81b122f6ee3952883e9a85e83b6af25e, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8042] gossip block proposal
+[alogrand] [127.0.0.1:8016] propose a new block with 20 txs: #4 434bf86e36e09ce4f1bda3414c804bf1695d8342617f2b11cfd3e58d8ce9cba0, stateHash: eccc62eeac1b3806b2b56730b87c16dc480a81ea1e860944d6abcacc0d596ad6, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8016] gossip block proposal
+[alogrand] [127.0.0.1:8048] propose a new block with 20 txs: #4 ab00a4e27a41a96c0f86d743e57349317abe551f4f1498a35cfbcee78854c19c, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8048] gossip block proposal
+[alogrand] [127.0.0.1:8018] propose a new block with 20 txs: #4 cb812a25c37569bc36758657f4757799aa68563837cb95f066fc9c96f597dfff, stateHash: b3283dfd60e3304a47bd8660cce46b0b76bb74ecc49d8696ed455718dec59f98, parent: b8f1a617133ea7ab39816ac8197aa5d3fdbf736de536c795af4938044fe5c1cb
+[debug] [127.0.0.1:8018] gossip block proposal
+[debug] [127.0.0.1:8020] gossip vote
+[algorand] [127.0.0.1:8020] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8003] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8041] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8030] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8026] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[debug] [127.0.0.1:8015] gossip vote
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8007] gossip vote
+[debug] [127.0.0.1:8002] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[algorand] [127.0.0.1:8007] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8006] gossip vote
+[debug] [127.0.0.1:8006] gossip vote
+[debug] [127.0.0.1:8039] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[debug] [127.0.0.1:8013] gossip vote
+[algorand] [127.0.0.1:8013] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8030] gossip vote
+[algorand] [127.0.0.1:8000] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8034] gossip vote
+[algorand] [127.0.0.1:8034] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8026] gossip vote
+[algorand] [127.0.0.1:8026] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8038] gossip vote
+[debug] [127.0.0.1:8006] gossip vote
+[algorand] [127.0.0.1:8006] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[debug] [127.0.0.1:8019] gossip vote
+[debug] [127.0.0.1:8023] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[debug] [127.0.0.1:8045] gossip vote
+[algorand] [127.0.0.1:8045] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8038] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[debug] [127.0.0.1:8044] gossip vote
+[algorand] [127.0.0.1:8044] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8039] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8002] gossip vote
+[algorand] [127.0.0.1:8002] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[debug] [127.0.0.1:8043] gossip vote
+[algorand] [127.0.0.1:8043] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[debug] [127.0.0.1:8040] gossip vote
+[algorand] [127.0.0.1:8040] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8047] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8047] gossip vote
+[algorand] [127.0.0.1:8047] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8023] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[algorand] [127.0.0.1:8023] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8028] gossip vote
+[debug] [127.0.0.1:8008] gossip vote
+[debug] [127.0.0.1:8028] gossip vote
+[algorand] [127.0.0.1:8028] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8014] gossip vote
+[debug] [127.0.0.1:8014] gossip vote
+[algorand] [127.0.0.1:8014] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8019] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8041] gossip vote
+[algorand] [127.0.0.1:8041] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[debug] [127.0.0.1:8049] gossip vote
+[algorand] [127.0.0.1:8049] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8015] gossip vote
+[algorand] [127.0.0.1:8015] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8024] gossip vote
+[alogrand] [127.0.0.1:8043] propose a new block with 20 txs: #5 8fc7b378520aeba6fa0eedc60be703228e811e2365c389b19fb9b019aa27c19e, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8043] gossip block proposal
+[debug] [127.0.0.1:8033] gossip vote
+[algorand] [127.0.0.1:8033] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8030] gossip vote
+[algorand] [127.0.0.1:8030] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8008] gossip vote
+[alogrand] [127.0.0.1:8000] propose a new block with 20 txs: #5 08d3eec3097827e3585e1e4b9940a9680403fab09463421e38a13d10f6f85317, stateHash: d2a5a4ae4707d99a86c2cab05af2f5fe0f94cb1292e8fafd157acc94a21a1e9a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8000] gossip block proposal
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8031] gossip vote
+[algorand] [127.0.0.1:8031] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8001] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[debug] [127.0.0.1:8004] gossip vote
+[algorand] [127.0.0.1:8004] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8037] gossip vote
+[debug] [127.0.0.1:8025] gossip vote
+[debug] [127.0.0.1:8036] gossip vote
+[debug] [127.0.0.1:8036] gossip vote
+[algorand] [127.0.0.1:8036] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8032] gossip vote
+[debug] [127.0.0.1:8032] gossip vote
+[algorand] [127.0.0.1:8032] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8022] gossip vote
+[debug] [127.0.0.1:8022] gossip vote
+[algorand] [127.0.0.1:8022] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8012] gossip vote
+[debug] [127.0.0.1:8012] gossip vote
+[algorand] [127.0.0.1:8012] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8021] gossip vote
+[algorand] [127.0.0.1:8021] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8039] propose a new block with 20 txs: #5 66304fae7b1c67e5036b1db724d62ae539c7c480e3a772f8851c5511cafa1e40, stateHash: d2a5a4ae4707d99a86c2cab05af2f5fe0f94cb1292e8fafd157acc94a21a1e9a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8039] gossip block proposal
+[debug] [127.0.0.1:8003] gossip vote
+[algorand] [127.0.0.1:8003] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8010] gossip vote
+[algorand] [127.0.0.1:8010] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8041] propose a new block with 20 txs: #5 c09f09f617052a95567a4052378ee6ebd87f54452159aa5003fe9f29f9bc983c, stateHash: c5099e67d9ae3f0a17ba98d3673b83290f948e19f5ed0b1ce6439ea0050dabc4, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8041] gossip block proposal
+[alogrand] [127.0.0.1:8023] propose a new block with 20 txs: #5 91ea122fd27882be13eece49a9d4cf84c31c8a33956964768a8fb0651a4764e0, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8023] gossip block proposal
+[debug] [127.0.0.1:8001] gossip vote
+[debug] [127.0.0.1:8001] gossip vote
+[algorand] [127.0.0.1:8001] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8005] gossip vote
+[debug] [127.0.0.1:8011] gossip vote
+[debug] [127.0.0.1:8037] gossip vote
+[debug] [127.0.0.1:8016] gossip vote
+[alogrand] [127.0.0.1:8003] propose a new block with 20 txs: #5 0373b83e7da99f6d9db1f970b4247089a38d870d420ef9a3cae03c576de1207f, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8003] gossip block proposal
+[debug] [127.0.0.1:8025] gossip vote
+[algorand] [127.0.0.1:8025] complete binaryBA with 1 steps
+[alogrand] [127.0.0.1:8033] propose a new block with 20 txs: #5 71aa32fe3e86285c2d163cdd2ef0bcb48abd8ef6251120d38052429e9492b422, stateHash: c5099e67d9ae3f0a17ba98d3673b83290f948e19f5ed0b1ce6439ea0050dabc4, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8033] gossip block proposal
+[debug] [127.0.0.1:8018] gossip vote
+[alogrand] [127.0.0.1:8019] propose a new block with 20 txs: #5 32da4036dffc5b833fd5ed8c826b63718460ca5be6e1a1848b5e6cfb2ccd66b7, stateHash: c5099e67d9ae3f0a17ba98d3673b83290f948e19f5ed0b1ce6439ea0050dabc4, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8019] gossip block proposal
+[alogrand] [127.0.0.1:8034] propose a new block with 20 txs: #5 caea61cb765a211ae7e7796ab90f3fcfe7df86853e33f094b8c3dea92bef23ca, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8034] gossip block proposal
+[debug] [127.0.0.1:8008] gossip vote
+[alogrand] [127.0.0.1:8026] propose a new block with 20 txs: #5 4eabfd01056c8095f656fbe8a296d84fc7a86fcf73ceda6272a1de036d1fbd8c, stateHash: c5099e67d9ae3f0a17ba98d3673b83290f948e19f5ed0b1ce6439ea0050dabc4, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8026] gossip block proposal
+[debug] [127.0.0.1:8018] gossip vote
+[alogrand] [127.0.0.1:8021] propose a new block with 20 txs: #5 dc118c276f7472ec99bab6dc9d33f641a37bb0de674d2c60c0531eb7667e9bf7, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8021] gossip block proposal
+[debug] [127.0.0.1:8042] gossip vote
+[debug] [127.0.0.1:8035] gossip vote
+[alogrand] [127.0.0.1:8001] propose a new block with 20 txs: #5 e52e8e38f6c5a26b36855a198bba2b7e033045765fb0dd250eb5aaa598aaaab1, stateHash: c5099e67d9ae3f0a17ba98d3673b83290f948e19f5ed0b1ce6439ea0050dabc4, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8001] gossip block proposal
+[alogrand] [127.0.0.1:8010] propose a new block with 20 txs: #5 5de1b1577cd1263fd5f21fc5ac1b40c0a08d7ea68a8bafb5f7e7513ad814a55d, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8010] gossip block proposal
+[alogrand] [127.0.0.1:8031] propose a new block with 20 txs: #5 bcc6394332d63fa6867ee27e03a9bba7027641d731c74b8cc76de5ca8c2d4e68, stateHash: 6dcd7e1eac66f132ec38eb8cabf1afef42b8889d42e86f1826916f53b31aa48a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[debug] [127.0.0.1:8031] gossip block proposal
+[debug] [127.0.0.1:8048] gossip vote
+[debug] [127.0.0.1:8005] gossip vote
+127.0.0.1:8000 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8001 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8002 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8003 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8004 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8005 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8006 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8007 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8008 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8009 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8010 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8011 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8012 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8013 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8014 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8015 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8016 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8017 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8018 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8019 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8020 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8021 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8022 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8023 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8024 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8025 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8026 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8027 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8028 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8029 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8030 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8031 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8032 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8033 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8034 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8035 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8036 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8037 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8038 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8039 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8040 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8041 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8042 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8043 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8044 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8045 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8046 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8047 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+127.0.0.1:8048 last state: 490702083be7e7998881d35018e798fc77709334b1a3320b4cf720f9a7251ce0
+127.0.0.1:8049 last state: 2a76fa692d8d434b43729dae0ef0972cc05300d55a3b0b8dd13a1f4f908e8e59
+Balance of peer 127.0.0.1:8000 is 0
+Balance of peer 127.0.0.1:8001 is 10
+Balance of peer 127.0.0.1:8002 is 0
+Balance of peer 127.0.0.1:8003 is 30
+Balance of peer 127.0.0.1:8004 is 10
+Balance of peer 127.0.0.1:8005 is 0
+Balance of peer 127.0.0.1:8006 is 10
+Balance of peer 127.0.0.1:8007 is 40
+Balance of peer 127.0.0.1:8008 is 10
+Balance of peer 127.0.0.1:8009 is 0
+Balance of peer 127.0.0.1:8010 is 0
+Balance of peer 127.0.0.1:8011 is 0
+Balance of peer 127.0.0.1:8012 is 40
+Balance of peer 127.0.0.1:8013 is 10
+Balance of peer 127.0.0.1:8014 is 0
+Balance of peer 127.0.0.1:8015 is 0
+Balance of peer 127.0.0.1:8016 is 10
+Balance of peer 127.0.0.1:8017 is 0
+Balance of peer 127.0.0.1:8018 is 0
+[algorand] [127.0.0.1:8005] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8027] gossip vote
+[debug] [127.0.0.1:8042] gossip vote
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8011] gossip vote
+[debug] [127.0.0.1:8048] gossip vote
+[algorand] [127.0.0.1:8037] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8046] gossip vote
+[algorand] [127.0.0.1:8008] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[debug] [127.0.0.1:8029] gossip vote
+[debug] [127.0.0.1:8035] gossip vote
+[debug] [127.0.0.1:8018] gossip vote
+Balance of peer 127.0.0.1:8019 is 20
+[debug] [127.0.0.1:8027] gossip vote
+[algorand] [127.0.0.1:8042] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8020] gossip vote
+[debug] [127.0.0.1:8016] gossip vote
+[debug] [127.0.0.1:8017] gossip vote
+[debug] [127.0.0.1:8024] gossip vote
+[debug] [127.0.0.1:8009] gossip vote
+[algorand] [127.0.0.1:8011] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8048] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8029] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8046] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8035] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8018] gossip vote
+Balance of peer 127.0.0.1:8020 is 10
+[algorand] [127.0.0.1:8027] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8016] complete binaryBA with 1 steps
+[debug] [127.0.0.1:8017] gossip vote
+[algorand] [127.0.0.1:8024] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8009] complete binaryBA with 1 steps
+[algorand] [127.0.0.1:8018] complete binaryBA with 1 steps
+Balance of peer 127.0.0.1:8021 is 20
+[debug] [127.0.0.1:8020] gossip vote
+[algorand] [127.0.0.1:8017] complete binaryBA with 1 steps
+Balance of peer 127.0.0.1:8022 is 10
+[debug] [127.0.0.1:8020] gossip vote
+[alogrand] [127.0.0.1:8042] propose a new block with 20 txs: #5 19ad4a355c7841ee1037dd43654d505ebf4198471b63b9009019c7a3cd9fb8f7, stateHash: a1c8ed176d85319a15c25241620f74daca97e7af015ed1f13ae13722b344215d, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+[alogrand] [127.0.0.1:8027] propose a new block with 20 txs: #5 25cbd2b14061dcbea0af06911a5022dc1b5238a238468d0bdd45fa46c1c5d39d, stateHash: d2a5a4ae4707d99a86c2cab05af2f5fe0f94cb1292e8fafd157acc94a21a1e9a, parent: da21ad8cc92f5dc0be1ef6d66f02c27d839f99190c5ee6a2a40dc66faa2e8b6f
+Balance of peer 127.0.0.1:8023 is 50
+[debug] [127.0.0.1:8042] gossip block proposal
+[debug] [127.0.0.1:8027] gossip block proposal
+Balance of peer 127.0.0.1:8024 is 20
+Balance of peer 127.0.0.1:8025 is 0
+Balance of peer 127.0.0.1:8026 is 10
+Balance of peer 127.0.0.1:8027 is 0
+Balance of peer 127.0.0.1:8028 is 20
+Balance of peer 127.0.0.1:8029 is 10
+Balance of peer 127.0.0.1:8030 is 20
+Balance of peer 127.0.0.1:8031 is 20
+Balance of peer 127.0.0.1:8032 is 0
+Balance of peer 127.0.0.1:8033 is 20
+Balance of peer 127.0.0.1:8034 is 20
+Balance of peer 127.0.0.1:8035 is 0
+Balance of peer 127.0.0.1:8036 is 30
+Balance of peer 127.0.0.1:8037 is 0
+Balance of peer 127.0.0.1:8038 is 20
+Balance of peer 127.0.0.1:8039 is 0
+Balance of peer 127.0.0.1:8040 is 0
+Balance of peer 127.0.0.1:8041 is 30
+Balance of peer 127.0.0.1:8042 is 0
+Balance of peer 127.0.0.1:8043 is 0
+Balance of peer 127.0.0.1:8044 is 0
+Balance of peer 127.0.0.1:8045 is 20
+Balance of peer 127.0.0.1:8046 is 10
+Balance of peer 127.0.0.1:8047 is 0
+Balance of peer 127.0.0.1:8048 is 40
+Balance of peer 127.0.0.1:8049 is 0

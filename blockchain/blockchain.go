@@ -1,8 +1,6 @@
 package blockchain
 
 import (
-	"errors"
-	"fmt"
 	"sync"
 
 	"github.com/rkumar0099/algorand/common"
@@ -15,7 +13,6 @@ import (
 type Blockchain struct {
 	Last            *msg.Block
 	Genesis         *msg.Block
-	persistKv       map[cmn.Hash][]byte
 	blockCache      *pool.RingBuffer
 	blockCacheIndex map[common.Hash]*msg.Block
 	cacheLock       *sync.Mutex
@@ -31,8 +28,8 @@ func NewBlockchain() *Blockchain {
 		blockCacheIndex: make(map[common.Hash]*msg.Block),
 		cacheLock:       &sync.Mutex{},
 		hashes:          make([]cmn.Hash, 0),
-		persistKv:       make(map[cmn.Hash][]byte),
 	}
+
 	emptyHash := common.Sha256([]byte{})
 	bc.Genesis = &msg.Block{
 		Round:      0,
@@ -46,7 +43,7 @@ func NewBlockchain() *Blockchain {
 
 func (bc *Blockchain) addGenesis(blk *msg.Block) {
 	data, _ := blk.Serialize()
-	bc.persistKv[blk.Hash()] = data
+	go bc.manage.AddBlk(blk.Hash(), data)
 	bc.hashes = append(bc.hashes, blk.Hash())
 	bc.Last = blk
 	bc.CacheBlock(blk)
@@ -59,15 +56,7 @@ func (bc *Blockchain) Get(hash common.Hash) (*msg.Block, error) {
 	if ok {
 		return blk, nil
 	}
-	data, ok := bc.persistKv[hash]
-	if !ok {
-		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found", hash.Hex()))
-	}
-	blk = &msg.Block{}
-	err := blk.Deserialize(data)
-	if err != nil {
-		return nil, errors.New(fmt.Sprintf("[Chain] block %s not found: %s", hash.Hex(), err.Error()))
-	}
+	blk = bc.manage.GetBlkByHash(hash)
 	return blk, nil
 }
 
@@ -86,14 +75,12 @@ func (bc *Blockchain) GetByRound(round uint64) *msg.Block {
 func (bc *Blockchain) Add(blk *msg.Block) {
 	hash := blk.Hash()
 	if len(bc.hashes) >= 10 {
-		var removedHash cmn.Hash
-		removedHash, bc.hashes = bc.hashes[0], bc.hashes[1:]
-		delete(bc.persistKv, removedHash)
+		_, bc.hashes = bc.hashes[0], bc.hashes[1:]
+		//delete(bc.persistKv, removedHash)
 	}
 	bc.hashes = append(bc.hashes, hash)
 	data, _ := blk.Serialize()
 	go bc.manage.AddBlk(hash, data)
-	bc.persistKv[hash] = data
 	if bc.Last == nil || blk.Round > bc.Last.Round {
 		bc.Last = blk
 	}

@@ -30,6 +30,8 @@ type LogManager struct {
 	blkLock     *sync.Mutex
 	processLock *sync.Mutex
 	balanceLock *sync.Mutex
+	logLock     *sync.Mutex
+	log         string
 	buffer      chan *message.Msg
 	txBuffer    chan cmn.Hash
 	finalBlk    map[uint64]cmn.Hash
@@ -42,6 +44,8 @@ func New() *LogManager {
 		blkLock:     &sync.Mutex{},
 		processLock: &sync.Mutex{},
 		balanceLock: &sync.Mutex{},
+		logLock:     &sync.Mutex{},
+		log:         "",
 		buffer:      make(chan *message.Msg, bufferCap),
 		txBuffer:    make(chan cmn.Hash, txBufferCap),
 		finalBlk:    make(map[uint64]cmn.Hash),
@@ -73,6 +77,9 @@ func (lm *LogManager) init() {
 
 	os.Remove("../logs/peers.txt")
 	os.Create("../logs/peers.txt")
+
+	os.Remove("../logs/out.txt")
+	os.Create("../logs/out.txt")
 
 }
 
@@ -233,4 +240,16 @@ func (lm *LogManager) writeBalances() {
 
 func (lm *LogManager) AddOracleBlk(blk *oracle.FinalBlock) {
 
+}
+
+func (lm *LogManager) AddLog(log string) {
+	lm.logLock.Lock()
+	defer lm.logLock.Unlock()
+	lm.log += log
+}
+
+func (lm *LogManager) WriteLog() {
+	f, _ := os.OpenFile("../logs/out.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	f.WriteString(lm.log)
+	f.Close()
 }

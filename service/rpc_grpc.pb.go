@@ -19,8 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RPCServiceClient interface {
 	GetDataByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*ResData, error)
-	SendContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResStateHash, error)
-	SendFinalContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResEmpty, error)
+	SendFinalContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResContribution, error)
 }
 
 type rPCServiceClient struct {
@@ -40,17 +39,8 @@ func (c *rPCServiceClient) GetDataByHash(ctx context.Context, in *ReqHash, opts 
 	return out, nil
 }
 
-func (c *rPCServiceClient) SendContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResStateHash, error) {
-	out := new(ResStateHash)
-	err := c.cc.Invoke(ctx, "/RPCService/SendContribution", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *rPCServiceClient) SendFinalContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResEmpty, error) {
-	out := new(ResEmpty)
+func (c *rPCServiceClient) SendFinalContribution(ctx context.Context, in *ReqContribution, opts ...grpc.CallOption) (*ResContribution, error) {
+	out := new(ResContribution)
 	err := c.cc.Invoke(ctx, "/RPCService/SendFinalContribution", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +53,7 @@ func (c *rPCServiceClient) SendFinalContribution(ctx context.Context, in *ReqCon
 // for forward compatibility
 type RPCServiceServer interface {
 	GetDataByHash(context.Context, *ReqHash) (*ResData, error)
-	SendContribution(context.Context, *ReqContribution) (*ResStateHash, error)
-	SendFinalContribution(context.Context, *ReqContribution) (*ResEmpty, error)
+	SendFinalContribution(context.Context, *ReqContribution) (*ResContribution, error)
 	mustEmbedUnimplementedRPCServiceServer()
 }
 
@@ -75,10 +64,7 @@ type UnimplementedRPCServiceServer struct {
 func (UnimplementedRPCServiceServer) GetDataByHash(context.Context, *ReqHash) (*ResData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataByHash not implemented")
 }
-func (UnimplementedRPCServiceServer) SendContribution(context.Context, *ReqContribution) (*ResStateHash, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendContribution not implemented")
-}
-func (UnimplementedRPCServiceServer) SendFinalContribution(context.Context, *ReqContribution) (*ResEmpty, error) {
+func (UnimplementedRPCServiceServer) SendFinalContribution(context.Context, *ReqContribution) (*ResContribution, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendFinalContribution not implemented")
 }
 func (UnimplementedRPCServiceServer) mustEmbedUnimplementedRPCServiceServer() {}
@@ -112,24 +98,6 @@ func _RPCService_GetDataByHash_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RPCService_SendContribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReqContribution)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RPCServiceServer).SendContribution(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/RPCService/SendContribution",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RPCServiceServer).SendContribution(ctx, req.(*ReqContribution))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _RPCService_SendFinalContribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqContribution)
 	if err := dec(in); err != nil {
@@ -158,10 +126,6 @@ var RPCService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDataByHash",
 			Handler:    _RPCService_GetDataByHash_Handler,
-		},
-		{
-			MethodName: "SendContribution",
-			Handler:    _RPCService_SendContribution_Handler,
 		},
 		{
 			MethodName: "SendFinalContribution",

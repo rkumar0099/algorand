@@ -2,23 +2,23 @@ package manage
 
 import (
 	"bytes"
+	"fmt"
 	"log"
-	"net"
 	"os"
 	"strconv"
 	"sync"
 	"time"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/gossip"
 	"github.com/rkumar0099/algorand/logs"
+	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
 	"github.com/rkumar0099/algorand/mpt/mpt"
-	"github.com/rkumar0099/algorand/params"
 	"github.com/rkumar0099/algorand/service"
-	"github.com/rkumar0099/algorand/transaction"
 	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
 )
@@ -29,6 +29,7 @@ type Manage struct {
 	txs           []*msg.Transaction
 	txLock        *sync.Mutex
 	shLock        *sync.Mutex
+	votesLock     *sync.Mutex
 	epoch         uint64
 	stateHash     map[cmn.Hash]uint64
 	connPool      map[gossip.NodeId]*grpc.ClientConn
@@ -42,6 +43,10 @@ type Manage struct {
 	blkLock       *sync.Mutex
 	db            *leveldb.DB
 	lastHash      []byte
+	lastRound     uint64
+	contributions map[common.Hash]*msg.ProposedTx
+	votes         map[common.Hash]uint64
+	confirm       uint64
 }
 
 func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Manage {
@@ -60,6 +65,11 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 		count:         0,
 		lm:            lm,
 		blkLock:       &sync.Mutex{},
+		contributions: make(map[common.Hash]*msg.ProposedTx),
+		votes:         make(map[cmn.Hash]uint64),
+		votesLock:     &sync.Mutex{},
+		confirm:       0,
+		lastRound:     0,
 	}
 	m.storage = kvstore.NewMemKVStore() // manage storage to execute Tx set and generate Hash
 	m.grpcServer = grpc.NewServer()
@@ -73,8 +83,9 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 	m.ServiceServer.Register(m.grpcServer)
 	m.addPeers(peers)
 	m.initializeMPT(peerAddresses)
-	lis, _ := net.Listen("tcp", m.Id.String())
-	go m.grpcServer.Serve(lis)
+
+	//lis, _ := net.Listen("tcp", m.Id.String())
+	//go m.grpcServer.Serve(lis)
 
 	os.Remove("../logs/manage.txt")
 	os.RemoveAll("../database/blockchain")
@@ -111,8 +122,8 @@ func (m *Manage) AddTransaction(tx *msg.Transaction) {
 		log.Printf("[algorand] Received invalid transaction: %s", err.Error())
 		return
 	}
-	m.lm.AddTxLog(tx.Hash())
 	m.txs = append(m.txs, tx)
+	m.lm.AddTxLog(tx.Hash())
 }
 
 func (m *Manage) Run() {
@@ -121,12 +132,56 @@ func (m *Manage) Run() {
 
 func (m *Manage) propose() {
 	for {
-		time.Sleep(20 * time.Second)
-		m.epoch += 1
-		go m.proposeTxs()
+		time.Sleep(5 * time.Second)
+		if len(m.txs) >= 20 {
+			m.process()
+		}
 	}
 }
 
+func (m *Manage) process() {
+	var (
+		txs []*msg.Transaction
+		tx  *msg.Transaction
+	)
+	for len(m.txs) > 0 {
+		tx, m.txs = m.txs[0], m.txs[1:]
+		txs = append(txs, tx)
+		if len(txs) >= 20 {
+			break
+		}
+	}
+
+	pt := &msg.ProposedTx{
+		Epoch: m.epoch,
+		Txs:   txs,
+	}
+
+	h := pt.Hash()
+	m.contributions[h] = pt
+	m.sendFinalContribution(pt)
+	//m.confirm += 1
+	time.Sleep(10 * time.Second)
+	if m.votes[h] >= 33 {
+		// confirm contribution
+		m.confirm += 1
+	} else {
+		// put the contribution back into the txs
+		pt = m.contributions[h]
+		m.txs = append(m.txs, pt.Txs...)
+	}
+
+	delete(m.contributions, h)
+	delete(m.votes, h)
+
+	// proceed to next contribution
+}
+
+func (m *Manage) GetConfirmedContributions() uint64 {
+	return m.confirm
+}
+
+/*
 func (m *Manage) proposeTxs() {
 	var (
 		txs []*msg.Transaction
@@ -139,30 +194,39 @@ func (m *Manage) proposeTxs() {
 			break
 		}
 	}
-	//log.Println(len(m.txs))
 
 	pt := &msg.ProposedTx{
 		Epoch: m.epoch,
 		Txs:   txs,
 	}
 
-	//m.proposedTxSet <- pt
-	st, sh := m.executeTxSet(pt)
-	m.sendContributionToPeers(pt)
-	time.Sleep(5 * time.Second)
-	res, c := m.validate(sh)
-	go m.writeLog(sh, m.stateHash[sh], res, c)
+	m.sendFinalContribution(pt)
+	// wait for the contribution to finish
+	//log.Println(len(m.txs))
 
-	if res {
-		m.sendFinalContribution(pt)
-		time.Sleep(5 * time.Second)
-		st.Commit()
-		m.recentMPT = st
-	} else {
-		copy(m.txs, txs)
-	}
+	/*
+		//m.proposedTxSet <- pt
+		//st, sh := m.executeTxSet(pt)
+		//m.sendContributionToPeers(pt)
+		//time.Sleep(5 * time.Second)
+		//res, _ := m.validate(sh)
+		//go m.writeLog(sh, m.stateHash[sh], res, c)
+
+		if res {
+			m.sendFinalContribution(pt)
+			// wait for the block to finalized, and remove the transactions from queue iff only
+			// they are present in the blk
+
+			time.Sleep(5 * time.Second)
+			st.Commit()
+			m.recentMPT = st
+		} else {
+			copy(m.txs, txs)
+		}
+
 }
-
+*/
+/*
 func (m *Manage) executeTxSet(txSet *msg.ProposedTx) (*mpt.Trie, cmn.Hash) {
 	txs := txSet.Txs
 	st := m.recentMPT
@@ -189,23 +253,17 @@ func (m *Manage) sendContributionToPeers(txSet *msg.ProposedTx) {
 	}
 }
 
-func (m *Manage) sendContribution(conn *grpc.ClientConn, data []byte) {
-	res, err := service.SendContribution(conn, data)
-	if err == nil {
-		m.addStateHash(cmn.BytesToHash(res.StateHash))
+
+*/
+
+func (m *Manage) GetByRound(round uint64) *msg.Block {
+	blk := &message.Block{}
+	data, _ := m.db.Get(cmn.Uint2Bytes(round), nil)
+	err := blk.Deserialize(data)
+	if err != nil {
+		return nil
 	}
-}
-
-func (m *Manage) addStateHash(hash cmn.Hash) {
-	m.shLock.Lock()
-	defer m.shLock.Unlock()
-	m.stateHash[hash] += 1
-}
-
-func (m *Manage) validate(hash cmn.Hash) (bool, uint64) {
-	count := m.stateHash[hash]
-	ans := uint64(2 * int(params.UserAmount) / 3)
-	return count >= ans, ans
+	return blk
 }
 
 func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
@@ -213,7 +271,14 @@ func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
 	for _, conn := range m.connPool {
 		go service.SendFinalContribution(conn, data)
 	}
-	m.lm.AddFinalTxLog(txSet.Txs)
+	//m.lm.AddFinalTxLog(txSet.Txs)
+}
+
+func (m *Manage) AddVote(contribution common.Hash) {
+	m.votesLock.Lock()
+	defer m.votesLock.Unlock()
+	m.votes[contribution] += 1
+	log.Printf("Confirmed votes for %s: %d\n", contribution.String(), m.votes[contribution])
 }
 
 func (m *Manage) LastState() []byte {
@@ -223,10 +288,50 @@ func (m *Manage) LastState() []byte {
 func (m *Manage) AddBlk(hash cmn.Hash, data []byte) {
 	m.blkLock.Lock()
 	defer m.blkLock.Unlock()
+
+	// find blk with hash key or round key
 	if !bytes.Equal(m.lastHash, hash.Bytes()) {
 		m.db.Put(hash.Bytes(), data, nil)
+		blk := &message.Block{}
+		blk.Deserialize(data)
+		m.db.Put(cmn.Uint2Bytes(blk.Round), data, nil)
 		m.lastHash = hash.Bytes()
+		m.lastRound = blk.Round
 	}
+}
+
+func (m *Manage) GetBlkByHash(hash cmn.Hash) *msg.Block {
+	blk := &message.Block{}
+	data, err := m.db.Get(hash.Bytes(), nil)
+	if err != nil {
+		s := fmt.Sprintf("[Error] Can't find block by hash, %s\n", err.Error())
+		fmt.Print(s)
+		return nil
+	}
+	err = blk.Deserialize(data)
+	if err != nil {
+		s := fmt.Sprintf("[Error] Can't Deserialize blk data found by hash, %s\n", err.Error())
+		fmt.Print(s)
+		return nil
+	}
+	return blk
+}
+
+func (m *Manage) GetBlkByRound(round uint64) *msg.Block {
+	blk := &message.Block{}
+	data, err := m.db.Get(cmn.Uint2Bytes(round), nil)
+	if err != nil {
+		s := fmt.Sprintf("[Error] Can't find block by Round, %s\n", err.Error())
+		fmt.Print(s)
+		return nil
+	}
+	err = blk.Deserialize(data)
+	if err != nil {
+		s := fmt.Sprintf("[Error] Can't Deserialize blk data found by Round, %s\n", err.Error())
+		fmt.Print(s)
+		return nil
+	}
+	return blk
 }
 
 func (m *Manage) writeLog(hash cmn.Hash, count uint64, res bool, c uint64) {

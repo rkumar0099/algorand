@@ -29,20 +29,6 @@ func GetBlock(conn *grpc.ClientConn, hash []byte) (*msg.Block, error) {
 	return blk, nil
 }
 
-func SendContribution(conn *grpc.ClientConn, data []byte) (*msg.StateHash, error) {
-	client := NewRPCServiceClient(conn)
-	req := &ReqContribution{
-		Data: data,
-	}
-	res, err := client.SendContribution(context.Background(), req)
-	if err != nil {
-		return nil, err
-	}
-	sh := &msg.StateHash{}
-	proto.Unmarshal(res.StateHash, sh)
-	return sh, nil
-}
-
 func SendFinalContribution(conn *grpc.ClientConn, data []byte) error {
 	client := NewRPCServiceClient(conn)
 	req := &ReqContribution{

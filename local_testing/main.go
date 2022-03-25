@@ -92,33 +92,39 @@ func regularRun(c *cli.Context) {
 		Id := fmt.Sprintf("127.0.0.1:%d", 8000+i)
 		neighbors = append(neighbors, gossip.NewNodeId(Id))
 		node := peer.New(Id, params.Honest)
+		nodes = append(nodes, node)
 		num += 1
 		addrPeers = append(addrPeers, node.Address().Bytes())
-		nodes = append(nodes, node)
 	}
 
 	for _, p := range nodes {
 		go p.Start(neighbors, addrPeers)
 	}
-	time.Sleep(5 * time.Second)
+	time.Sleep(1 * time.Second)
 
 	lm := logs.New()
 	m := manage.New(neighbors, addrPeers, lm)
-	oracle := oracle.New()
-	go oracle.Run()
+	//oracle := oracle.New()
+	//go oracle.Run()
 
 	for _, p := range nodes {
-		p.AddManage(m, lm, oracle)
+		p.AddManage(m, lm)
 		go p.Run()
 	}
+
 	time.Sleep(5 * time.Second)
+	go m.Run() // run manager
+	//go proposeEWTxs(nodes)                // propose EWTs
+	go proposeTopUpTransactions(nodes) // propose Topups
+	//go proposeTransferTransactions(nodes) // propse transfers
 
-	go m.Run()
-	go proposeEWTxs(nodes)
-	go proposeTopUpTransactions(nodes)
-	go proposeTransferTransactions(nodes)
-
+	//time.Sleep(30 * time.Second)
 	time.Sleep(1 * time.Minute)
+	printStates(nodes, lm)
+	log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
+	showBalances(nodes, lm)
+	lm.WriteLog()
+
 	//showBalances(nodes)
 
 	/*
@@ -133,6 +139,15 @@ func regularRun(c *cli.Context) {
 
 }
 
+func printStates(peers []*peer.Peer, lm *logs.LogManager) {
+	for _, p := range peers {
+		s := fmt.Sprintf("%s last state: %s\n", p.Id.String(), p.GetLastState())
+		//log.Printf("%s last state: %s\n", p.Id.String(), p.GetLastState())
+		lm.AddLog(s)
+	}
+}
+
+// propose 10 random EW transactions every 5 sec
 func proposeEWTxs(peers []*peer.Peer) {
 	for {
 		time.Sleep(5 * time.Second)
@@ -143,33 +158,39 @@ func proposeEWTxs(peers []*peer.Peer) {
 	}
 }
 
+// propose top up transactions every 5 sec
 func proposeTopUpTransactions(peers []*peer.Peer) {
-	for {
-		time.Sleep(5 * time.Second)
-		for i := 0; i < 5; i++ {
-			ind := rand.Intn(50)
-			peers[ind].TopupTransaction(uint64(10))
-		}
+	//for {
+	//time.Sleep(5 * time.Second)
+	for i := 0; i < 100; i++ {
+		log.Println("Top up tx proposed")
+		ind := rand.Intn(50)
+		peers[ind].TopupTransaction(uint64(10))
 	}
+	//}
 }
 
+// propose transfer transactions every 5 sec
 func proposeTransferTransactions(peers []*peer.Peer) {
-	for {
-		time.Sleep(5 * time.Second)
-		for i := 0; i < 5; i++ {
-			ind := rand.Intn(50)
-			to := rand.Intn(50)
-			for to == ind {
-				to = rand.Intn(50)
-			}
-			peers[ind].TransferTransaction(uint64(10), peers[to].Address())
+	//for {
+	//time.Sleep(5 * time.Second)
+	for i := 0; i < 100; i++ {
+		log.Println("Transfer tx proposed")
+		ind := rand.Intn(50)
+		to := rand.Intn(50)
+		for to == ind {
+			to = rand.Intn(50)
 		}
+		peers[ind].TransferTransaction(uint64(10), peers[to].Address())
 	}
+	//}
 }
 
-func showBalances(peers []*peer.Peer) {
+func showBalances(peers []*peer.Peer, lm *logs.LogManager) {
 	for _, p := range peers {
-		log.Printf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
+		s := fmt.Sprintf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
+		//log.Printf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
+		lm.AddLog(s)
 	}
 }
 

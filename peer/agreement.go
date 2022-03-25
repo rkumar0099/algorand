@@ -1,6 +1,7 @@
 package peer
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -34,7 +35,10 @@ func (p *Peer) BA(round uint64, block *msg.Block) (int8, *msg.Block) {
 		var err error
 		newBlk, err = p.getBlock(hash)
 		if err != nil {
-			log.Printf("[Algorand] [%s] hang forever becaue BA error: %s", p.Id.String(), err.Error())
+			s := fmt.Sprintf("[Algorand] [%s] hang forever becaue BA error: %s\n", p.Id.String(), err.Error())
+			log.Print(s)
+			p.lm.AddLog(s)
+			//log.Printf("[Algorand] [%s] hang forever becaue BA error: %s", p.Id.String(), err.Error())
 			<-p.hangForever
 		}
 	}
@@ -80,7 +84,10 @@ func (p *Peer) binaryBA(round uint64, hash cmn.Hash) cmn.Hash {
 	)
 	empty := p.emptyHash(round, p.chain.Last.Hash())
 	defer func() {
-		log.Printf("[algorand] [%s] complete binaryBA with %d steps", p.Id.String(), step)
+		s := fmt.Sprintf("[algorand] [%s] complete binaryBA with %d steps\n", p.Id.String(), step)
+		log.Print(s)
+		p.lm.AddLog(s)
+		//log.Printf("[algorand] [%s] complete binaryBA with %d steps", p.Id.String(), step)
 	}()
 	for step < params.MAXSTEPS {
 		p.committeeVote(round, strconv.Itoa(step), params.ExpectedCommitteeMembers, r)

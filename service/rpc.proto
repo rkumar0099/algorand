@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "/service";
+
+service RPCService {
+    rpc GetDataByHash(ReqHash) returns(ResData) {}
+    rpc SendFinalContribution(ReqContribution) returns(ResContribution) {}
+}
+
+message ReqHash {
+    bytes Hash = 1;
+}
+
+message ResData {
+    bytes Data = 1;
+}
+
+message ReqContribution {
+    bytes Data = 1;
+}
+
+message ResContribution {}
