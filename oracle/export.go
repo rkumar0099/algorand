@@ -5,6 +5,7 @@ import (
 
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
+	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/params"
 )
 
@@ -21,6 +22,13 @@ func (o *Oracle) SortitionSeed(round uint64) []byte {
 	blk := o.GetBlkByRound(realR)
 	//log.Println(blk, realR)
 	return blk.Seed
+}
+
+func (o *Oracle) GetBlkByRound(round uint64) *msg.Block {
+	blk := &msg.Block{}
+	data, _ := o.db.Get(cmn.Uint2Bytes(round), nil)
+	blk.Deserialize(data)
+	return blk
 }
 
 // sortition runs cryptographic selection procedure and returns vrf,proof and amount of selected sub-users.

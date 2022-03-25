@@ -42,8 +42,8 @@ func NewBlockchain() *Blockchain {
 }
 
 func (bc *Blockchain) addGenesis(blk *msg.Block) {
-	data, _ := blk.Serialize()
-	go bc.manage.AddBlk(blk.Hash(), data)
+	//data, _ := blk.Serialize()
+	//go bc.manage.AddBlk(blk.Hash(), data)
 	bc.hashes = append(bc.hashes, blk.Hash())
 	bc.Last = blk
 	bc.CacheBlock(blk)
@@ -106,4 +106,6 @@ func (bc *Blockchain) ResolveFork(fork *msg.Block) {
 
 func (bc *Blockchain) SetManage(m *manage.Manage) {
 	bc.manage = m
+	data, _ := bc.Genesis.Serialize()
+	bc.manage.AddBlk(bc.Genesis.Hash(), data)
 }

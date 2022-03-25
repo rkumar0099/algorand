@@ -2,9 +2,7 @@ package oracle
 
 import (
 	"bytes"
-	"context"
 	"os"
-	"strconv"
 
 	"log"
 	"sync"
@@ -14,16 +12,13 @@ import (
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
 	"github.com/rkumar0099/algorand/gossip"
-	"google.golang.org/protobuf/proto"
-
-	"github.com/rkumar0099/algorand/logs"
-	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/message"
+	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/syndtr/goleveldb/leveldb"
 	mt "github.com/wealdtech/go-merkletree"
+	"google.golang.org/grpc"
 )
-
 
 type Oracle struct {
 	pubkey      *crypto.PublicKey
@@ -39,11 +34,13 @@ type Oracle struct {
 	results     map[uint64]map[uint64][][]byte
 	finalBlks   map[uint64]*FinalBlock
 	count       uint64
+	lastRound   uint64
 	db          *leveldb.DB
 	running     bool
 	confirmedId int
-	lm          *logs.LogManager
-	m           *manage.Manage
+	server      *OracleServiceServer
+	grpcServer  *grpc.Server
+	connPool    map[gossip.NodeId]*grpc.ClientConn
 }
 
 type Reveal struct {
@@ -60,7 +57,7 @@ type FinalBlock struct {
 	Epoch   uint64
 }
 
-func New(lm *logs.LogManager, m *manage.Manage, addr ) *Oracle {
+func New(peers []gossip.NodeId) *Oracle {
 	oracle := &Oracle{
 		peers:       make(map[uint64][]*OraclePeer),
 		lock:        &sync.Mutex{},
@@ -74,68 +71,71 @@ func New(lm *logs.LogManager, m *manage.Manage, addr ) *Oracle {
 		count:       0,
 		running:     false,
 		confirmedId: 0,
-		lm:          lm,
-		m:           m,
+		connPool:    make(map[gossip.NodeId]*grpc.ClientConn),
 	}
 
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
-	//os.RemoveAll("../oracle/blockDB")
-	//oracle.db, _ = leveldb.OpenFile("../oracle/blockDB", nil)
+	oracle.grpcServer = grpc.NewServer()
+	oracle.server = NewServer(
+		gossip.NewNodeId("127.0.0.1:9001"),
+		func(uint64) (*ResOPP, error) { return nil, nil },
+	)
+	oracle.server.Register(oracle.grpcServer)
+	oracle.addPeers(peers)
+	os.RemoveAll("../oracle/blockchain")
+	oracle.db, _ = leveldb.OpenFile("../oracle/blockchain", nil)
 	return oracle
+}
+
+func (o *Oracle) addPeers(peers []gossip.NodeId) {
+	for _, id := range peers {
+		conn, err := id.Dial()
+		if err == nil {
+			o.connPool[id] = conn
+		}
+	}
 }
 
 func (o *Oracle) Address() []byte {
 	return o.pubkey.Bytes()
 }
 
-func (o *Oracle) preparePool() {
-	o.epoch += 1;
-	// send req to peer to send the result of proposal, see if it's selected
-}
-
-func (o *Oracle) AddOPP(opp *message.OraclePeerProposal) {
+func (o *Oracle) AddBlock(blk *msg.Block) {
 	o.lock.Lock()
 	defer o.lock.Unlock()
-	epoch := opp.Epoch
-
-	//log.Println("Propose oracle peer")
-	if _, ok := o.peers[epoch]; !ok {
-		o.peers[epoch] = make([]*OraclePeer, 0)
-		//log.Println("Make peer array again")
-	}
-	seed := o.sortitionSeed(1)
-	role := role(params.OraclePeer, epoch, params.ORACLE)
-	m := constructSeed(seed, role)
-	if err := opp.Verify(m); err != nil {
-		return
-	}
-	//log.Println("Oracle peer proposal verified successfully")
-	o.peers[epoch] = append(o.peers[epoch], newOraclePeer(epoch))
-	log.Println("The number of oracle peers for epoch: ", epoch, len(o.peers[epoch]))
-}
-
-func (o *Oracle) AddBlk(blk *message.Block) {
-	o.lock.Lock()
-	defer o.lock.Unlock()
-	if o.round < blk.Round {
+	if blk.Round > o.lastRound {
 		data, _ := blk.Serialize()
 		o.db.Put(cmn.Uint2Bytes(blk.Round), data, nil)
-		o.round = blk.Round
+		o.lastRound = blk.Round
 	}
+}
+
+func (o *Oracle) preparePool() {
+	o.epoch += 1
+	for _, conn := range o.connPool {
+		res, _ := SendOPP(conn, o.epoch)
+		if res != nil {
+			seed := o.sortitionSeed(1)
+			role := role(params.OraclePeer, o.epoch, params.ORACLE)
+			m := constructSeed(seed, role)
+			opp := &message.OraclePeerProposal{
+				Proof:  res.Proof,
+				Vrf:    res.VRF,
+				Pubkey: res.Pubkey,
+				Epoch:  o.epoch,
+				Weight: res.Weight,
+			}
+			if err := opp.Verify(m); err != nil {
+				o.peers[o.epoch] = append(o.peers[o.epoch], newOraclePeer(o.epoch))
+			}
+		}
+	}
+	log.Println("The number of oracle peers for epoch: ", o.epoch, len(o.peers[o.epoch]))
+	// send req to peer to send the result of proposal, see if it's selected
 }
 
 func (o *Oracle) GetPeers() ([]*OraclePeer, uint64) {
 	return o.peers[o.epoch], o.epoch
-}
-
-func (o *Oracle) GetBlkByRound(round uint64) *message.Block {
-	blk := &message.Block{}
-	data, _ := o.db.Get(cmn.Uint2Bytes(round), nil)
-	err := blk.Deserialize(data)
-	if err != nil {
-		return nil
-	}
-	return blk
 }
 
 func (o *Oracle) AddEWTx(tx *message.PendingRequest) {
@@ -177,20 +177,15 @@ func constructSeed(seed, role []byte) []byte {
 
 func (o *Oracle) completeEpoch() {
 	// once oracle peers are ready, ask all of them to fetch jobs and store the result in a merkle
-	// patricia tree 
+	// patricia tree
 }
 
 func (o *Oracle) Run() {
 	for {
 
-		time.Sleep(5 * time.Second)
-		//if !o.running {
-		epoch := o.epoch + 1
-		if len(o.peers[epoch]) == 0 {
-			continue
-		}
-		time.Sleep(1 * time.Second)
-		o.epoch = epoch
+		time.Sleep(10 * time.Second)
+		o.preparePool()
+
 		var (
 			tx  *message.PendingRequest
 			txs []*message.PendingRequest
@@ -200,12 +195,12 @@ func (o *Oracle) Run() {
 			tx, o.txs = o.txs[0], o.txs[1:]
 			txs = append(txs, tx)
 		}
+
 		if len(txs) > 0 {
 			log.Println("Oracle run: ", o.epoch, len(txs), len(o.peers[o.epoch]))
 			o.running = true
-			go o.process(o.epoch, o.peers[o.epoch], txs)
+			//go o.process(o.epoch, o.peers[o.epoch], txs)
 		}
-
 	}
 }
 
@@ -269,7 +264,7 @@ func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.Pendi
 			blk := o.finalBlks[epoch]
 			log.Println("Confirmed EW transactions ", len(blk.Results))
 			//o.lm.AddOracleBlk(blk)
-			o.writeBlk(blk)
+			//o.writeBlk(blk)
 			delete(o.finalBlks, epoch)
 			o.running = false
 		}
@@ -314,6 +309,7 @@ func (o *Oracle) verifyCommitReveal(epoch uint64) {
 	delete(o.reveal, epoch)
 }
 
+/*
 func (o *Oracle) writeBlk(blk *FinalBlock) {
 	log.Println(blk)
 	f, err := os.OpenFile("../logs/oracle.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -343,3 +339,4 @@ func (o *Oracle) writeBlk(blk *FinalBlock) {
 	f.Close()
 
 }
+*/

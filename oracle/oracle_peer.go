@@ -37,8 +37,6 @@ func newOraclePeer(epoch uint64) *OraclePeer {
 		lock:    &sync.Mutex{},
 	}
 	op.pubkey, op.privkey, _ = crypto.NewKeyPair()
-	//op.db, err := leveldb.OpenFile("../oracle/blockDB", nil)
-
 	return op
 }
 

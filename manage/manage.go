@@ -63,7 +63,6 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 		connPool:      make(map[gossip.NodeId]*grpc.ClientConn),
 		proposedTxSet: make(chan *msg.ProposedTx, 1),
 		count:         0,
-		lm:            lm,
 		blkLock:       &sync.Mutex{},
 		contributions: make(map[common.Hash]*msg.ProposedTx),
 		votes:         make(map[cmn.Hash]uint64),
@@ -71,6 +70,7 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 		confirm:       0,
 		lastRound:     0,
 	}
+	m.lm = lm
 	m.storage = kvstore.NewMemKVStore() // manage storage to execute Tx set and generate Hash
 	m.grpcServer = grpc.NewServer()
 	m.ServiceServer = service.NewServer(
@@ -180,81 +180,6 @@ func (m *Manage) process() {
 func (m *Manage) GetConfirmedContributions() uint64 {
 	return m.confirm
 }
-
-/*
-func (m *Manage) proposeTxs() {
-	var (
-		txs []*msg.Transaction
-		tx  *msg.Transaction
-	)
-	for len(m.txs) > 0 {
-		tx, m.txs = m.txs[0], m.txs[1:]
-		txs = append(txs, tx)
-		if len(txs) > 40 {
-			break
-		}
-	}
-
-	pt := &msg.ProposedTx{
-		Epoch: m.epoch,
-		Txs:   txs,
-	}
-
-	m.sendFinalContribution(pt)
-	// wait for the contribution to finish
-	//log.Println(len(m.txs))
-
-	/*
-		//m.proposedTxSet <- pt
-		//st, sh := m.executeTxSet(pt)
-		//m.sendContributionToPeers(pt)
-		//time.Sleep(5 * time.Second)
-		//res, _ := m.validate(sh)
-		//go m.writeLog(sh, m.stateHash[sh], res, c)
-
-		if res {
-			m.sendFinalContribution(pt)
-			// wait for the block to finalized, and remove the transactions from queue iff only
-			// they are present in the blk
-
-			time.Sleep(5 * time.Second)
-			st.Commit()
-			m.recentMPT = st
-		} else {
-			copy(m.txs, txs)
-		}
-
-}
-*/
-/*
-func (m *Manage) executeTxSet(txSet *msg.ProposedTx) (*mpt.Trie, cmn.Hash) {
-	txs := txSet.Txs
-	st := m.recentMPT
-	for _, tx := range txs {
-		switch tx.Type {
-		case transaction.TOPUP:
-			transaction.Topup(st, tx, cmn.Bytes2Uint(tx.Data))
-		case transaction.TRNASFER:
-			transaction.Transfer(st, tx, cmn.Bytes2Uint(tx.Data))
-		default:
-			log.Printf("Received invalid transaction")
-		}
-	}
-	hash := cmn.BytesToHash(st.RootHash())
-	m.stateHash[hash] = 0
-	return st, hash
-}
-
-func (m *Manage) sendContributionToPeers(txSet *msg.ProposedTx) {
-	data, _ := proto.Marshal(txSet)
-	for _, conn := range m.connPool {
-		go m.sendContribution(conn, data)
-		//go service.SendContribution(conn, data)
-	}
-}
-
-
-*/
 
 func (m *Manage) GetByRound(round uint64) *msg.Block {
 	blk := &message.Block{}

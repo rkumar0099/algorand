@@ -7,13 +7,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/gossip"
 	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
-	"github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/oracle"
+
+	//"github.com/rkumar0099/algorand/oracle"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/rkumar0099/algorand/peer"
 	"github.com/urfave/cli"
@@ -101,29 +101,29 @@ func regularRun(c *cli.Context) {
 		go p.Start(neighbors, addrPeers)
 	}
 	time.Sleep(1 * time.Second)
-
 	lm := logs.New()
 	m := manage.New(neighbors, addrPeers, lm)
-	//oracle := oracle.New()
-	//go oracle.Run()
+	o := oracle.New(neighbors)
 
 	for _, p := range nodes {
-		p.AddManage(m, lm)
+		p.AddManage(m, lm, o)
 		go p.Run()
 	}
 
 	time.Sleep(5 * time.Second)
 	go m.Run() // run manager
+	//oracle := oracle.New(neighbors, lm, m)
+	//go oracle.Run() // run oracle
 	//go proposeEWTxs(nodes)                // propose EWTs
 	go proposeTopUpTransactions(nodes) // propose Topups
 	//go proposeTransferTransactions(nodes) // propse transfers
 
 	//time.Sleep(30 * time.Second)
 	time.Sleep(1 * time.Minute)
-	printStates(nodes, lm)
+	//printStates(nodes, lm)
 	log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
-	showBalances(nodes, lm)
-	lm.WriteLog()
+	//showBalances(nodes, lm)
+	//lm.WriteLog()
 
 	//showBalances(nodes)
 
@@ -139,6 +139,7 @@ func regularRun(c *cli.Context) {
 
 }
 
+/*
 func printStates(peers []*peer.Peer, lm *logs.LogManager) {
 	for _, p := range peers {
 		s := fmt.Sprintf("%s last state: %s\n", p.Id.String(), p.GetLastState())
@@ -146,7 +147,8 @@ func printStates(peers []*peer.Peer, lm *logs.LogManager) {
 		lm.AddLog(s)
 	}
 }
-
+*/
+/*
 // propose 10 random EW transactions every 5 sec
 func proposeEWTxs(peers []*peer.Peer) {
 	for {
@@ -157,6 +159,7 @@ func proposeEWTxs(peers []*peer.Peer) {
 		}
 	}
 }
+*/
 
 // propose top up transactions every 5 sec
 func proposeTopUpTransactions(peers []*peer.Peer) {
@@ -186,6 +189,7 @@ func proposeTransferTransactions(peers []*peer.Peer) {
 	//}
 }
 
+/*
 func showBalances(peers []*peer.Peer, lm *logs.LogManager) {
 	for _, p := range peers {
 		s := fmt.Sprintf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
@@ -193,7 +197,8 @@ func showBalances(peers []*peer.Peer, lm *logs.LogManager) {
 		lm.AddLog(s)
 	}
 }
-
+*/
+/*
 func sendData(node *gossip.Node) {
 	for {
 		time.Sleep(1 * time.Second)
@@ -210,3 +215,4 @@ func sendData(node *gossip.Node) {
 		node.Gossip(msgBytes)
 	}
 }
+*/

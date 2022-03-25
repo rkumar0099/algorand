@@ -40,17 +40,11 @@ func (p *Peer) Start(neighbors []gossip.NodeId, addr [][]byte) error {
 	return nil
 }
 
-func (p *Peer) AddManage(m *manage.Manage, lm *logs.LogManager) {
+func (p *Peer) AddManage(m *manage.Manage, lm *logs.LogManager, o *oracle.Oracle) {
 	p.manage = m
 	p.lm = lm
+	p.oracle = o
 	p.chain.SetManage(m)
-}
-
-func (p *Peer) AddOracle(oracle *oracle.Oracle) {
-	p.oracle = oracle
-	blk := p.chain.GetByRound(0)
-	go p.lm.AddFinalBlk(blk.Hash(), 0)
-	go p.oracle.AddBlk(blk) // add initial algorand block to oracle
 }
 
 func (p *Peer) StartServices(bootNode []gossip.NodeId) error {

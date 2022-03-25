@@ -42,7 +42,7 @@ type Peer struct {
 	grpcServer    *grpc.Server
 	msgAgent      *msg.MsgAgent
 	ServiceServer *service.Server
-	OracleService *oracle.OracleServiceServer
+	//OracleService *oracle.OracleServiceServer
 
 	votePool     *pool.VotePool
 	proposalPool *pool.ProposalPool
@@ -100,7 +100,7 @@ func New(addr string, maliciousType int) *Peer {
 
 	// register the same grpc server for service and gossip
 	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleContribution, peer.handleFinalContribution)
-	peer.OracleService = oracle.NewServer(peer.Id, peer.proposeOraclePeer())
+	//peer.OracleService = oracle.NewServer(peer.Id, peer.proposeOraclePeer)
 	peer.node.Register(peer.grpcServer)
 	peer.ServiceServer.Register(peer.grpcServer)
 
@@ -155,7 +155,7 @@ func (p *Peer) processMain() {
 
 	p.chain.Add(block) // add blk to blockchain
 	go p.lm.AddFinalBlk(block.Hash(), block.Round)
-	//go p.oracle.AddBlk(block)
+	go p.oracle.AddBlock(block)
 	//time.Sleep(5 * time.Second) // sleep to allow all peers add block to their storage, we change params.R and simulate the algorand with changing seed
 }
 
