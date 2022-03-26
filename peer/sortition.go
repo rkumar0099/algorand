@@ -64,6 +64,7 @@ func (p *Peer) sortitionSeed(round uint64) []byte {
 func (p *Peer) sortition(seed, role []byte, expectedNum int, weight uint64) (vrf, proof []byte, selected int) {
 	vrf, proof, _ = p.privkey.Evaluate(constructSeed(seed, role))
 	selected = cmn.SubUsers(expectedNum, weight, vrf)
+	log.Printf("[Debug] selected %d\n", selected)
 	return
 }
 

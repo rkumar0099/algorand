@@ -111,11 +111,12 @@ func regularRun(c *cli.Context) {
 	}
 
 	time.Sleep(5 * time.Second)
-	go m.Run() // run manager
+	go o.Run()
+	//go m.Run() // run manager
 	//oracle := oracle.New(neighbors, lm, m)
 	//go oracle.Run() // run oracle
-	//go proposeEWTxs(nodes)                // propose EWTs
-	go proposeTopUpTransactions(nodes) // propose Topups
+	go proposeEWTxs(nodes) // propose EWTs
+	//go proposeTopUpTransactions(nodes) // propose Topups
 	//go proposeTransferTransactions(nodes) // propse transfers
 
 	//time.Sleep(30 * time.Second)
@@ -148,7 +149,7 @@ func printStates(peers []*peer.Peer, lm *logs.LogManager) {
 	}
 }
 */
-/*
+
 // propose 10 random EW transactions every 5 sec
 func proposeEWTxs(peers []*peer.Peer) {
 	for {
@@ -159,7 +160,6 @@ func proposeEWTxs(peers []*peer.Peer) {
 		}
 	}
 }
-*/
 
 // propose top up transactions every 5 sec
 func proposeTopUpTransactions(peers []*peer.Peer) {

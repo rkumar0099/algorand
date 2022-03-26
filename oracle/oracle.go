@@ -2,7 +2,6 @@ package oracle
 
 import (
 	"bytes"
-	"os"
 
 	"log"
 	"sync"
@@ -41,6 +40,7 @@ type Oracle struct {
 	server      *OracleServiceServer
 	grpcServer  *grpc.Server
 	connPool    map[gossip.NodeId]*grpc.ClientConn
+	log         string
 }
 
 type Reveal struct {
@@ -72,6 +72,7 @@ func New(peers []gossip.NodeId) *Oracle {
 		running:     false,
 		confirmedId: 0,
 		connPool:    make(map[gossip.NodeId]*grpc.ClientConn),
+		log:         "",
 	}
 
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
@@ -82,7 +83,7 @@ func New(peers []gossip.NodeId) *Oracle {
 	)
 	oracle.server.Register(oracle.grpcServer)
 	oracle.addPeers(peers)
-	os.RemoveAll("../oracle/blockchain")
+	//os.RemoveAll("../oracle/blockchain")
 	oracle.db, _ = leveldb.OpenFile("../oracle/blockchain", nil)
 	return oracle
 }
@@ -114,7 +115,7 @@ func (o *Oracle) preparePool() {
 	o.epoch += 1
 	for _, conn := range o.connPool {
 		res, _ := SendOPP(conn, o.epoch)
-		if res != nil {
+		if res.Weight > 0 {
 			seed := o.sortitionSeed(1)
 			role := role(params.OraclePeer, o.epoch, params.ORACLE)
 			m := constructSeed(seed, role)
@@ -125,7 +126,7 @@ func (o *Oracle) preparePool() {
 				Epoch:  o.epoch,
 				Weight: res.Weight,
 			}
-			if err := opp.Verify(m); err != nil {
+			if err := opp.Verify(m); err == nil {
 				o.peers[o.epoch] = append(o.peers[o.epoch], newOraclePeer(o.epoch))
 			}
 		}
@@ -199,6 +200,7 @@ func (o *Oracle) Run() {
 		if len(txs) > 0 {
 			log.Println("Oracle run: ", o.epoch, len(txs), len(o.peers[o.epoch]))
 			o.running = true
+			delete(o.peers, o.epoch)
 			//go o.process(o.epoch, o.peers[o.epoch], txs)
 		}
 	}
