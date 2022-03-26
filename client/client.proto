@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "/client";
+
+service RPCClientService {
+    rpc SendTx(ReqTx) returns(ResEmpty) {}
+    rpc SendResTx(ResTx) returns(ResEmpty) {}
+}
+
+message ReqTx {
+    int32 Type = 1;
+    bytes To = 2;
+    bytes From = 3;
+    string URL = 4;
+    string Addr = 5;
+}
+
+message ResTx {
+    bytes Data = 1;
+}
+
+message ResEmpty {}

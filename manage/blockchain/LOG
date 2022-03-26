@@ -1,6 +1,0 @@
-=============== Nov 23, 2021 (PKT) ===============
-21:21:38.656120 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-21:21:38.660582 db@open opening
-21:21:38.660755 version@stat F·[] S·0B[] Sc·[]
-21:21:38.662448 db@janitor F·2 G·0
-21:21:38.662481 db@open done T·1.8845ms

@@ -10,7 +10,7 @@ import (
 func Testing_Price_feed() {
 	addr := gossip.NewNodeId("127.0.0.1:9020")
 	ac := api.New(addr.String())
-	log.Printf("[Debug] Algorand client %s created to communicate with blockchain", ac.Address)
+	log.Printf("[Debug] [Price Feed] Algorand client %s created to communicate with blockchain", ac.Address)
 
 	// write smart contract logic here
 }
