@@ -115,12 +115,12 @@ func regularRun(c *cli.Context) {
 	//go m.Run() // run manager
 	//oracle := oracle.New(neighbors, lm, m)
 	//go oracle.Run() // run oracle
-	go proposeEWTxs(nodes) // propose EWTs
+	//go proposeEWTxs(nodes) // propose EWTs
 	//go proposeTopUpTransactions(nodes) // propose Topups
 	//go proposeTransferTransactions(nodes) // propse transfers
 
 	//time.Sleep(30 * time.Second)
-	time.Sleep(1 * time.Minute)
+	time.Sleep(2 * time.Minute)
 	//printStates(nodes, lm)
 	log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
 	//showBalances(nodes, lm)
