@@ -11,6 +11,8 @@ import (
 	"crypto"
 
 	"github.com/rkumar0099/algorand/client"
+	"github.com/rkumar0099/algorand/gossip"
+	"google.golang.org/grpc"
 )
 
 type API struct {
@@ -20,7 +22,21 @@ type API struct {
 }
 
 func New() *API {
+	a := &API{}
+	id := gossip.NewNodeId("127.0.0.1:9020")
+	a.client = client.New(id, a.sendReqHandler, a.sendResHandler)
+	a.client.Register(grpc.NewServer())
 	return &API{}
+}
+
+func (a *API) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
+	return &client.ResEmpty{}, nil
+}
+
+func (a *API) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
+	// handle the response received from blockchain network for the req sent
+
+	return &client.ResEmpty{}, nil
 }
 
 func (a *API) CreateAccount() bool {

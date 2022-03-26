@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/rkumar0099/algorand/client"
 	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
@@ -41,7 +42,7 @@ type Peer struct {
 	msgAgent            *msg.MsgAgent
 	ServiceServer       *service.Server
 	OracleServiceServer *oracle.OracleServiceServer
-	//OracleService *oracle.OracleServiceServer
+	ClientServiceServer *client.ClientServiceServer
 
 	votePool     *pool.VotePool
 	proposalPool *pool.ProposalPool
@@ -100,10 +101,12 @@ func New(addr string, maliciousType int) *Peer {
 	// register the same grpc server for service and gossip
 	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleContribution, peer.handleFinalContribution)
 	peer.OracleServiceServer = oracle.NewServer(peer.Id, peer.proposeOraclePeer)
-	//peer.OracleService = oracle.NewServer(peer.Id, peer.proposeOraclePeer)
+	peer.ClientServiceServer = client.New(peer.Id, peer.handleTx, peer.sendRes)
+
 	peer.node.Register(peer.grpcServer)
 	peer.ServiceServer.Register(peer.grpcServer)
 	peer.OracleServiceServer.Register(peer.grpcServer)
+	peer.ClientServiceServer.Register(peer.grpcServer)
 
 	// msg agent and register handlers
 	peer.msgAgent = msg.NewMsgAgent(peer.node.GetMsgChan())
