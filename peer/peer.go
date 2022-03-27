@@ -143,7 +143,7 @@ func (p *Peer) processMain() {
 		if len(block.Txs) > 0 {
 			parentBlk := p.lastBlock()
 			txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
-			st := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+			st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
 			//st := p.recentMPT
 
 			if bytes.Equal(block.StateHash, st.RootHash()) {
@@ -152,6 +152,7 @@ func (p *Peer) processMain() {
 				//p.manage.AddVote(p.pt.Hash())
 				st.Commit()
 				p.lastState = block.StateHash
+				// p.manage.AddRes(pt.Hash, responses)
 			} else {
 				block.StateHash = parentBlk.StateHash
 				// txs not finalized, put all txs back to manage
@@ -159,7 +160,7 @@ func (p *Peer) processMain() {
 		}
 
 		p.chain.Add(block) // add blk to blockchain
-		go p.lm.AddFinalBlk(block.Hash(), block.Round)
+		//go p.lm.AddFinalBlk(block.Hash(), block.Round)
 	*/
 	//go p.oracle.AddBlock(block)
 	//time.Sleep(5 * time.Second) // sleep to allow all peers add block to their storage, we change params.R and simulate the algorand with changing seed

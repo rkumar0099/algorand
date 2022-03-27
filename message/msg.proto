@@ -35,6 +35,12 @@ message Transaction {
     bytes Data = 6;
     bytes Signature = 7;
     uint64 Id = 8;
+    string Addr = 9;
+}
+
+message TxRes {
+    bytes TxHash = 1;
+    bytes Data = 2;
 }
 
 message PendingRequest {
@@ -42,6 +48,13 @@ message PendingRequest {
     string URL = 2;
     uint64 Id = 3;
     uint64 Type = 4;
+    string Addr = 5;
+    bytes Data = 6;
+}
+
+message PendingRequestRes{
+    bytes TxHash = 1;
+    bytes Data = 2;
 }
 
 message Block {
@@ -59,8 +72,10 @@ message Block {
     bytes Data = 12;
     repeated PendingRequest Reqs = 13;
     repeated bytes ResHash = 14;
-    uint64 txEpoch = 15;
-    uint64 oracleEpoch = 16;
+    uint64 TxEpoch = 15;
+    uint64 OracleEpoch = 16;
+    repeated TxRes ResTx = 17;
+    repeated PendingRequestRes EWRes = 18;
 }
 
 message AccessResponse {

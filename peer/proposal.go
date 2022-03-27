@@ -102,7 +102,8 @@ func (p *Peer) proposeBlock() *msg.Block {
 		p.pt = <-p.finalContributions
 		txSet := p.pt
 		blk.Txs = txSet.Txs
-		st := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+		st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+		blk.ResTx = responses
 		blk.StateHash = st.RootHash()
 		blk.TxEpoch = txSet.Epoch
 	}

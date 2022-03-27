@@ -71,7 +71,6 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 		lastRound:     0,
 	}
 	m.lm = lm
-	m.storage = kvstore.NewMemKVStore() // manage storage to execute Tx set and generate Hash
 	m.grpcServer = grpc.NewServer()
 	m.ServiceServer = service.NewServer(
 		nodeId,
@@ -82,10 +81,6 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Ma
 	m.node.Register(m.grpcServer)
 	m.ServiceServer.Register(m.grpcServer)
 	m.addPeers(peers)
-	m.initializeMPT(peerAddresses)
-
-	//lis, _ := net.Listen("tcp", m.Id.String())
-	//go m.grpcServer.Serve(lis)
 
 	os.Remove("../logs/manage.txt")
 	os.RemoveAll("../database/blockchain")
@@ -102,26 +97,15 @@ func (m *Manage) addPeers(peers []gossip.NodeId) {
 	}
 }
 
-func (m *Manage) initializeMPT(addr [][]byte) {
-	st := mpt.New(nil, m.storage)
-	for _, val := range addr {
-		stateAddr := bytes.Join([][]byte{
-			val,
-			[]byte("value"),
-		}, nil)
-		st.Put(stateAddr, cmn.Uint2Bytes(0))
-	}
-	m.recentMPT = st
-	st.Commit()
-}
-
 func (m *Manage) AddTransaction(tx *msg.Transaction) {
 	m.txLock.Lock()
 	defer m.txLock.Unlock()
-	if err := tx.VerifySign(); err != nil {
-		log.Printf("[algorand] Received invalid transaction: %s", err.Error())
-		return
-	}
+	/*
+		if err := tx.VerifySign(); err != nil {
+			log.Printf("[algorand] Received invalid transaction: %s", err.Error())
+			return
+		}
+	*/
 	m.txs = append(m.txs, tx)
 	m.lm.AddTxLog(tx.Hash())
 }
@@ -132,8 +116,9 @@ func (m *Manage) Run() {
 
 func (m *Manage) propose() {
 	for {
-		time.Sleep(5 * time.Second)
-		if len(m.txs) >= 20 {
+		time.Sleep(10 * time.Second)
+		if len(m.txs) > 0 {
+			m.epoch += 1
 			m.process()
 		}
 	}
@@ -144,6 +129,7 @@ func (m *Manage) process() {
 		txs []*msg.Transaction
 		tx  *msg.Transaction
 	)
+
 	for len(m.txs) > 0 {
 		tx, m.txs = m.txs[0], m.txs[1:]
 		txs = append(txs, tx)
@@ -160,6 +146,7 @@ func (m *Manage) process() {
 	h := pt.Hash()
 	m.contributions[h] = pt
 	m.sendFinalContribution(pt)
+
 	//m.confirm += 1
 	time.Sleep(10 * time.Second)
 	if m.votes[h] >= 33 {
@@ -175,6 +162,14 @@ func (m *Manage) process() {
 	delete(m.votes, h)
 
 	// proceed to next contribution
+}
+
+func (m *Manage) AddRes(hash cmn.Hash, res []*msg.TxRes) {
+	m.ResLock.Lock()
+	defer m.ResLock.Unlock()
+	if _, ok := m.Res[hash]; !ok {
+		m.Res[hash] = res
+	}
 }
 
 func (m *Manage) GetConfirmedContributions() uint64 {

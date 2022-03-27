@@ -1,6 +1,11 @@
 package transaction
 
 const (
-	TOPUP = iota
+	CREATE = iota
+	LOGIN
+	LOGOUT
+	TOPUP
 	TRNASFER
+	PRICEFEED
+	SESSIONDATA
 )

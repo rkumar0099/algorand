@@ -8,17 +8,20 @@
 package api
 
 import (
-	"crypto"
+	"fmt"
+	"log"
 
 	"github.com/rkumar0099/algorand/client"
+	cmn "github.com/rkumar0099/algorand/common"
+	"github.com/rkumar0099/algorand/crypto"
 	"github.com/rkumar0099/algorand/gossip"
 	"google.golang.org/grpc"
 )
 
 type API struct {
 	client  *client.ClientServiceServer // to communicate with blockchain over grpc
-	Pubkey  *crypto.PublicKey
-	Privkey *crypto.PrivateKey
+	pubkey  *crypto.PublicKey
+	privkey *crypto.PrivateKey
 }
 
 func New() *API {
@@ -39,24 +42,64 @@ func (a *API) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
 	return &client.ResEmpty{}, nil
 }
 
-func (a *API) CreateAccount() bool {
+func (a *API) CreateAccount(username string, password string) bool {
 	// create account by sending the transaction to blockchain
 	// over 2/3 of peers must execute the transaction in order to create a new account
+	pk, sk, _ := crypto.NewKeyPair()
+	a.pubkey = pk
+	a.privkey = sk
+
+	passHash := cmn.Sha256([]byte(password))
+
+	c := &client.Create{
+		Username: username,
+		Password: passHash.Bytes(),
+		Pubkey:   pk.Bytes(),
+	}
+	data, _ := c.Serialize()
+	req := &client.ReqTx{
+		Type: 1,
+		Addr: "127.0.0.1:9020",
+		Data: data,
+	}
+
+	// send the tx to all peers
+	a.sendReq(req)
 
 	return true
 }
 
-func (a *API) LogIn(pubkey *crypto.PublicKey, privkey *crypto.PrivateKey) bool {
+func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey, privkey *crypto.PrivateKey) bool {
 	// send the credentials to blockchain to see if there is account for this address
+	// private key is important to sign the transactions
+	passHash := cmn.Sha256([]byte(password))
+	l := &client.LogIn{
+		Username: username,
+		Password: passHash.Bytes(),
+		Pubkey:   pubkey.Bytes(),
+	}
+	data, _ := l.Serialize()
+	req := &client.ReqTx{
+		Type: 2,
+		Addr: "127.0.0.1:9020",
+		Data: data,
+	}
+
+	a.sendReq(req)
+
+	return true
+}
+
+func (a *API) LogOut(username string, password string, pubkey *crypto.PublicKey) {
+	// logout this user
+}
+
+func (ac *API) Topup(amount uint) bool {
 	return true
 }
 
 func (a *API) Transfer(to crypto.PublicKey, amt uint) bool {
 	// perform transfer, return true if tx successful
-	return true
-}
-
-func (ac *API) Topup(amount uint) bool {
 	return true
 }
 
@@ -72,4 +115,15 @@ func (a *API) PriceFeed(TYPE int) bool {
 // future work
 func (a *API) SessionData(form int) bool {
 	return true
+}
+
+func (a *API) sendReq(req *client.ReqTx) {
+	for i := 0; i < 50; i++ {
+		id := gossip.NewNodeId(fmt.Sprintf("127.0.0.1:%d", 8000+i))
+		conn, _ := id.Dial()
+		_, err := client.SendReqTx(conn, req)
+		if err == nil {
+			log.Println("[Debug] [API] Tx send successfully")
+		}
+	}
 }

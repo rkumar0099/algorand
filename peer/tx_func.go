@@ -6,6 +6,7 @@ import (
 	"math/rand"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/rkumar0099/algorand/client"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
@@ -34,7 +35,7 @@ func (p *Peer) handleContribution(data []byte) ([]byte, error) {
 	}
 
 	//log.Println("Got contribution of size ", len(txSet.Txs))
-	st := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+	st, _ := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
 	res := &msg.StateHash{
 		Epoch:     txSet.Epoch,
 		StateHash: st.RootHash(),
@@ -43,24 +44,85 @@ func (p *Peer) handleContribution(data []byte) ([]byte, error) {
 	return resBytes, nil
 }
 
-func (p *Peer) executeTxSet(txSet *msg.ProposedTx, rootHash []byte, store kvstore.KVStore) *mpt.Trie {
+func (p *Peer) executeTxSet(txSet *msg.ProposedTx, rootHash []byte, store kvstore.KVStore) (*mpt.Trie, []*msg.TxRes) {
 	rootNode := mpt.HashNode(rootHash)
 	st := mpt.New(&rootNode, store)
-	p.execute(st, txSet.Txs, txSet.Epoch)
-	return st
+	res := p.execute(st, txSet.Txs, txSet.Epoch)
+	return st, res
 }
 
-func (p *Peer) execute(st *mpt.Trie, txs []*msg.Transaction, epoch uint64) {
+func (p *Peer) execute(st *mpt.Trie, txs []*msg.Transaction, epoch uint64) []*msg.TxRes {
+	var responses []*msg.TxRes
 	for _, tx := range txs {
 		switch tx.Type {
+		case transaction.CREATE:
+			r := p.createAccount(st, tx.Data, tx.Addr)
+			res := &msg.TxRes{}
+			res.TxHash = tx.Hash().Bytes()
+			d, _ := r.Serialize()
+			res.Data = d
+			responses = append(responses, res)
+		case transaction.LOGIN:
+			p.logIn(st, tx.Data)
+		case transaction.LOGOUT:
+			p.logOut(st, tx.Data)
 		case transaction.TOPUP:
+			p.topUp(st, tx.Data)
 			transaction.Topup(st, tx, cmn.Bytes2Uint(tx.Data))
 		case transaction.TRNASFER:
+			p.transfer(st, tx.Data)
 			transaction.Transfer(st, tx, cmn.Bytes2Uint(tx.Data))
 		default:
 			log.Printf("Received invalid transaction")
 		}
 	}
+	return responses
+}
+
+func (p *Peer) createAccount(st *mpt.Trie, data []byte, addr string) *client.ResTx {
+	info := &client.Create{}
+	info.Deserialize(data)
+	user := &User{}
+	user.Type = 2 // 1 = Blockchain Peer, 2 = Normal Client
+	user.Username = info.Username
+	user.PassHash = info.Password
+	user.Pubkey = info.Pubkey
+	user.Balance = 100
+	user_data, _ := proto.Marshal(user)
+	err := st.Put(info.Pubkey, user_data)
+	res := &client.ResTx{}
+	if err == nil {
+		log.Println("[Debug] [Create User] Successfully created user")
+		res.Status = true
+		res.Msg = "Account Created Successfully"
+		res.Balance = user.Balance
+		res.Pubkey = user.Pubkey
+		res.Addr = addr
+	} else {
+		res.Status = false
+		res.Msg = "[Error] Can't create account"
+		res.Balance = 0
+		res.Pubkey = info.Pubkey
+		res.Addr = addr
+	}
+	return res
+
+}
+
+func (p *Peer) logIn() {
+
+}
+
+func (p *Peer) logOut() {
+
+}
+
+func (p *Peer) topUp() {
+
+}
+
+func (p *Peer) transfer() {
+
 }
 
 func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
