@@ -14,21 +14,18 @@ type Server struct {
 	UnimplementedRPCServiceServer
 	nodeId                       gossip.NodeId
 	getDataByHashHandler         func([]byte) ([]byte, error)
-	sendContributionHandler      func([]byte) ([]byte, error)
 	sendFinalContributionHandler func([]byte) error
 }
 
 func NewServer(
 	nodeId gossip.NodeId,
 	getDataByHashHandler func([]byte) ([]byte, error),
-	sendContributionHandler func([]byte) ([]byte, error),
 	sendFinalContributionHandler func([]byte) error,
 ) *Server {
 	return &Server{
 		UnimplementedRPCServiceServer{},
 		nodeId,
 		getDataByHashHandler,
-		sendContributionHandler,
 		sendFinalContributionHandler,
 	}
 }

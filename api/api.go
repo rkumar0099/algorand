@@ -10,6 +10,8 @@ package api
 import (
 	"fmt"
 	"log"
+	"net"
+	"time"
 
 	"github.com/rkumar0099/algorand/client"
 	cmn "github.com/rkumar0099/algorand/common"
@@ -19,17 +21,32 @@ import (
 )
 
 type API struct {
-	client  *client.ClientServiceServer // to communicate with blockchain over grpc
-	pubkey  *crypto.PublicKey
-	privkey *crypto.PrivateKey
+	Client  *client.ClientServiceServer // to communicate with blockchain over grpc
+	Pubkey  *crypto.PublicKey
+	Privkey *crypto.PrivateKey
+	Res     *client.ResTx
+	Ready   chan bool
+	Server  *grpc.Server
+	Id      gossip.NodeId
 }
 
 func New() *API {
-	a := &API{}
-	id := gossip.NewNodeId("127.0.0.1:9020")
-	a.client = client.New(id, a.sendReqHandler, a.sendResHandler)
-	a.client.Register(grpc.NewServer())
-	return &API{}
+
+	a := &API{
+		Id:     gossip.NewNodeId("127.0.0.1:9020"),
+		Server: grpc.NewServer(),
+		Ready:  make(chan bool, 1),
+		Res:    &client.ResTx{},
+	}
+
+	a.Client = client.New(a.Id, a.sendReqHandler, a.sendResHandler)
+	a.Client.Register(a.Server)
+	lis, err := net.Listen("tcp", a.Id.String())
+	if err == nil {
+		go a.Server.Serve(lis)
+		log.Println("[Debug] [API] Listening for responses")
+	}
+	return a
 }
 
 func (a *API) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
@@ -38,16 +55,24 @@ func (a *API) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
 
 func (a *API) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
 	// handle the response received from blockchain network for the req sent
+	log.Println("[Debug] [API] Received Response from blockchain")
+	log.Println(res.Status)
+	log.Println(a)
+	//log.Printf("[Debug] [API] [RES] Id: %s, Pk: %s\n", a.id.String(),
+	//cmn.BytesToHash(a.pubkey.Bytes()).String())
 
+	a.Res = res
+	a.Ready <- true
+	log.Printf("[Debug] [API] Num of Conn: %d\n", len(a.Ready))
 	return &client.ResEmpty{}, nil
 }
 
-func (a *API) CreateAccount(username string, password string) bool {
+func (a *API) CreateAccount(username string, password string) *client.ResTx {
 	// create account by sending the transaction to blockchain
 	// over 2/3 of peers must execute the transaction in order to create a new account
 	pk, sk, _ := crypto.NewKeyPair()
-	a.pubkey = pk
-	a.privkey = sk
+	a.Pubkey = pk
+	a.Privkey = sk
 
 	passHash := cmn.Sha256([]byte(password))
 
@@ -58,15 +83,27 @@ func (a *API) CreateAccount(username string, password string) bool {
 	}
 	data, _ := c.Serialize()
 	req := &client.ReqTx{
-		Type: 1,
+		Type: 0,
 		Addr: "127.0.0.1:9020",
 		Data: data,
 	}
 
 	// send the tx to all peers
 	a.sendReq(req)
+	for {
+		time.Sleep(1 * time.Second)
+		if len(a.Ready) > 0 {
+			<-a.Ready
+			break
+		}
+	}
+	log.Println(a.Res)
+	log.Println("[Debug] [API] Received response")
+	return a.Res
+}
 
-	return true
+func (a *API) ReqCompleted() bool {
+	return len(a.Ready) > 0
 }
 
 func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey, privkey *crypto.PrivateKey) bool {
@@ -118,12 +155,13 @@ func (a *API) SessionData(form int) bool {
 }
 
 func (a *API) sendReq(req *client.ReqTx) {
-	for i := 0; i < 50; i++ {
-		id := gossip.NewNodeId(fmt.Sprintf("127.0.0.1:%d", 8000+i))
-		conn, _ := id.Dial()
-		_, err := client.SendReqTx(conn, req)
-		if err == nil {
-			log.Println("[Debug] [API] Tx send successfully")
-		}
+	i := 1
+	//for i := 0; i < 50; i++ {
+	id := gossip.NewNodeId(fmt.Sprintf("127.0.0.1:%d", 8000+i))
+	conn, _ := id.Dial()
+	_, err := client.SendReqTx(conn, req)
+	if err == nil {
+		log.Println("[Debug] [API] Tx send successfully")
 	}
+	//}
 }

@@ -7,9 +7,11 @@ import (
 	"os"
 	"time"
 
+	"github.com/rkumar0099/algorand/api"
+	"github.com/rkumar0099/algorand/client"
 	cmn "github.com/rkumar0099/algorand/common"
+	"github.com/rkumar0099/algorand/crypto"
 	"github.com/rkumar0099/algorand/gossip"
-	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/oracle"
 
@@ -101,28 +103,30 @@ func regularRun(c *cli.Context) {
 		go p.Start(neighbors, addrPeers)
 	}
 	time.Sleep(1 * time.Second)
-	lm := logs.New()
-	m := manage.New(neighbors, addrPeers, lm)
+	//lm := logs.New()
+	m := manage.New(neighbors, addrPeers)
 	o := oracle.New(neighbors)
 
 	for _, p := range nodes {
-		p.AddManage(m, lm, o)
+		p.AddManage(m, o)
 		go p.Run()
 	}
 
 	time.Sleep(5 * time.Second)
-	go o.Run()
-	//go m.Run() // run manager
+	//go m.Run()
+	//go o.Run()
+	go m.Run() // run manager
 	//oracle := oracle.New(neighbors, lm, m)
 	//go oracle.Run() // run oracle
 	//go proposeEWTxs(nodes) // propose EWTs
 	//go proposeTopUpTransactions(nodes) // propose Topups
 	//go proposeTransferTransactions(nodes) // propse transfers
-
+	//a := api.New()
+	//go proposeAccounts(nodes, a)
 	//time.Sleep(30 * time.Second)
 	time.Sleep(2 * time.Minute)
 	//printStates(nodes, lm)
-	log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
+	//log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
 	//showBalances(nodes, lm)
 	//lm.WriteLog()
 
@@ -138,6 +142,16 @@ func regularRun(c *cli.Context) {
 		}
 	*/
 
+}
+
+func proposeAccounts(peers []*peer.Peer, a *api.API) {
+	for {
+		time.Sleep(5 * time.Second)
+		//createAccounts(peers[1])
+		u := "Rabu"
+		p := "Main"
+		a.CreateAccount(u, p)
+	}
 }
 
 /*
@@ -216,3 +230,30 @@ func sendData(node *gossip.Node) {
 	}
 }
 */
+
+func createAccounts(peer *peer.Peer) {
+	username := "rabu"
+	password := "main"
+
+	pk, _, _ := crypto.NewKeyPair()
+	//a.pubkey = pk
+	//a.privkey = sk
+
+	passHash := cmn.Sha256([]byte(password))
+
+	c := &client.Create{
+		Username: username,
+		Password: passHash.Bytes(),
+		Pubkey:   pk.Bytes(),
+	}
+
+	data, _ := c.Serialize()
+	req := &client.ReqTx{
+		Type: 1,
+		Addr: "127.0.0.1:9020",
+		Data: data,
+	}
+
+	peer.HandleTx(req)
+
+}

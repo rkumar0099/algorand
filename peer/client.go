@@ -1,21 +1,24 @@
 package peer
 
 import (
+	"log"
+
 	"github.com/rkumar0099/algorand/client"
 	msg "github.com/rkumar0099/algorand/message"
 )
 
-func (p *Peer) handleTx(req *client.ReqTx) (*client.ResEmpty, error) {
+func (p *Peer) HandleTx(req *client.ReqTx) (*client.ResEmpty, error) {
 	t := req.Type
-	if t > 0 && t < 5 {
+	p.rec = true
+	if t < 5 {
 		// normal tx
+		log.Println("[Debug] [Peer Tx] Received Tx from client")
 		tx := &msg.Transaction{
 			Type: t,
 			Addr: req.Addr,
 			Data: req.Data,
 		}
-
-		p.manage.AddTransaction(tx)
+		go p.manage.AddTransaction(tx)
 
 	} else if t > 4 && t < 6 {
 		// external world tx
@@ -25,7 +28,7 @@ func (p *Peer) handleTx(req *client.ReqTx) (*client.ResEmpty, error) {
 			Addr: req.Addr,
 			Data: req.Data,
 		}
-		p.oracle.AddEWTx(pr)
+		go p.oracle.AddEWTx(pr)
 	}
 
 	re := &client.ResEmpty{}

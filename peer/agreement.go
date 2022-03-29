@@ -37,7 +37,7 @@ func (p *Peer) BA(round uint64, block *msg.Block) (int8, *msg.Block) {
 		if err != nil {
 			s := fmt.Sprintf("[Algorand] [%s] hang forever becaue BA error: %s\n", p.Id.String(), err.Error())
 			log.Print(s)
-			p.lm.AddLog(s)
+			//p.lm.AddLog(s)
 			//log.Printf("[Algorand] [%s] hang forever becaue BA error: %s", p.Id.String(), err.Error())
 			<-p.hangForever
 		}
@@ -86,7 +86,7 @@ func (p *Peer) binaryBA(round uint64, hash cmn.Hash) cmn.Hash {
 	defer func() {
 		s := fmt.Sprintf("[algorand] [%s] complete binaryBA with %d steps\n", p.Id.String(), step)
 		log.Print(s)
-		p.lm.AddLog(s)
+		//p.lm.AddLog(s)
 		//log.Printf("[algorand] [%s] complete binaryBA with %d steps", p.Id.String(), step)
 	}()
 	for step < params.MAXSTEPS {

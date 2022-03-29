@@ -1,13 +1,14 @@
 package peer
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"math/rand"
 	"time"
 
 	"github.com/rkumar0099/algorand/client"
-	"github.com/rkumar0099/algorand/logs"
+	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/mpt/kvstore"
 	"github.com/rkumar0099/algorand/oracle"
@@ -48,9 +49,9 @@ type Peer struct {
 	proposalPool *pool.ProposalPool
 
 	pt     *msg.ProposedTx
-	manage *manage.Manage   // manage package to help in txs, logs, and oracle
-	oracle *oracle.Oracle   // oracle
-	lm     *logs.LogManager // log manager
+	manage *manage.Manage // manage package to help in txs, logs, and oracle
+	oracle *oracle.Oracle // oracle
+	//lm     *logs.LogManager // log manager
 
 	txEpoch uint64
 
@@ -61,6 +62,7 @@ type Peer struct {
 	startState []byte
 
 	oracleEpoch uint64
+	rec         bool
 }
 
 //const memPoolCap = 512
@@ -78,6 +80,7 @@ func New(addr string, maliciousType int) *Peer {
 		oracleEpoch:              0,
 		finalContributions:       make(chan *msg.ProposedTx, 10),
 		oracleFinalContributions: make(chan []byte, 10),
+		rec:                      false,
 	}
 	// gossip node
 	peer.node = gossip.New(peer.Id, "algorand")
@@ -99,9 +102,9 @@ func New(addr string, maliciousType int) *Peer {
 	peer.votePool = pool.NewVotePool(votePoolCap, peer.voteVerifier, cleanTimeout)
 
 	// register the same grpc server for service and gossip
-	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleContribution, peer.handleFinalContribution)
+	peer.ServiceServer = service.NewServer(peer.Id, peer.getDataByHashHandler, peer.handleFinalContribution)
 	peer.OracleServiceServer = oracle.NewServer(peer.Id, peer.proposeOraclePeer)
-	peer.ClientServiceServer = client.New(peer.Id, peer.handleTx, peer.sendRes)
+	peer.ClientServiceServer = client.New(peer.Id, peer.HandleTx, peer.sendRes)
 
 	peer.node.Register(peer.grpcServer)
 	peer.ServiceServer.Register(peer.grpcServer)
@@ -119,49 +122,79 @@ func New(addr string, maliciousType int) *Peer {
 
 // processMain performs the main processing of algorand algorithm
 func (p *Peer) processMain() {
-	/*
-		if cmn.MetricsRound == p.round() {
-			cmn.ProposerSelectedHistogram.Update(cmn.ProposerSelectedCounter.Count())
-			cmn.ProposerSelectedCounter.Clear()
-			cmn.MetricsRound = p.round() + 1
-		}
-		currRound := p.round() + 1
-		block := p.blockProposal(false) // not modified
-		//log.Printf("[algorand] [%s] init BA with block #%d %s (%d txs), is empty? %v", p.Id.String(), block.Round, block.Hash(), len(block.Txs), block.Signature == nil)
 
-		// 2. init BA with block with the highest priority.
-		consensusType, block := p.BA(currRound, block) // not modified
+	if cmn.MetricsRound == p.round() {
+		cmn.ProposerSelectedHistogram.Update(cmn.ProposerSelectedCounter.Count())
+		cmn.ProposerSelectedCounter.Clear()
+		cmn.MetricsRound = p.round() + 1
+	}
+	currRound := p.round() + 1
+	block := p.blockProposal(false) // not modified
+	//log.Printf("[algorand] [%s] init BA with block #%d %s (%d txs), is empty? %v", p.Id.String(), block.Round, block.Hash(), len(block.Txs), block.Signature == nil)
+	// 2. init BA with block with the highest priority.
+	consensusType, block := p.BA(currRound, block) // not modified
 
-		// 3. reach consensus on a FINAL or TENTATIVE new block.
-		if consensusType == params.FINAL_CONSENSUS {
-			//log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
-		} else {
-			//log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
-		}
+	// 3. reach consensus on a FINAL or TENTATIVE new block.
+	if consensusType == params.FINAL_CONSENSUS {
+		//log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+	} else {
+		//log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+	}
 
-		// all peers are guaranteed to receive the same block
-		if len(block.Txs) > 0 {
-			parentBlk := p.lastBlock()
-			txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
-			st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
-			//st := p.recentMPT
+	// all peers are guaranteed to receive the same block
+	if len(block.Txs) > 0 {
+		parentBlk := p.lastBlock()
+		txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
+		st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+		//st := p.recentMPT
+		log.Printf("[Debug] [Peer] [Final Tx RES] Len: %d\n", len(responses))
 
-			if bytes.Equal(block.StateHash, st.RootHash()) {
-				// txs finalized
-				log.Printf("%s finalized\n", p.pt.Hash().String())
-				//p.manage.AddVote(p.pt.Hash())
-				st.Commit()
-				p.lastState = block.StateHash
-				// p.manage.AddRes(pt.Hash, responses)
-			} else {
-				block.StateHash = parentBlk.StateHash
-				// txs not finalized, put all txs back to manage
+		if bytes.Equal(block.StateHash, st.RootHash()) {
+			// txs finalized
+			log.Printf("%s finalized\n", p.pt.Hash().String())
+			//p.manage.AddVote(p.pt.Hash())
+			st.Commit()
+			p.lastState = block.StateHash
+			if len(p.finalContributions) > 0 {
+				<-p.finalContributions
 			}
-		}
+			var t *msg.TxRes
+			for len(responses) > 0 {
+				t, responses = responses[0], responses[1:]
 
-		p.chain.Add(block) // add blk to blockchain
-		//go p.lm.AddFinalBlk(block.Hash(), block.Round)
-	*/
+				//for _, t := range responses {
+				if p.rec {
+					res := &client.ResTx{}
+					res.Deserialize(t.Data)
+					id := gossip.NewNodeId("127.0.0.1:9020")
+					conn, err := id.Dial()
+					if err != nil {
+						log.Println("[Debug] [Peer] [API] Can't dial")
+					} else {
+						//if err == nil {
+						_, err = client.SendResTx(conn, res)
+						if err != nil {
+							log.Println("[Debug] [Peer Tx] Can't Send")
+						} else {
+							log.Println("[Debug] [Peer Tx] Send")
+						}
+					}
+				}
+			}
+
+		} else {
+			block.StateHash = parentBlk.StateHash
+
+			// txs not finalized, put all txs back to manage
+		}
+		//log.Println("[Debug] [Peer] Send RES to manage")
+		//p.manage.AddRes(p.pt.Hash(), responses)
+		//log.Println("[Debug] [Peer] Received response")
+	}
+
+	p.chain.Add(block) // add blk to blockchain
+	//go p.lm.AddFinalBlk(block.Hash(), block.Round)
+
 	//go p.oracle.AddBlock(block)
 	//time.Sleep(5 * time.Second) // sleep to allow all peers add block to their storage, we change params.R and simulate the algorand with changing seed
 }
@@ -172,7 +205,7 @@ func (p *Peer) Run() {
 	time.Sleep(1 * time.Second)
 	s := fmt.Sprintf("[alogrand] [%s] found %d peers\n", p.Id.String(), p.node.GetNeighborList().Len())
 	log.Print(s)
-	p.lm.AddLog(s)
+	//p.lm.AddLog(s)
 
 	// propose block
 	//go p.proposeOraclePeer() // run this func continuously to propose oracle peer every oracle epoch

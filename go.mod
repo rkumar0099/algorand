@@ -20,6 +20,7 @@ require (
 	github.com/zllai/go-MerklePatriciaTree v0.0.0-20190826154110-1538c9c6c9e6
 	github.com/zllai/gossip v0.0.0-20190816162234-bbeeb011d1ee
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
+	golang.org/x/tour v0.1.0 // indirect
 	google.golang.org/grpc v1.42.0
 	google.golang.org/protobuf v1.27.1
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0

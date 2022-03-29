@@ -98,6 +98,7 @@ func (p *Peer) proposeBlock() *msg.Block {
 	}
 
 	//var txSet *msg.ProposedTx
+	log.Printf("[Debug] [Peer BLK] Num Cont: %d\n", len(p.finalContributions))
 	if len(p.finalContributions) > 0 {
 		p.pt = <-p.finalContributions
 		txSet := p.pt
@@ -113,7 +114,7 @@ func (p *Peer) proposeBlock() *msg.Block {
 	blk.Signature = sign
 	s := fmt.Sprintf("[alogrand] [%s] propose a new block with %d txs: #%d %s, stateHash: %s, parent: %s\n", p.Id.String(), len(blk.Txs), blk.Round, blk.Hash(), hex.EncodeToString(blk.StateHash), hex.EncodeToString(blk.ParentHash))
 	log.Print(s)
-	p.lm.AddLog(s)
+	//p.lm.AddLog(s)
 	//log.Printf
 	return blk
 }
@@ -123,7 +124,7 @@ func (p *Peer) handleBlockProposal(data []byte) {
 	if err := bp.Deserialize(data); err != nil {
 		s := fmt.Sprintf("[algorand] [%s] Received invalid proposal message: %s", p.Id.String(), err.Error())
 		log.Print(s)
-		p.lm.AddLog(s)
+		//p.lm.AddLog(s)
 		return
 	}
 	p.proposalPool.Update(bp, msg.BLOCK_PROPOSAL)
@@ -133,7 +134,7 @@ func (p *Peer) proposalVerifier(bp *msg.Proposal) bool {
 	if err := bp.Verify(p.weight(bp.Address()), constructSeed(p.sortitionSeed(bp.Round), role(params.Proposer, bp.Round, params.PROPOSE))); err != nil {
 		s := fmt.Sprintf("[algorand] [%s] Received invaild proposal: %5s\n", p.Id.String(), err.Error())
 		log.Print(s)
-		p.lm.AddLog(s)
+		//p.lm.AddLog(s)
 		return false
 	}
 	blk := &msg.Block{}

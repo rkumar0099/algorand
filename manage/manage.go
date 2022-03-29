@@ -5,81 +5,76 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"sync"
 	"time"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/rkumar0099/algorand/client"
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/gossip"
-	"github.com/rkumar0099/algorand/logs"
 	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
-	"github.com/rkumar0099/algorand/mpt/kvstore"
-	"github.com/rkumar0099/algorand/mpt/mpt"
 	"github.com/rkumar0099/algorand/service"
 	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
 )
 
 type Manage struct {
-	Id            gossip.NodeId
-	node          *gossip.Node
-	txs           []*msg.Transaction
-	txLock        *sync.Mutex
-	shLock        *sync.Mutex
-	votesLock     *sync.Mutex
+	Id     gossip.NodeId
+	node   *gossip.Node
+	txs    []*msg.Transaction
+	txLock *sync.Mutex
+
+	lastHash      []byte
 	epoch         uint64
-	stateHash     map[cmn.Hash]uint64
 	connPool      map[gossip.NodeId]*grpc.ClientConn
 	proposedTxSet chan *msg.ProposedTx
 	ServiceServer *service.Server
 	grpcServer    *grpc.Server
-	count         int
-	storage       kvstore.KVStore
-	recentMPT     *mpt.Trie
-	lm            *logs.LogManager
-	blkLock       *sync.Mutex
 	db            *leveldb.DB
-	lastHash      []byte
 	lastRound     uint64
-	contributions map[common.Hash]*msg.ProposedTx
-	votes         map[common.Hash]uint64
-	confirm       uint64
+	resLock       *sync.Mutex
+	response      map[common.Hash][]*msg.TxRes
+	lastTxHash    []byte
+	client        *client.ClientServiceServer
+	blkLock       *sync.Mutex
+	log           string
+	recHash       []byte
 }
 
-func New(peers []gossip.NodeId, peerAddresses [][]byte, lm *logs.LogManager) *Manage {
+func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 	nodeId := gossip.NewNodeId("127.0.0.1:9000")
 	m := &Manage{
 		Id:     nodeId,
 		node:   gossip.New(nodeId, "transaction"),
 		txLock: &sync.Mutex{},
-		shLock: &sync.Mutex{},
 		txs:    make([]*msg.Transaction, 0),
 
-		stateHash:     make(map[cmn.Hash]uint64),
 		epoch:         0,
 		connPool:      make(map[gossip.NodeId]*grpc.ClientConn),
 		proposedTxSet: make(chan *msg.ProposedTx, 1),
-		count:         0,
-		blkLock:       &sync.Mutex{},
-		contributions: make(map[common.Hash]*msg.ProposedTx),
-		votes:         make(map[cmn.Hash]uint64),
-		votesLock:     &sync.Mutex{},
-		confirm:       0,
-		lastRound:     0,
+
+		blkLock: &sync.Mutex{},
+
+		lastRound:  0,
+		resLock:    &sync.Mutex{},
+		response:   make(map[common.Hash][]*msg.TxRes),
+		lastTxHash: []byte(""),
+		log:        "",
+		recHash:    []byte(""),
 	}
-	m.lm = lm
+	//m.lm = lm
+	m.client = client.New(m.Id, m.sendReqHandler, m.sendResHandler)
 	m.grpcServer = grpc.NewServer()
 	m.ServiceServer = service.NewServer(
 		nodeId,
-		func([]byte) ([]byte, error) { return nil, nil },
 		func([]byte) ([]byte, error) { return nil, nil },
 		func([]byte) error { return nil },
 	)
 	m.node.Register(m.grpcServer)
 	m.ServiceServer.Register(m.grpcServer)
+	m.client.Register(m.grpcServer)
 	m.addPeers(peers)
 
 	os.Remove("../logs/manage.txt")
@@ -97,17 +92,27 @@ func (m *Manage) addPeers(peers []gossip.NodeId) {
 	}
 }
 
+func (m *Manage) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
+	res := &client.ResEmpty{}
+	return res, nil
+}
+
+func (m *Manage) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
+	info := &client.ResEmpty{}
+	return info, nil
+}
+
 func (m *Manage) AddTransaction(tx *msg.Transaction) {
 	m.txLock.Lock()
 	defer m.txLock.Unlock()
-	/*
-		if err := tx.VerifySign(); err != nil {
-			log.Printf("[algorand] Received invalid transaction: %s", err.Error())
-			return
-		}
-	*/
-	m.txs = append(m.txs, tx)
-	m.lm.AddTxLog(tx.Hash())
+	h := tx.Hash()
+	if !bytes.Equal(h.Bytes(), m.lastTxHash) {
+		m.lastTxHash = h.Bytes()
+		m.txs = append(m.txs, tx)
+		s := "[Debug] [Manage] Tx Added to Pool\n"
+		log.Print(s)
+		m.log += s
+	}
 }
 
 func (m *Manage) Run() {
@@ -144,36 +149,42 @@ func (m *Manage) process() {
 	}
 
 	h := pt.Hash()
-	m.contributions[h] = pt
-	m.sendFinalContribution(pt)
+	go m.sendFinalContribution(pt)
 
-	//m.confirm += 1
-	time.Sleep(10 * time.Second)
-	if m.votes[h] >= 33 {
-		// confirm contribution
-		m.confirm += 1
-	} else {
-		// put the contribution back into the txs
-		pt = m.contributions[h]
-		m.txs = append(m.txs, pt.Txs...)
+	for {
+		time.Sleep(5 * time.Second)
+		if bytes.Equal(h.Bytes(), m.recHash) {
+			break
+		}
 	}
-
-	delete(m.contributions, h)
-	delete(m.votes, h)
 
 	// proceed to next contribution
 }
 
-func (m *Manage) AddRes(hash cmn.Hash, res []*msg.TxRes) {
-	m.ResLock.Lock()
-	defer m.ResLock.Unlock()
-	if _, ok := m.Res[hash]; !ok {
-		m.Res[hash] = res
+func (m *Manage) sendResponse(responses []*msg.TxRes) {
+	for _, res := range responses {
+		r := &client.ResTx{}
+		r.Deserialize(res.Data)
+		id := gossip.NewNodeId("127.0.0.1:9020")
+		conn, err := id.Dial()
+		if err == nil {
+			_, err = client.SendResTx(conn, r)
+			if err == nil {
+				log.Printf("[Debug] [Manage] Sending Response to Client: %s\n", id.String())
+			}
+		}
 	}
 }
 
-func (m *Manage) GetConfirmedContributions() uint64 {
-	return m.confirm
+func (m *Manage) AddRes(hash cmn.Hash, res []*msg.TxRes) {
+	m.resLock.Lock()
+	defer m.resLock.Unlock()
+	h := hash.Bytes()
+	if !bytes.Equal(h, m.recHash) {
+		m.recHash = h
+		m.sendResponse(res)
+	}
+	log.Println("[Debug] [Manage] Got TXs Response from Peer")
 }
 
 func (m *Manage) GetByRound(round uint64) *msg.Block {
@@ -192,17 +203,6 @@ func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
 		go service.SendFinalContribution(conn, data)
 	}
 	//m.lm.AddFinalTxLog(txSet.Txs)
-}
-
-func (m *Manage) AddVote(contribution common.Hash) {
-	m.votesLock.Lock()
-	defer m.votesLock.Unlock()
-	m.votes[contribution] += 1
-	log.Printf("Confirmed votes for %s: %d\n", contribution.String(), m.votes[contribution])
-}
-
-func (m *Manage) LastState() []byte {
-	return m.recentMPT.RootHash()
 }
 
 func (m *Manage) AddBlk(hash cmn.Hash, data []byte) {
@@ -252,20 +252,4 @@ func (m *Manage) GetBlkByRound(round uint64) *msg.Block {
 		return nil
 	}
 	return blk
-}
-
-func (m *Manage) writeLog(hash cmn.Hash, count uint64, res bool, c uint64) {
-	f, err := os.OpenFile("../logs/manage.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		return
-	}
-	latestLog := ""
-	if res {
-		latestLog += "True. "
-	} else {
-		latestLog += "False. "
-	}
-	latestLog += "Count is " + strconv.Itoa(int(count)) + "Res is " + strconv.Itoa(int(c)) + " for hash " + hash.Hex() + "\n"
-	f.WriteString(latestLog)
-	f.Close()
 }
