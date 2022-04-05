@@ -9,14 +9,15 @@ import (
 
 func (p *Peer) HandleTx(req *client.ReqTx) (*client.ResEmpty, error) {
 	t := req.Type
-	p.rec = true
-	if t < 5 {
+	//p.rec = true
+	data, _ := req.Serialize()
+	if t >= 0 && t < 5 {
 		// normal tx
 		log.Println("[Debug] [Peer Tx] Received Tx from client")
 		tx := &msg.Transaction{
 			Type: t,
 			Addr: req.Addr,
-			Data: req.Data,
+			Data: data,
 		}
 		go p.manage.AddTransaction(tx)
 

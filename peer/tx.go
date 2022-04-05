@@ -39,86 +39,221 @@ func (p *Peer) execute(st *mpt.Trie, txs []*msg.Transaction, epoch uint64) []*ms
 	var responses []*msg.TxRes = make([]*msg.TxRes, 0)
 	for _, tx := range txs {
 		log.Printf("[Debug] [Peer] [Tx Type] Tx type: %d\n", tx.Type)
-		if tx.Type == 0 {
-			r := p.createAccount(st, tx.Data, tx.Addr)
-			res := &msg.TxRes{}
+		switch tx.Type {
+		case transaction.CREATE:
+			res := p.createAccount(st, tx.Data, tx.Addr)
 			res.TxHash = tx.Hash().Bytes()
-			d, _ := r.Serialize()
-			res.Data = d
 			responses = append(responses, res)
-		} else {
-			switch tx.Type {
+		case transaction.LOGIN:
+			res := p.login(st, tx.Data, tx.Addr)
+			res.TxHash = tx.Hash().Bytes()
+			responses = append(responses, res)
 
-			//case transaction.CREATE:
+		case transaction.LOGOUT:
 
-			case transaction.LOGIN:
-				p.logIn(st, tx.Data, tx.Addr)
-			case transaction.LOGOUT:
-				p.logOut(st, tx.Data, tx.Addr)
-			case transaction.TOPUP:
-				p.topUp(st, tx.Data, tx.Addr)
-				transaction.Topup(st, tx, cmn.Bytes2Uint(tx.Data))
-			case transaction.TRNASFER:
-				p.transfer(st, tx.Data, tx.Addr)
-				transaction.Transfer(st, tx, cmn.Bytes2Uint(tx.Data))
-			default:
-				log.Printf("Received invalid transaction")
-			}
+		case transaction.TOPUP:
+			res := p.topUp(st, tx.Data, tx.Addr)
+			res.TxHash = tx.Hash().Bytes()
+			responses = append(responses, res)
+
+		case transaction.TRNASFER:
+			res := p.transfer(st, tx.Data, tx.Addr)
+			res.TxHash = tx.Hash().Bytes()
+			responses = append(responses, res)
+
+		case transaction.OFFTOPUP:
+			res := p.offTopUp(st, tx.From, cmn.Bytes2Uint(tx.Data))
+			res.TxHash = tx.Hash().Bytes()
+			responses = append(responses, res)
+
+		default:
+			log.Printf("Received invalid transaction")
 		}
-
 	}
+
 	return responses
 }
 
-func (p *Peer) createAccount(st *mpt.Trie, data []byte, addr string) *client.ResTx {
+func (p *Peer) createAccount(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
+	response := &msg.TxRes{}
+	response.SendRes = true
+	req := &client.ReqTx{}
+	res := &client.ResTx{}
+	req.Deserialize(data)
 	info := &client.Create{}
-	info.Deserialize(data)
+	info.Deserialize(req.Data)
+	res.Addr = addr
+	_, err := p.manage.GetClient(req.Pubkey)
+	if err == nil {
+		res.Status = false
+		res.Msg = "Account already exists"
+		response.Res, _ = res.Serialize()
+		response.StoreData = false
+		return response
+	}
+
 	user := &User{}
 	user.Type = 2 // 1 = Blockchain Peer, 2 = Normal Client
 	user.Username = info.Username
 	user.PassHash = info.Password
-	user.Pubkey = info.Pubkey
+	user.Pubkey = req.Pubkey
 	user.Balance = 100
+	user.Online = false
 	user_data, _ := proto.Marshal(user)
-	err := st.Put(info.Pubkey, user_data)
+
+	log.Println("[Debug] [Create User] Successfully created user")
+	res.Status = true
+	res.Msg = "Account Created Successfully"
+	res.Pubkey = user.Pubkey
+
+	response.Res, _ = res.Serialize()
+	response.Data = user_data
+	response.StoreData = true
+	response.DataAddr = req.Pubkey
+
+	st.Put(req.Pubkey, user_data)
+
+	return response
+
+}
+
+func (p *Peer) login(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
+	response := &msg.TxRes{}
+	response.SendRes = true
+	response.StoreData = false
+	req := &client.ReqTx{}
 	res := &client.ResTx{}
-	if err == nil {
-		log.Println("[Debug] [Create User] Successfully created user")
-		res.Status = true
-		res.Msg = "Account Created Successfully"
-		res.Balance = user.Balance
-		res.Pubkey = user.Pubkey
-		res.Addr = addr
-	} else {
+	info := &client.LogIn{}
+	req.Deserialize(data)
+	info.Deserialize(req.Data)
+	res.Addr = addr
+	data, err := p.manage.GetClient(req.Pubkey)
+	if err != nil {
 		res.Status = false
-		res.Msg = "[Error] Can't create account"
-		res.Balance = 0
-		res.Pubkey = info.Pubkey
-		res.Addr = addr
+		res.Msg = "User doesn't exists"
+		response.Res, _ = res.Serialize()
+		return response
+	}
+	user := &User{}
+	proto.Unmarshal(data, user)
+	if bytes.Equal(info.Password, user.PassHash) {
+		// login successful
+		user.Online = true
+		user_data, _ := proto.Marshal(user)
+		st.Put(req.Pubkey, user_data)
+		response.StoreData = true
+		response.Data = user_data
+		response.DataAddr = req.Pubkey
+		res.Status = true
+		res.Msg = "Login successful"
+
+	} else {
+		// login unsuccessful
+		res.Status = false
+		res.Msg = "Invalid credentials"
+	}
+	response.Res, _ = res.Serialize()
+	return response
+}
+
+func (p *Peer) logOut(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
+	response := &msg.TxRes{}
+	req := &client.ReqTx{}
+	req.Deserialize(data)
+	res := &client.ResTx{}
+	res.Addr = addr
+	response.SendRes = true
+	response.StoreData = false
+	res.Status = true
+	res.Msg = "Log out successful"
+	return response
+}
+
+func (p *Peer) topUp(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
+	response := &msg.TxRes{}
+	response.SendRes = true
+	req := &client.ReqTx{}
+	res := &client.ResTx{}
+	info := &client.TopUp{}
+	req.Deserialize(data)
+	info.Deserialize(req.Data)
+	res.Addr = addr
+	data, err := p.manage.GetClient(req.Pubkey)
+	if err != nil {
+		res.Status = false
+		res.Msg = "Invalid credentials"
+		response.Res, _ = res.Serialize()
+		response.StoreData = false
+		return response
 	}
 
-	return res
+	user := &User{}
+	proto.Unmarshal(data, user)
+	if user.Balance >= info.Amount {
+		// req successful
+		user.Balance += info.Amount
+		user_data, _ := proto.Marshal(user)
+		st.Put(req.Pubkey, user_data)
+		response.StoreData = true
+		response.Data = user_data
+		response.DataAddr = req.Pubkey
+		res.Status = true
+		res.Msg = "Successful topup"
+	} else {
+		res.Status = false
+		res.Msg = "UnSuccessful topup. Insufficient balance"
+		response.StoreData = false
+	}
 
+	response.Res, _ = res.Serialize()
+	response.Data, _ = proto.Marshal(user)
+	return response
 }
 
-func (p *Peer) logIn(st *mpt.Trie, data []byte, addr string) *client.ResTx {
+func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
+	// check status of user. true if online false otherwise
+	response := &msg.TxRes{}
+	response.SendRes = true
+	req := &client.ReqTx{}
 	res := &client.ResTx{}
-	return res
-}
+	info := &client.Transfer{}
 
-func (p *Peer) logOut(st *mpt.Trie, data []byte, addr string) *client.ResTx {
-	res := &client.ResTx{}
-	return res
-}
+	req.Deserialize(data)
+	info.Deserialize(req.Data)
+	res.Addr = addr
+	data, err := p.manage.GetClient(req.Pubkey)
+	if err != nil {
+		res.Status = false
+		res.Msg = "Invalid credentials"
+		response.Res, _ = res.Serialize()
+		response.StoreData = false
+		return response
+	}
+	user := &User{}
+	proto.Unmarshal(data, user)
+	data, err = p.manage.GetClient(info.To)
+	if err == nil && !bytes.Equal(info.To, info.From) && user.Balance >= info.Amount {
+		// req success
+		user.Balance -= info.Amount
+		user_data, _ := proto.Marshal(user)
+		st.Put(req.Pubkey, user_data)
+		response.StoreData = true
+		response.Data = user_data
+		response.DataAddr = req.Pubkey
+		p.TopupTransaction(info.To, info.Amount)
+		response.Data, _ = proto.Marshal(user)
+		res.Status = true
+		res.Msg = "Successful transfer"
 
-func (p *Peer) topUp(st *mpt.Trie, data []byte, addr string) *client.ResTx {
-	res := &client.ResTx{}
-	return res
-}
+	} else {
+		res.Status = false
+		res.Msg = "Unsuccessful req"
+		response.StoreData = false
+	}
 
-func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *client.ResTx {
-	res := &client.ResTx{}
-	return res
+	response.Res, _ = res.Serialize()
+	response.Data, _ = proto.Marshal(user)
+	return response
 }
 
 func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
@@ -137,17 +272,38 @@ func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
 	st.Commit()
 }
 
-func (p *Peer) TopupTransaction(value uint64) {
+func (p *Peer) TopupTransaction(addr []byte, value uint64) {
 	tx := &msg.Transaction{
-		From:  p.pubkey.Address().Bytes(),
+		From:  addr,
 		To:    nil,
 		Nonce: rand.Uint64(),
-		Type:  transaction.TOPUP,
+		Type:  transaction.OFFTOPUP,
 		Data:  cmn.Uint2Bytes(value),
 	}
 
 	tx.Sign(p.privkey)
 	p.manage.AddTransaction(tx)
+}
+
+func (p *Peer) offTopUp(st *mpt.Trie, addr []byte, amount uint64) *msg.TxRes {
+	// handle it correctly
+	response := &msg.TxRes{}
+	response.SendRes = false
+	data, err := p.manage.GetClient(addr)
+	if err != nil {
+		// user does not exists
+		response.StoreData = false
+		response.Type = transaction.OFFTOPUP
+		return response
+	}
+	user := &User{}
+	proto.Unmarshal(data, user)
+	user.Balance += amount
+	user_data, _ := proto.Marshal(user)
+	st.Put(addr, user_data)
+	response.Data, _ = proto.Marshal(user)
+	response.StoreData = true
+	return response
 }
 
 func (p *Peer) TransferTransaction(value uint64, to cmn.Address) {

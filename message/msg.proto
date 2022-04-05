@@ -40,7 +40,15 @@ message Transaction {
 
 message TxRes {
     bytes TxHash = 1;
-    bytes Data = 2;
+    bytes Req = 2;
+    bytes Res = 3;
+    bytes Data = 4;
+    bytes DataAddr = 5;
+    bool SendRes = 6;
+    uint32 Type = 7;
+    bool Status = 8;
+    bool StoreData = 9;
+
 }
 
 message PendingRequest {

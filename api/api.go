@@ -79,13 +79,13 @@ func (a *API) CreateAccount(username string, password string) *client.ResTx {
 	c := &client.Create{
 		Username: username,
 		Password: passHash.Bytes(),
-		Pubkey:   pk.Bytes(),
 	}
 	data, _ := c.Serialize()
 	req := &client.ReqTx{
-		Type: 0,
-		Addr: "127.0.0.1:9020",
-		Data: data,
+		Type:   0,
+		Addr:   "127.0.0.1:9020",
+		Pubkey: pk.Bytes(),
+		Data:   data,
 	}
 
 	// send the tx to all peers
@@ -113,13 +113,13 @@ func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey, 
 	l := &client.LogIn{
 		Username: username,
 		Password: passHash.Bytes(),
-		Pubkey:   pubkey.Bytes(),
 	}
 	data, _ := l.Serialize()
 	req := &client.ReqTx{
-		Type: 2,
-		Addr: "127.0.0.1:9020",
-		Data: data,
+		Type:   2,
+		Addr:   "127.0.0.1:9020",
+		Pubkey: pubkey.Bytes(),
+		Data:   data,
 	}
 
 	a.sendReq(req)

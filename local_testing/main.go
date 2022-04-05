@@ -2,15 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"math/rand"
 	"os"
 	"time"
 
-	"github.com/rkumar0099/algorand/api"
-	"github.com/rkumar0099/algorand/client"
 	cmn "github.com/rkumar0099/algorand/common"
-	"github.com/rkumar0099/algorand/crypto"
 	"github.com/rkumar0099/algorand/gossip"
 	"github.com/rkumar0099/algorand/manage"
 	"github.com/rkumar0099/algorand/oracle"
@@ -141,119 +136,5 @@ func regularRun(c *cli.Context) {
 			count -= 1
 		}
 	*/
-
-}
-
-func proposeAccounts(peers []*peer.Peer, a *api.API) {
-	for {
-		time.Sleep(5 * time.Second)
-		//createAccounts(peers[1])
-		u := "Rabu"
-		p := "Main"
-		a.CreateAccount(u, p)
-	}
-}
-
-/*
-func printStates(peers []*peer.Peer, lm *logs.LogManager) {
-	for _, p := range peers {
-		s := fmt.Sprintf("%s last state: %s\n", p.Id.String(), p.GetLastState())
-		//log.Printf("%s last state: %s\n", p.Id.String(), p.GetLastState())
-		lm.AddLog(s)
-	}
-}
-*/
-
-// propose 10 random EW transactions every 5 sec
-func proposeEWTxs(peers []*peer.Peer) {
-	for {
-		time.Sleep(5 * time.Second)
-		for i := 0; i < 10; i++ {
-			ind := rand.Intn(50)
-			peers[ind].ExternalWorldTransaction("", oracle.CURRENCY_EXCHANGE)
-		}
-	}
-}
-
-// propose top up transactions every 5 sec
-func proposeTopUpTransactions(peers []*peer.Peer) {
-	//for {
-	//time.Sleep(5 * time.Second)
-	for i := 0; i < 100; i++ {
-		log.Println("Top up tx proposed")
-		ind := rand.Intn(50)
-		peers[ind].TopupTransaction(uint64(10))
-	}
-	//}
-}
-
-// propose transfer transactions every 5 sec
-func proposeTransferTransactions(peers []*peer.Peer) {
-	//for {
-	//time.Sleep(5 * time.Second)
-	for i := 0; i < 100; i++ {
-		log.Println("Transfer tx proposed")
-		ind := rand.Intn(50)
-		to := rand.Intn(50)
-		for to == ind {
-			to = rand.Intn(50)
-		}
-		peers[ind].TransferTransaction(uint64(10), peers[to].Address())
-	}
-	//}
-}
-
-/*
-func showBalances(peers []*peer.Peer, lm *logs.LogManager) {
-	for _, p := range peers {
-		s := fmt.Sprintf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
-		//log.Printf("Balance of peer %s is %d\n", p.Id.String(), p.GetBalance())
-		lm.AddLog(s)
-	}
-}
-*/
-/*
-func sendData(node *gossip.Node) {
-	for {
-		time.Sleep(1 * time.Second)
-		blk := &message.Block{
-			Round: uint64(1),
-		}
-		data, _ := blk.Serialize()
-		msg := &message.Msg{
-			PID:  "123",
-			Type: message.BLOCK,
-			Data: data,
-		}
-		msgBytes, _ := proto.Marshal(msg)
-		node.Gossip(msgBytes)
-	}
-}
-*/
-
-func createAccounts(peer *peer.Peer) {
-	username := "rabu"
-	password := "main"
-
-	pk, _, _ := crypto.NewKeyPair()
-	//a.pubkey = pk
-	//a.privkey = sk
-
-	passHash := cmn.Sha256([]byte(password))
-
-	c := &client.Create{
-		Username: username,
-		Password: passHash.Bytes(),
-		Pubkey:   pk.Bytes(),
-	}
-
-	data, _ := c.Serialize()
-	req := &client.ReqTx{
-		Type: 1,
-		Addr: "127.0.0.1:9020",
-		Data: data,
-	}
-
-	peer.HandleTx(req)
 
 }

@@ -53,6 +53,14 @@ func SendResTx(conn *grpc.ClientConn, res *ResTx) (*ResEmpty, error) {
 	return c.SendResTx(context.Background(), res)
 }
 
+func (req *ReqTx) Serialize() ([]byte, error) {
+	return proto.Marshal(req)
+}
+
+func (req *ReqTx) Deserialize(data []byte) error {
+	return proto.Unmarshal(data, req)
+}
+
 func (c *Create) Serialize() ([]byte, error) {
 	return proto.Marshal(c)
 }

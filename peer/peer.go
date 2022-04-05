@@ -158,29 +158,32 @@ func (p *Peer) processMain() {
 			if len(p.finalContributions) > 0 {
 				<-p.finalContributions
 			}
-			var t *msg.TxRes
-			for len(responses) > 0 {
-				t, responses = responses[0], responses[1:]
 
-				//for _, t := range responses {
-				if p.rec {
-					res := &client.ResTx{}
-					res.Deserialize(t.Data)
-					id := gossip.NewNodeId("127.0.0.1:9020")
-					conn, err := id.Dial()
-					if err != nil {
-						log.Println("[Debug] [Peer] [API] Can't dial")
-					} else {
-						//if err == nil {
-						_, err = client.SendResTx(conn, res)
+			/*
+				var t *msg.TxRes
+				for len(responses) > 0 {
+					t, responses = responses[0], responses[1:]
+
+					//for _, t := range responses {
+					if p.rec {
+						res := &client.ResTx{}
+						res.Deserialize(t.Data)
+						id := gossip.NewNodeId("127.0.0.1:9020")
+						conn, err := id.Dial()
 						if err != nil {
-							log.Println("[Debug] [Peer Tx] Can't Send")
+							log.Println("[Debug] [Peer] [API] Can't dial")
 						} else {
-							log.Println("[Debug] [Peer Tx] Send")
+							//if err == nil {
+							_, err = client.SendResTx(conn, res)
+							if err != nil {
+								log.Println("[Debug] [Peer Tx] Can't Send")
+							} else {
+								log.Println("[Debug] [Peer Tx] Send")
+							}
 						}
 					}
 				}
-			}
+			*/
 
 		} else {
 			block.StateHash = parentBlk.StateHash
@@ -188,7 +191,7 @@ func (p *Peer) processMain() {
 			// txs not finalized, put all txs back to manage
 		}
 		//log.Println("[Debug] [Peer] Send RES to manage")
-		//p.manage.AddRes(p.pt.Hash(), responses)
+		p.manage.AddRes(p.pt.Hash(), responses)
 		//log.Println("[Debug] [Peer] Received response")
 	}
 

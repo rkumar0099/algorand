@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"net"
 	"os"
 	"sync"
 	"time"
@@ -15,6 +16,7 @@ import (
 	"github.com/rkumar0099/algorand/gossip"
 	"github.com/rkumar0099/algorand/message"
 	msg "github.com/rkumar0099/algorand/message"
+
 	"github.com/rkumar0099/algorand/service"
 	"github.com/syndtr/goleveldb/leveldb"
 	"google.golang.org/grpc"
@@ -46,11 +48,10 @@ type Manage struct {
 func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 	nodeId := gossip.NewNodeId("127.0.0.1:9000")
 	m := &Manage{
-		Id:     nodeId,
-		node:   gossip.New(nodeId, "transaction"),
-		txLock: &sync.Mutex{},
-		txs:    make([]*msg.Transaction, 0),
-
+		Id:            nodeId,
+		node:          gossip.New(nodeId, "transaction"),
+		txLock:        &sync.Mutex{},
+		txs:           make([]*msg.Transaction, 0),
 		epoch:         0,
 		connPool:      make(map[gossip.NodeId]*grpc.ClientConn),
 		proposedTxSet: make(chan *msg.ProposedTx, 1),
@@ -65,8 +66,9 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 		recHash:    []byte(""),
 	}
 	//m.lm = lm
-	m.client = client.New(m.Id, m.sendReqHandler, m.sendResHandler)
 	m.grpcServer = grpc.NewServer()
+	m.client = client.New(m.Id, m.sendReqHandler, m.sendResHandler)
+
 	m.ServiceServer = service.NewServer(
 		nodeId,
 		func([]byte) ([]byte, error) { return nil, nil },
@@ -76,7 +78,11 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 	m.ServiceServer.Register(m.grpcServer)
 	m.client.Register(m.grpcServer)
 	m.addPeers(peers)
-
+	lis, err := net.Listen("tcp", "127.0.0.1:9000")
+	if err == nil {
+		log.Println("[Debug] [Manage] Manage listening at port 9000")
+		go m.grpcServer.Serve(lis)
+	}
 	os.Remove("../logs/manage.txt")
 	os.RemoveAll("../database/blockchain")
 	m.db, _ = leveldb.OpenFile("../database/blockchain", nil)
@@ -162,15 +168,25 @@ func (m *Manage) process() {
 }
 
 func (m *Manage) sendResponse(responses []*msg.TxRes) {
-	for _, res := range responses {
-		r := &client.ResTx{}
-		r.Deserialize(res.Data)
-		id := gossip.NewNodeId("127.0.0.1:9020")
-		conn, err := id.Dial()
-		if err == nil {
-			_, err = client.SendResTx(conn, r)
+	for _, response := range responses {
+		if response.SendRes {
+			// send the response to Client
+			res := &client.ResTx{}
+			res.Deserialize(response.Res)
+			id := gossip.NewNodeId(res.Addr)
+			conn, err := id.Dial()
 			if err == nil {
-				log.Printf("[Debug] [Manage] Sending Response to Client: %s\n", id.String())
+				_, err = client.SendResTx(conn, res)
+				if err == nil {
+					log.Printf("[Debug] [Manage] Sending Response to Client: %s\n", id.String())
+				}
+			}
+		}
+
+		if response.StoreData {
+			err := m.db.Put(response.DataAddr, response.Data, nil)
+			if err != nil {
+				log.Println("[Debug] Unable to store response Data")
 			}
 		}
 	}
@@ -182,7 +198,7 @@ func (m *Manage) AddRes(hash cmn.Hash, res []*msg.TxRes) {
 	h := hash.Bytes()
 	if !bytes.Equal(h, m.recHash) {
 		m.recHash = h
-		m.sendResponse(res)
+		go m.sendResponse(res)
 	}
 	log.Println("[Debug] [Manage] Got TXs Response from Peer")
 }
@@ -218,6 +234,14 @@ func (m *Manage) AddBlk(hash cmn.Hash, data []byte) {
 		m.lastHash = hash.Bytes()
 		m.lastRound = blk.Round
 	}
+}
+
+func (m *Manage) GetClient(credentials []byte) ([]byte, error) {
+	data, err := m.db.Get(credentials, nil)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }
 
 func (m *Manage) GetBlkByHash(hash cmn.Hash) *msg.Block {

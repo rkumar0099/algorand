@@ -9,11 +9,13 @@ service RPCClientService {
 message ReqTx {
     uint64 Type = 1;
     string Addr = 2;
-    bytes Data = 3;
+    bytes Pubkey = 3;
+    bytes Data = 4;
 }
 
+message ResEmpty {}
+
 message ResTx {
-    uint64 Balance = 1;
     bool Status = 2;
     string Msg = 3;
     string Addr = 4;
@@ -21,25 +23,33 @@ message ResTx {
     bytes Data = 6;
 }
 
-message ResEmpty {}
+message AdditionalInfo {
+    uint64 Balance = 1;
+}
 
 message Create {
     string Username = 1;
     bytes Password = 2;
-    bytes Pubkey = 3;
 }
 
 message LogIn {
     string Username = 1;
     bytes Password = 2;
-    bytes Pubkey = 3;
 }
 
-message LogOut {}
+message LogOut {
+}
 
-message TopUp {}
+message TopUp {
+    bytes From = 1;
+    uint64 Amount = 2;
+}
 
-message Transfer {}
+message Transfer {
+    bytes From = 1;
+    bytes To = 2;
+    uint64 Amount = 3;
+}
 
 message PriceFeed {}
 

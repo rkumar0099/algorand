@@ -7,4 +7,5 @@ message User {
     string Username = 3;
     bytes PassHash = 4;
 	bytes Pubkey = 5;
+    bool Online = 6;
 }
