@@ -45,6 +45,8 @@ type Manage struct {
 	recHash       []byte
 	finalized     map[cmn.Hash]bool
 	added         map[cmn.Hash]bool
+	off           map[cmn.Hash]bool
+	offLock       *sync.Mutex
 }
 
 func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
@@ -68,6 +70,8 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 		recHash:    []byte(""),
 		finalized:  make(map[cmn.Hash]bool),
 		added:      make(map[cmn.Hash]bool),
+		off:        make(map[cmn.Hash]bool),
+		offLock:    &sync.Mutex{},
 	}
 	//m.lm = lm
 	m.grpcServer = grpc.NewServer()
@@ -120,9 +124,7 @@ func (m *Manage) AddTransaction(tx *msg.Transaction) {
 		// add the tx
 		m.added[h] = true
 		m.txs = append(m.txs, tx)
-		s := "[Debug] [Manage] Tx Added to Pool\n"
-		log.Print(s)
-		m.log += s
+		m.txLog(tx)
 	}
 }
 
@@ -159,6 +161,7 @@ func (m *Manage) process() {
 		Txs:   txs,
 	}
 	h := pt.Hash()
+	pt.PtHash = h.Bytes()
 	s := fmt.Sprintf("[Manage] Contribution proposed. Epoch: %d, Hash: %s\n", m.epoch, h.String())
 	m.log += s
 	m.sendFinalContribution(pt)
@@ -173,8 +176,6 @@ func (m *Manage) process() {
 }
 
 func (m *Manage) sendResponse(responses []*msg.TxRes) {
-	s := fmt.Sprintf("Total responses: %d\n", len(responses))
-	m.log += s
 	for _, response := range responses {
 
 		if response.SendRes {
@@ -288,4 +289,19 @@ func (m *Manage) GetBlkByRound(round uint64) *msg.Block {
 
 func (m *Manage) GetLog() string {
 	return m.log
+}
+
+func (m *Manage) txLog(tx *msg.Transaction) {
+	s := fmt.Sprintf("[Manage] Tx type: %d\n", tx.Type)
+	m.log += s
+}
+
+func (m *Manage) AddOffTopup(hash cmn.Hash, tx *msg.Transaction) {
+	m.offLock.Lock()
+	defer m.offLock.Unlock()
+	if _, ok := m.off[hash]; !ok {
+		m.log += "Off top up tx added"
+		m.AddTransaction(tx)
+		m.off[hash] = true
+	}
 }

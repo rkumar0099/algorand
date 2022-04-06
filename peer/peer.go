@@ -122,7 +122,6 @@ func New(addr string, maliciousType int) *Peer {
 
 // processMain performs the main processing of algorand algorithm
 func (p *Peer) processMain() {
-
 	if cmn.MetricsRound == p.round() {
 		cmn.ProposerSelectedHistogram.Update(cmn.ProposerSelectedCounter.Count())
 		cmn.ProposerSelectedCounter.Clear()
@@ -147,24 +146,28 @@ func (p *Peer) processMain() {
 			<-p.finalContributions
 		}
 		parentBlk := p.lastBlock()
-		txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
-		st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+		//txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
+		st, responses := p.executeTxSet(p.pt, p.lastState, p.permanentTxStorage)
 		log.Printf("[Debug] [Peer] [Final Tx RES] Epoch: %d, Len: %d\n", p.txEpoch, len(responses))
 
 		if bytes.Equal(block.StateHash, st.RootHash()) {
 			// txs finalized
-			log.Printf("%s finalized\n", p.pt.Hash().String())
+			log.Printf("%s finalized\n", cmn.BytesToHash(p.pt.PtHash).String())
 			st.Commit()
 			p.lastState = block.StateHash
-			p.manage.AddRes(p.pt.Hash(), responses)
+			p.manage.AddRes(cmn.BytesToHash(p.pt.PtHash), responses)
 		} else {
 			for _, tx := range block.Txs {
 				p.manage.AddTransaction(tx)
 			}
 			log.Printf("[Debug] [Peer] Tx for Epoch: %d, not finalized\n", p.txEpoch)
 			block.StateHash = parentBlk.StateHash
+			for _, tx := range block.Txs {
+				log.Println("[Peer] Added tx back into pool")
+				p.manage.AddTransaction(tx)
+			}
 			// txs not finalized, put all txs back to manage
-			p.manage.AddRes(p.pt.Hash(), []*msg.TxRes{})
+			p.manage.AddRes(cmn.BytesToHash(p.pt.PtHash), []*msg.TxRes{})
 		}
 	}
 	p.chain.Add(block) // add blk to blockchain

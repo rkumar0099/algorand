@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -119,7 +120,8 @@ func regularRun(c *cli.Context) {
 	//a := api.New()
 	//go proposeAccounts(nodes, a)
 	//time.Sleep(30 * time.Second)
-	time.Sleep(5 * time.Minute)
+	time.Sleep(3 * time.Minute)
+	log.Println(m.GetLog())
 	//printStates(nodes, lm)
 	//log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
 	//showBalances(nodes, lm)

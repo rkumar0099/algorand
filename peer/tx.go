@@ -17,13 +17,14 @@ import (
 
 func (p *Peer) handleFinalContribution(data []byte) error {
 	//log.Println("Got final contribution, len: ", len(p.finalContributions))
-	txSet := &msg.ProposedTx{}
-	err := proto.Unmarshal(data, txSet)
+	contribution := &msg.ProposedTx{}
+	err := proto.Unmarshal(data, contribution)
 	if err != nil {
 		return err
 	}
 	log.Println("[Debug] [Tx] Received Final Contribution")
-	p.finalContributions <- txSet
+	p.finalContributions <- contribution
+	p.pt = contribution
 	return nil
 }
 
@@ -214,6 +215,7 @@ func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
 	// check status of user. true if online false otherwise
 	response := &msg.TxRes{}
 	response.SendRes = true
+	response.Req = data
 	req := &client.ReqTx{}
 	res := &client.ResTx{}
 	info := &client.Transfer{}
@@ -231,7 +233,7 @@ func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
 	}
 	user := &User{}
 	proto.Unmarshal(data, user)
-	data, err = p.manage.GetClient(info.To)
+	_, err = p.manage.GetClient(info.To)
 	if err == nil && !bytes.Equal(info.To, info.From) && user.Balance >= info.Amount {
 		// req success
 		user.Balance -= info.Amount
@@ -240,8 +242,7 @@ func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
 		response.StoreData = true
 		response.Data = user_data
 		response.DataAddr = req.Pubkey
-		p.TopupTransaction(info.To, info.Amount)
-		response.Data, _ = proto.Marshal(user)
+		p.TopupTransaction(response.Req, info.To, info.Amount)
 		res.Status = true
 		res.Msg = "Successful transfer"
 
@@ -252,7 +253,6 @@ func (p *Peer) transfer(st *mpt.Trie, data []byte, addr string) *msg.TxRes {
 	}
 
 	response.Res, _ = res.Serialize()
-	response.Data, _ = proto.Marshal(user)
 	return response
 }
 
@@ -272,17 +272,17 @@ func (p *Peer) initialize(addr [][]byte, store kvstore.KVStore) {
 	st.Commit()
 }
 
-func (p *Peer) TopupTransaction(addr []byte, value uint64) {
+func (p *Peer) TopupTransaction(addr []byte, to []byte, value uint64) {
 	tx := &msg.Transaction{
-		From:  addr,
+		From:  to,
 		To:    nil,
 		Nonce: rand.Uint64(),
 		Type:  transaction.OFFTOPUP,
 		Data:  cmn.Uint2Bytes(value),
 	}
-
+	h := cmn.Sha256(addr)
 	tx.Sign(p.privkey)
-	p.manage.AddTransaction(tx)
+	p.manage.AddOffTopup(h, tx)
 }
 
 func (p *Peer) offTopUp(st *mpt.Trie, addr []byte, amount uint64) *msg.TxRes {
@@ -301,8 +301,9 @@ func (p *Peer) offTopUp(st *mpt.Trie, addr []byte, amount uint64) *msg.TxRes {
 	user.Balance += amount
 	user_data, _ := proto.Marshal(user)
 	st.Put(addr, user_data)
-	response.Data, _ = proto.Marshal(user)
+	response.Data = user_data
 	response.StoreData = true
+	response.DataAddr = addr
 	return response
 }
 

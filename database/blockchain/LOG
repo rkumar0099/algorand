@@ -1,6 +1,6 @@
 =============== Apr 6, 2022 (PKT) ===============
-17:28:18.486781 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-17:28:18.511733 db@open opening
-17:28:18.517498 version@stat F·[] S·0B[] Sc·[]
-17:28:18.531538 db@janitor F·2 G·0
-17:28:18.535770 db@open done T·19.8795ms
+20:03:43.038545 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:03:43.059470 db@open opening
+20:03:43.079441 version@stat F·[] S·0B[] Sc·[]
+20:03:43.082368 db@janitor F·2 G·0
+20:03:43.082420 db@open done T·10.7909ms

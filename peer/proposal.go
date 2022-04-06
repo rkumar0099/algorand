@@ -101,12 +101,11 @@ func (p *Peer) proposeBlock() *msg.Block {
 	log.Printf("[Debug] [Peer BLK] Num Cont: %d\n", len(p.finalContributions))
 	if len(p.finalContributions) > 0 {
 		p.pt = <-p.finalContributions
-		txSet := p.pt
-		blk.Txs = txSet.Txs
-		st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
+		blk.Txs = p.pt.Txs
+		st, responses := p.executeTxSet(p.pt, p.lastState, p.permanentTxStorage)
 		blk.ResTx = responses
 		blk.StateHash = st.RootHash()
-		blk.TxEpoch = txSet.Epoch
+		blk.TxEpoch = p.pt.Epoch
 	}
 
 	bhash := blk.Hash()
@@ -114,8 +113,6 @@ func (p *Peer) proposeBlock() *msg.Block {
 	blk.Signature = sign
 	s := fmt.Sprintf("[alogrand] [%s] propose a new block with %d txs: #%d %s, stateHash: %s, parent: %s\n", p.Id.String(), len(blk.Txs), blk.Round, blk.Hash(), hex.EncodeToString(blk.StateHash), hex.EncodeToString(blk.ParentHash))
 	log.Print(s)
-	//p.lm.AddLog(s)
-	//log.Printf
 	return blk
 }
 

@@ -99,6 +99,7 @@ message AccessResponse {
 message ProposedTx {
     uint64 Epoch = 1;
     repeated Transaction Txs = 2;
+    bytes PtHash = 3;
 }
 
 message StateHash {
