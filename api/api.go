@@ -21,29 +21,35 @@ import (
 )
 
 type API struct {
-	Client  *client.ClientServiceServer // to communicate with blockchain over grpc
-	Pubkey  *crypto.PublicKey
-	Privkey *crypto.PrivateKey
-	Res     *client.ResTx
-	Ready   chan bool
-	Server  *grpc.Server
-	Id      gossip.NodeId
+	client      *client.ClientServiceServer // to communicate with blockchain over grpc
+	pubkey      *crypto.PublicKey
+	privkey     *crypto.PrivateKey
+	res         *client.ResTx
+	ready       chan bool
+	server      *grpc.Server
+	id          gossip.NodeId
+	acctCreated bool
+	login       bool
+	logout      bool
 }
 
-func New() *API {
+func New(id string) *API {
 
 	a := &API{
-		Id:     gossip.NewNodeId("127.0.0.1:9020"),
-		Server: grpc.NewServer(),
-		Ready:  make(chan bool, 1),
-		Res:    &client.ResTx{},
+		id:          gossip.NewNodeId(id),
+		server:      grpc.NewServer(),
+		ready:       make(chan bool, 1),
+		res:         &client.ResTx{},
+		acctCreated: false,
+		login:       false,
+		logout:      true,
 	}
 
-	a.Client = client.New(a.Id, a.sendReqHandler, a.sendResHandler)
-	a.Client.Register(a.Server)
-	lis, err := net.Listen("tcp", a.Id.String())
+	a.client = client.New(a.id, a.sendReqHandler, a.sendResHandler)
+	a.client.Register(a.server)
+	lis, err := net.Listen("tcp", a.id.String())
 	if err == nil {
-		go a.Server.Serve(lis)
+		go a.server.Serve(lis)
 		log.Println("[Debug] [API] Listening for responses")
 	}
 	return a
@@ -56,23 +62,21 @@ func (a *API) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
 func (a *API) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
 	// handle the response received from blockchain network for the req sent
 	log.Println("[Debug] [API] Received Response from blockchain")
-	log.Println(res.Status)
-	log.Println(a)
 	//log.Printf("[Debug] [API] [RES] Id: %s, Pk: %s\n", a.id.String(),
 	//cmn.BytesToHash(a.pubkey.Bytes()).String())
 
-	a.Res = res
-	a.Ready <- true
-	log.Printf("[Debug] [API] Num of Conn: %d\n", len(a.Ready))
+	a.res = res
+	a.ready <- true
+
 	return &client.ResEmpty{}, nil
 }
 
-func (a *API) CreateAccount(username string, password string) *client.ResTx {
+func (a *API) CreateAccount(username string, password string) (*crypto.PublicKey, *crypto.PrivateKey, string) {
 	// create account by sending the transaction to blockchain
 	// over 2/3 of peers must execute the transaction in order to create a new account
 	pk, sk, _ := crypto.NewKeyPair()
-	a.Pubkey = pk
-	a.Privkey = sk
+	a.pubkey = pk
+	a.privkey = sk
 
 	passHash := cmn.Sha256([]byte(password))
 
@@ -83,61 +87,119 @@ func (a *API) CreateAccount(username string, password string) *client.ResTx {
 	data, _ := c.Serialize()
 	req := &client.ReqTx{
 		Type:   0,
-		Addr:   "127.0.0.1:9020",
+		Addr:   a.id.String(),
 		Pubkey: pk.Bytes(),
 		Data:   data,
 	}
 
+	a.empty()
+	log.Printf("Len ready: %d\n", len(a.ready))
 	// send the tx to all peers
 	a.sendReq(req)
-	for {
-		time.Sleep(1 * time.Second)
-		if len(a.Ready) > 0 {
-			<-a.Ready
-			break
-		}
+	a.receiveRes()
+
+	if !a.res.Status {
+		log.Println("[API] [Error] Account created unsuccessful")
+		a.pubkey = nil
+		a.privkey = nil
+		return nil, nil, a.res.Msg
 	}
-	log.Println(a.Res)
-	log.Println("[Debug] [API] Received response")
-	return a.Res
+	return pk, sk, a.res.Msg
 }
 
-func (a *API) ReqCompleted() bool {
-	return len(a.Ready) > 0
-}
-
-func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey, privkey *crypto.PrivateKey) bool {
+func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey) (bool, string) {
 	// send the credentials to blockchain to see if there is account for this address
 	// private key is important to sign the transactions
 	passHash := cmn.Sha256([]byte(password))
-	l := &client.LogIn{
+	info := &client.LogIn{
 		Username: username,
 		Password: passHash.Bytes(),
 	}
-	data, _ := l.Serialize()
+	data, _ := info.Serialize()
 	req := &client.ReqTx{
-		Type:   2,
-		Addr:   "127.0.0.1:9020",
+		Type:   1,
+		Addr:   a.id.String(),
 		Pubkey: pubkey.Bytes(),
 		Data:   data,
 	}
-
+	a.empty()
+	log.Printf("Len ready: %d\n", len(a.ready))
 	a.sendReq(req)
+	a.receiveRes()
+	if a.res.Status {
+		log.Println("[API] [LOGIN] Successful login")
+		a.login = true
+		a.logout = false
+	}
+	return a.res.Status, a.res.Msg
 
-	return true
 }
 
 func (a *API) LogOut(username string, password string, pubkey *crypto.PublicKey) {
 	// logout this user
 }
 
-func (ac *API) Topup(amount uint) bool {
-	return true
+func (a *API) TopUp(amount uint64) (bool, string) {
+	// perform transfer, return true if tx successful
+	if !a.login {
+		return false, "You must login first"
+	}
+	info := &client.TopUp{}
+	info.From = a.pubkey.Bytes()
+	info.Amount = amount
+	req := &client.ReqTx{}
+	req.Type = 3
+	req.Addr = a.id.String()
+	req.Pubkey = a.pubkey.Bytes()
+	req.Data, _ = info.Serialize()
+	a.empty()
+	a.sendReq(req)
+	a.receiveRes()
+	if a.res.Status {
+		log.Println("[API] [TOPUP] Successful topup")
+	}
+	return a.res.Status, a.res.String()
+
 }
 
-func (a *API) Transfer(to crypto.PublicKey, amt uint) bool {
-	// perform transfer, return true if tx successful
-	return true
+func (a *API) Transfer(to *crypto.PublicKey, amount uint64) (bool, string) {
+	if !a.login {
+		return false, "You must login first"
+	}
+	info := &client.Transfer{}
+	info.From = a.pubkey.Bytes()
+	info.To = to.Bytes()
+	info.Amount = amount
+	req := &client.ReqTx{}
+	req.Type = 4
+	req.Addr = a.id.String()
+	req.Pubkey = a.pubkey.Bytes()
+	req.Data, _ = info.Serialize()
+	a.empty()
+	a.sendReq(req)
+	a.receiveRes()
+	if a.res.Status {
+		log.Println("[API] Successful topup")
+	}
+	return a.res.Status, a.res.Msg
+
+}
+
+func (a *API) receiveRes() {
+	for {
+		time.Sleep(1 * time.Second)
+		if len(a.ready) > 0 {
+			<-a.ready
+			break
+		}
+	}
+}
+
+func (a *API) empty() {
+	for len(a.ready) > 0 {
+		<-a.ready
+	}
+	a.res = nil
 }
 
 // Our system supports different price feeds

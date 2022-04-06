@@ -43,6 +43,8 @@ type Manage struct {
 	blkLock       *sync.Mutex
 	log           string
 	recHash       []byte
+	finalized     map[cmn.Hash]bool
+	added         map[cmn.Hash]bool
 }
 
 func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
@@ -64,6 +66,8 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 		lastTxHash: []byte(""),
 		log:        "",
 		recHash:    []byte(""),
+		finalized:  make(map[cmn.Hash]bool),
+		added:      make(map[cmn.Hash]bool),
 	}
 	//m.lm = lm
 	m.grpcServer = grpc.NewServer()
@@ -112,8 +116,9 @@ func (m *Manage) AddTransaction(tx *msg.Transaction) {
 	m.txLock.Lock()
 	defer m.txLock.Unlock()
 	h := tx.Hash()
-	if !bytes.Equal(h.Bytes(), m.lastTxHash) {
-		m.lastTxHash = h.Bytes()
+	if _, ok := m.added[h]; !ok {
+		// add the tx
+		m.added[h] = true
 		m.txs = append(m.txs, tx)
 		s := "[Debug] [Manage] Tx Added to Pool\n"
 		log.Print(s)
@@ -127,7 +132,7 @@ func (m *Manage) Run() {
 
 func (m *Manage) propose() {
 	for {
-		time.Sleep(10 * time.Second)
+		time.Sleep(1 * time.Second)
 		if len(m.txs) > 0 {
 			m.epoch += 1
 			m.process()
@@ -153,22 +158,25 @@ func (m *Manage) process() {
 		Epoch: m.epoch,
 		Txs:   txs,
 	}
-
 	h := pt.Hash()
-	go m.sendFinalContribution(pt)
+	s := fmt.Sprintf("[Manage] Contribution proposed. Epoch: %d, Hash: %s\n", m.epoch, h.String())
+	m.log += s
+	m.sendFinalContribution(pt)
 
 	for {
-		time.Sleep(5 * time.Second)
-		if bytes.Equal(h.Bytes(), m.recHash) {
+		time.Sleep(1 * time.Second)
+		if _, ok := m.finalized[h]; ok {
 			break
 		}
 	}
-
 	// proceed to next contribution
 }
 
 func (m *Manage) sendResponse(responses []*msg.TxRes) {
+	s := fmt.Sprintf("Total responses: %d\n", len(responses))
+	m.log += s
 	for _, response := range responses {
+
 		if response.SendRes {
 			// send the response to Client
 			res := &client.ResTx{}
@@ -195,12 +203,13 @@ func (m *Manage) sendResponse(responses []*msg.TxRes) {
 func (m *Manage) AddRes(hash cmn.Hash, res []*msg.TxRes) {
 	m.resLock.Lock()
 	defer m.resLock.Unlock()
-	h := hash.Bytes()
-	if !bytes.Equal(h, m.recHash) {
-		m.recHash = h
+	if _, ok := m.finalized[hash]; !ok {
+		// finalize the set
+		s := fmt.Sprintf("Received response for contribution: %s, Len: %d\n", hash.String(), len(res))
+		m.log += s
 		go m.sendResponse(res)
+		m.finalized[hash] = true
 	}
-	log.Println("[Debug] [Manage] Got TXs Response from Peer")
 }
 
 func (m *Manage) GetByRound(round uint64) *msg.Block {
@@ -218,7 +227,6 @@ func (m *Manage) sendFinalContribution(txSet *msg.ProposedTx) {
 	for _, conn := range m.connPool {
 		go service.SendFinalContribution(conn, data)
 	}
-	//m.lm.AddFinalTxLog(txSet.Txs)
 }
 
 func (m *Manage) AddBlk(hash cmn.Hash, data []byte) {
@@ -276,4 +284,8 @@ func (m *Manage) GetBlkByRound(round uint64) *msg.Block {
 		return nil
 	}
 	return blk
+}
+
+func (m *Manage) GetLog() string {
+	return m.log
 }

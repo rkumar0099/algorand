@@ -119,7 +119,7 @@ func regularRun(c *cli.Context) {
 	//a := api.New()
 	//go proposeAccounts(nodes, a)
 	//time.Sleep(30 * time.Second)
-	time.Sleep(2 * time.Minute)
+	time.Sleep(5 * time.Minute)
 	//printStates(nodes, lm)
 	//log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())
 	//showBalances(nodes, lm)

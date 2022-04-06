@@ -78,8 +78,8 @@ func New(addr string, maliciousType int) *Peer {
 		maliciousType:            params.Honest,
 		txEpoch:                  0,
 		oracleEpoch:              0,
-		finalContributions:       make(chan *msg.ProposedTx, 10),
-		oracleFinalContributions: make(chan []byte, 10),
+		finalContributions:       make(chan *msg.ProposedTx, 1),
+		oracleFinalContributions: make(chan []byte, 1),
 		rec:                      false,
 	}
 	// gossip node
@@ -136,65 +136,37 @@ func (p *Peer) processMain() {
 
 	// 3. reach consensus on a FINAL or TENTATIVE new block.
 	if consensusType == params.FINAL_CONSENSUS {
-		//log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+		log.Printf("[algorand] [%s] reach final consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
 	} else {
-		//log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
+		log.Printf("[algorand] [%s] reach tentative consensus at round %d, block (%d txs) hash %s, is empty? %v", p.Id.String(), currRound, len(block.Txs), block.Hash(), block.Signature == nil)
 	}
 
 	// all peers are guaranteed to receive the same block
 	if len(block.Txs) > 0 {
+		for len(p.finalContributions) > 0 {
+			<-p.finalContributions
+		}
 		parentBlk := p.lastBlock()
 		txSet := &msg.ProposedTx{Epoch: p.txEpoch, Txs: block.Txs}
 		st, responses := p.executeTxSet(txSet, p.lastState, p.permanentTxStorage)
-		//st := p.recentMPT
-		log.Printf("[Debug] [Peer] [Final Tx RES] Len: %d\n", len(responses))
+		log.Printf("[Debug] [Peer] [Final Tx RES] Epoch: %d, Len: %d\n", p.txEpoch, len(responses))
 
 		if bytes.Equal(block.StateHash, st.RootHash()) {
 			// txs finalized
 			log.Printf("%s finalized\n", p.pt.Hash().String())
-			//p.manage.AddVote(p.pt.Hash())
 			st.Commit()
 			p.lastState = block.StateHash
-			if len(p.finalContributions) > 0 {
-				<-p.finalContributions
-			}
-
-			/*
-				var t *msg.TxRes
-				for len(responses) > 0 {
-					t, responses = responses[0], responses[1:]
-
-					//for _, t := range responses {
-					if p.rec {
-						res := &client.ResTx{}
-						res.Deserialize(t.Data)
-						id := gossip.NewNodeId("127.0.0.1:9020")
-						conn, err := id.Dial()
-						if err != nil {
-							log.Println("[Debug] [Peer] [API] Can't dial")
-						} else {
-							//if err == nil {
-							_, err = client.SendResTx(conn, res)
-							if err != nil {
-								log.Println("[Debug] [Peer Tx] Can't Send")
-							} else {
-								log.Println("[Debug] [Peer Tx] Send")
-							}
-						}
-					}
-				}
-			*/
-
+			p.manage.AddRes(p.pt.Hash(), responses)
 		} else {
+			for _, tx := range block.Txs {
+				p.manage.AddTransaction(tx)
+			}
+			log.Printf("[Debug] [Peer] Tx for Epoch: %d, not finalized\n", p.txEpoch)
 			block.StateHash = parentBlk.StateHash
-
 			// txs not finalized, put all txs back to manage
+			p.manage.AddRes(p.pt.Hash(), []*msg.TxRes{})
 		}
-		//log.Println("[Debug] [Peer] Send RES to manage")
-		p.manage.AddRes(p.pt.Hash(), responses)
-		//log.Println("[Debug] [Peer] Received response")
 	}
-
 	p.chain.Add(block) // add blk to blockchain
 	//go p.lm.AddFinalBlk(block.Hash(), block.Round)
 
@@ -218,7 +190,6 @@ func (p *Peer) Run() {
 		case <-p.quitCh:
 			return
 		default:
-			time.Sleep(5 * time.Second)
 			p.processMain() // process algorand functions
 		}
 	}
