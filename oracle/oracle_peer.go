@@ -1,33 +1,14 @@
 package oracle
 
 import (
-	"bytes"
-	"encoding/json"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
 	"sync"
 
-	"github.com/golang/protobuf/proto"
-	"github.com/rkumar0099/algorand/common"
-	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
-	"github.com/rkumar0099/algorand/message"
-	"github.com/rkumar0099/algorand/params"
-	mt "github.com/wealdtech/go-merkletree"
 )
 
-type OraclePeer struct {
-	pubkey  *crypto.PublicKey
-	privkey *crypto.PrivateKey
-	//store   kvstore.KVStore
-	epoch   uint64
-	results map[uint64][]byte
-	data    [][]byte
-	tree    *mt.MerkleTree
-	//db      *leveldb.DB
-	lock *sync.Mutex
+type response struct {
+	val_bytes []byte
+	val_float float64
 }
 
 func newOraclePeer(epoch uint64) *OraclePeer {
@@ -40,15 +21,71 @@ func newOraclePeer(epoch uint64) *OraclePeer {
 	return op
 }
 
+/*
+
 func (op *OraclePeer) commit(epoch uint64, txs []*message.PendingRequest, res map[cmn.Hash][]byte) {
 	for _, tx := range txs {
-		//op.fetchURL(tx.URL, tx.Id, tx.Type)
-		op.fetchFile(tx.URL, tx.Id, tx.Type)
+		req := &client.ReqTx{}
+		req.Deserialize(t.Data)
+		pf := &client.PriceFeed{}
+		pf.Deserialize(req.Data)
+		val_bytes, val, err := op.fetchData(pf.Type)
+		res := &Response{}
+		res.val_bytes = val_bytes
+		res.val_float = val
+		op.responses[tx.Id] = res
+
+		op.data = append(op.data, val_bytes)
 	}
-	op.tree, _ = mt.New(op.data)
-	log.Println(op.tree)
-	res[cmn.BytesToHash(op.pubkey.Bytes())] = op.tree.Root()
-	log.Println("Commit results = ", len(op.results), len(txs))
+}
+
+
+func (op *OraclePeer) processTx(tx *msg.PendingRequest) (float64, error) {
+	req := &client.ReqTx{}
+	req.Deserialize(tx.Data)
+	pf := &client.PriceFeed{}
+	pf.Deserialize(req.Data)
+	return op.FetchData(pf.Type)
+}
+
+func (op *OraclePeer) FetchData(pricefeed uint64) (float64, error) {
+	switch pricefeed {
+	case 1:
+		f, err := os.OpenFile("../pricefeeds/eth.txt", os.O_RDONLY|os.O_CREATE, 0644)
+		if err != nil {
+			return 0.0, err
+		}
+		buffer := make([]byte, 128)
+		f.Read(buffer)
+		val, _ := strconv.ParseFloat(string(buffer), 2)
+		return val, nil
+
+	case 2:
+		f, err := os.OpenFile("../pricefeeds/bit.txt", os.O_RDONLY|os.O_CREATE, 0644)
+		if err != nil {
+			return 0.0, err
+		}
+		buffer := make([]byte, 128)
+		f.Read(buffer)
+		val, _ := strconv.ParseFloat(string(buffer), 2)
+		return val, nil
+
+	case 3:
+		f, err := os.OpenFile("../pricefeeds/algo.txt", os.O_RDONLY|os.O_CREATE, 0644)
+		if err != nil {
+			return 0.0, err
+		}
+		buffer := make([]byte, 128)
+		f.Read(buffer)
+		val, _ := strconv.ParseFloat(string(buffer), 2)
+		return val, nil
+
+	default:
+		log.Printf("[Oracle] Invalid Pricefeed req\n")
+		return 0.0, nil
+
+	}
+
 }
 
 func (op *OraclePeer) fetchFile(url string, Id uint64, reqType uint64) {
@@ -190,3 +227,5 @@ func (op *OraclePeer) proposeBlock(nonce uint64, ss SortitionSeed, blkChan chan 
 		}
 	}
 }
+
+*/

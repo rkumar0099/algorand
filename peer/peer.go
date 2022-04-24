@@ -193,7 +193,7 @@ func (p *Peer) Run() {
 		case <-p.quitCh:
 			return
 		default:
-			p.processMain() // process algorand functions
+			//p.processMain() // process algorand functions
 		}
 	}
 }

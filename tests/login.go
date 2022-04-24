@@ -7,6 +7,6 @@ import (
 )
 
 func TestLogin(username string, password string, pk *crypto.PublicKey) {
-	status, msg := a.LogIn(username, password, pk)
+	status, msg := a1.LogIn(username, password, pk)
 	log.Println(status, msg)
 }

@@ -21,14 +21,16 @@ func (p *Peer) HandleTx(req *client.ReqTx) (*client.ResEmpty, error) {
 		}
 		go p.manage.AddTransaction(tx)
 
-	} else if t > 4 && t < 6 {
+	} else if t >= 5 && t < 7 {
 		// external world tx
+		data, _ := req.Serialize()
 
 		pr := &msg.PendingRequest{
-			Type: req.Type,
+			Type: t,
 			Addr: req.Addr,
-			Data: req.Data,
+			Data: data,
 		}
+
 		go p.oracle.AddEWTx(pr)
 	}
 

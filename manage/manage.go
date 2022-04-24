@@ -86,13 +86,13 @@ func New(peers []gossip.NodeId, peerAddresses [][]byte) *Manage {
 	m.ServiceServer.Register(m.grpcServer)
 	m.client.Register(m.grpcServer)
 	m.addPeers(peers)
-	lis, err := net.Listen("tcp", "127.0.0.1:9000")
+	lis, err := net.Listen("tcp", m.Id.String())
 	if err == nil {
 		log.Println("[Debug] [Manage] Manage listening at port 9000")
 		go m.grpcServer.Serve(lis)
 	}
 	os.Remove("../logs/manage.txt")
-	os.RemoveAll("../database/blockchain")
+	//os.RemoveAll("../database/blockchain")
 	m.db, _ = leveldb.OpenFile("../database/blockchain", nil)
 	return m
 }

@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"encoding/hex"
+	"math"
 	"math/big"
 )
 
@@ -129,6 +130,17 @@ func Uint2Bytes(v uint64) []byte {
 
 func Bytes2Uint(d []byte) uint64 {
 	return binary.BigEndian.Uint64(d)
+}
+
+func Float2Bytes(v float64) []byte {
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b[:], math.Float64bits(v))
+	return b[:]
+}
+
+func Bytes2Float(val []byte) float64 {
+	bits := binary.BigEndian.Uint64(val)
+	return math.Float64frombits(bits)
 }
 
 func Hex(b []byte) []byte {

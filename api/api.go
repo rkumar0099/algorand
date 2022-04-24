@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"sync"
 	"time"
 
 	"github.com/rkumar0099/algorand/client"
@@ -31,6 +32,8 @@ type API struct {
 	acctCreated bool
 	login       bool
 	logout      bool
+	reqLock     *sync.Mutex
+	resLock     *sync.Mutex
 }
 
 func New(id string) *API {
@@ -43,6 +46,8 @@ func New(id string) *API {
 		acctCreated: false,
 		login:       false,
 		logout:      true,
+		reqLock:     &sync.Mutex{},
+		resLock:     &sync.Mutex{},
 	}
 
 	a.client = client.New(a.id, a.sendReqHandler, a.sendResHandler)
@@ -74,6 +79,8 @@ func (a *API) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
 func (a *API) CreateAccount(username string, password string) (*crypto.PublicKey, *crypto.PrivateKey, string) {
 	// create account by sending the transaction to blockchain
 	// over 2/3 of peers must execute the transaction in order to create a new account
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
 	pk, sk, _ := crypto.NewKeyPair()
 	a.pubkey = pk
 	a.privkey = sk
@@ -110,6 +117,8 @@ func (a *API) CreateAccount(username string, password string) (*crypto.PublicKey
 func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey) (bool, string) {
 	// send the credentials to blockchain to see if there is account for this address
 	// private key is important to sign the transactions
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
 	passHash := cmn.Sha256([]byte(password))
 	info := &client.LogIn{
 		Username: username,
@@ -137,10 +146,14 @@ func (a *API) LogIn(username string, password string, pubkey *crypto.PublicKey) 
 
 func (a *API) LogOut(username string, password string, pubkey *crypto.PublicKey) {
 	// logout this user
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
 }
 
 func (a *API) TopUp(amount uint64) (bool, string) {
 	// perform transfer, return true if tx successful
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
 	if !a.login {
 		return false, "You must login first"
 	}
@@ -163,6 +176,8 @@ func (a *API) TopUp(amount uint64) (bool, string) {
 }
 
 func (a *API) Transfer(to *crypto.PublicKey, amount uint64) (bool, string) {
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
 	if !a.login {
 		return false, "You must login first"
 	}
@@ -179,7 +194,7 @@ func (a *API) Transfer(to *crypto.PublicKey, amount uint64) (bool, string) {
 	a.sendReq(req)
 	a.receiveRes()
 	if a.res.Status {
-		log.Println("[API] Successful topup")
+		log.Println("[API] Successful transfer")
 	}
 	return a.res.Status, a.res.Msg
 
@@ -206,8 +221,25 @@ func (a *API) empty() {
 // 1 - BTC/USD
 // 2 - ETH/USD
 // And so on
-func (a *API) PriceFeed(TYPE int) bool {
+func (a *API) PriceFeed(TYPE uint64, status chan bool) bool {
+	a.reqLock.Lock()
+	defer a.reqLock.Unlock()
+	req := &client.ReqTx{}
+	req.Type = 5
+	req.Addr = a.id.String()
+	req.Pubkey = []byte{}
+	pf := &client.PriceFeed{}
+	pf.Type = TYPE
+	data, _ := pf.Serialize()
+	req.Data = data
+	a.sendReq(req)
+	a.receiveRes()
+
+	val := cmn.Bytes2Float(a.res.Data)
+	log.Printf("[Debug] [API] Pricefeed response: %f\n", val)
+	status <- true
 	return true
+
 }
 
 // Our system also aims to support SessionData type whose value may not be integer but a schema

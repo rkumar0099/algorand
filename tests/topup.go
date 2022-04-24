@@ -5,6 +5,6 @@ import (
 )
 
 func TestTopup() {
-	status, msg := a.TopUp(100)
+	status, msg := a1.TopUp(100)
 	log.Println(status, msg)
 }

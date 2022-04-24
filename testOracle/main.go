@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
+	"bufio"
 	"os"
+	"strconv"
 
-	"github.com/golang/protobuf/proto"
-	"github.com/rkumar0099/algorand/oracle"
+	cmn "github.com/rkumar0099/algorand/common"
 )
 
 type Blk struct {
@@ -30,15 +30,36 @@ var (
 
 func main() {
 
-	testOracle()
+	//testOracle()
 	runOracle()
+	//print(val)
 
 }
 
-func runOracle() {
-	o := oracle.New()
+func runOracle() (float64, error) {
+	f, err := os.OpenFile("../pricefeeds/bit.txt", os.O_RDONLY|os.O_CREATE, 0644)
 
+	if err != nil {
+		return 0.0, err
+	}
+
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	var float_val float64 = 0.0
+	for scanner.Scan() {
+		val := scanner.Text()
+		float_val, _ = strconv.ParseFloat(val, 64)
+		//log.Println(val)
+	}
+	var b []byte
+	b = cmn.Float2Bytes(float_val)
+	print(b)
+	//print(cmn.Bytes2Float(b))
+	return float_val, nil
 }
+
+/*
 
 func testOracle() {
 	//res := &oracle.CurrencyExchange{}
@@ -55,6 +76,7 @@ func testOracle() {
 	data, _ := proto.Marshal(response)
 	log.Println(data)
 }
+*/
 
 /*
 

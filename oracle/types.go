@@ -1,5 +1,13 @@
 package oracle
 
+import (
+	"sync"
+
+	"github.com/rkumar0099/algorand/crypto"
+	msg "github.com/rkumar0099/algorand/message"
+	mt "github.com/wealdtech/go-merkletree"
+)
+
 const (
 	CURRENCY_EXCHANGE = iota
 	FLIGHT
@@ -36,3 +44,34 @@ type  struct {
 
 var URL map[string]
 */
+
+type OraclePeer struct {
+	pubkey  *crypto.PublicKey
+	privkey *crypto.PrivateKey
+	//store   kvstore.KVStore
+	epoch   uint64
+	results map[uint64][]byte
+	data    [][]byte
+	tree    *mt.MerkleTree
+	//db      *leveldb.DB
+	lock *sync.Mutex
+}
+
+type OracleBlock struct {
+	Epoch uint64
+	Res   []*msg.PendingRequestRes
+}
+
+type Reveal struct {
+	addr    []byte
+	tree    *mt.MerkleTree
+	results map[uint64][]byte
+}
+
+type FinalBlock struct {
+	Results map[uint64][]byte
+	Proof   []byte
+	VRF     []byte
+	Pubkey  []byte
+	Epoch   uint64
+}

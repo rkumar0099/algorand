@@ -65,6 +65,11 @@ message PendingRequestRes{
     bytes Data = 2;
 }
 
+message OracleBlock {
+    uint64 Epoch = 1;
+    repeated PendingRequestRes Res = 2;
+}
+
 message Block {
     uint64 Round = 1;
     bytes ParentHash = 2;

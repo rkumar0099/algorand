@@ -51,6 +51,8 @@ message Transfer {
     uint64 Amount = 3;
 }
 
-message PriceFeed {}
+message PriceFeed {
+    uint64 Type = 1;
+}
 
 message SessionData {}

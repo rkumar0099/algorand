@@ -29,7 +29,7 @@ func initApp() *cli.App {
 	app := cli.NewApp()
 	app.Name = "Algorand"
 	app.Version = "0.1"
-	app.Author = "Ziliang"
+	app.Author = "Rabindar, Ziliang"
 	app.Usage = "Algorand simulation demo for different scenario."
 
 	app.Commands = []cli.Command{
@@ -110,7 +110,7 @@ func regularRun(c *cli.Context) {
 
 	time.Sleep(5 * time.Second)
 	//go m.Run()
-	//go o.Run()
+	go o.Run()
 	go m.Run() // run manager
 	//oracle := oracle.New(neighbors, lm, m)
 	//go oracle.Run() // run oracle
@@ -120,7 +120,7 @@ func regularRun(c *cli.Context) {
 	//a := api.New()
 	//go proposeAccounts(nodes, a)
 	//time.Sleep(30 * time.Second)
-	time.Sleep(3 * time.Minute)
+	time.Sleep(4 * time.Minute)
 	log.Println(m.GetLog())
 	//printStates(nodes, lm)
 	//log.Printf("Confirmed contributions: %d\n", m.GetConfirmedContributions())

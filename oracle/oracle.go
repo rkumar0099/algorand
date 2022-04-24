@@ -1,12 +1,17 @@
 package oracle
 
 import (
+	"bufio"
 	"bytes"
+	"net"
+	"os"
+	"strconv"
 
 	"log"
 	"sync"
 	"time"
 
+	"github.com/rkumar0099/algorand/client"
 	"github.com/rkumar0099/algorand/common"
 	cmn "github.com/rkumar0099/algorand/common"
 	"github.com/rkumar0099/algorand/crypto"
@@ -15,11 +20,11 @@ import (
 	msg "github.com/rkumar0099/algorand/message"
 	"github.com/rkumar0099/algorand/params"
 	"github.com/syndtr/goleveldb/leveldb"
-	mt "github.com/wealdtech/go-merkletree"
 	"google.golang.org/grpc"
 )
 
 type Oracle struct {
+	id          gossip.NodeId
 	pubkey      *crypto.PublicKey
 	privkey     *crypto.PrivateKey
 	peers       map[uint64][]*OraclePeer
@@ -41,24 +46,13 @@ type Oracle struct {
 	grpcServer  *grpc.Server
 	connPool    map[gossip.NodeId]*grpc.ClientConn
 	log         string
-}
 
-type Reveal struct {
-	addr    []byte
-	tree    *mt.MerkleTree
-	results map[uint64][]byte
-}
-
-type FinalBlock struct {
-	Results map[uint64][]byte
-	Proof   []byte
-	VRF     []byte
-	Pubkey  []byte
-	Epoch   uint64
+	client *client.ClientServiceServer
 }
 
 func New(peers []gossip.NodeId) *Oracle {
 	oracle := &Oracle{
+		id:          gossip.NewNodeId("127.0.0.1:9005"),
 		peers:       make(map[uint64][]*OraclePeer),
 		lock:        &sync.Mutex{},
 		round:       0,
@@ -78,14 +72,31 @@ func New(peers []gossip.NodeId) *Oracle {
 	oracle.pubkey, oracle.privkey, _ = crypto.NewKeyPair()
 	oracle.grpcServer = grpc.NewServer()
 	oracle.server = NewServer(
-		gossip.NewNodeId("127.0.0.1:9001"),
+		oracle.id,
 		func(uint64) (*ResOPP, error) { return nil, nil },
 	)
+	oracle.client = client.New(oracle.id, oracle.sendReqHandler, oracle.sendResHandler)
 	oracle.server.Register(oracle.grpcServer)
+	oracle.client.Register(oracle.grpcServer)
 	oracle.addPeers(peers)
+	lis, err := net.Listen("tcp", oracle.id.String())
+	if err == nil {
+		log.Println("[Debug] [Oracle] Oracle listening at port 9005")
+		go oracle.grpcServer.Serve(lis)
+	}
 	//os.RemoveAll("../oracle/blockchain")
 	oracle.db, _ = leveldb.OpenFile("../oracle/blockchain", nil)
 	return oracle
+}
+
+func (o *Oracle) sendReqHandler(req *client.ReqTx) (*client.ResEmpty, error) {
+	res := &client.ResEmpty{}
+	return res, nil
+}
+
+func (o *Oracle) sendResHandler(res *client.ResTx) (*client.ResEmpty, error) {
+	info := &client.ResEmpty{}
+	return info, nil
 }
 
 func (o *Oracle) addPeers(peers []gossip.NodeId) {
@@ -132,7 +143,6 @@ func (o *Oracle) preparePool() {
 		}
 	}
 	log.Println("The number of oracle peers for epoch: ", o.epoch, len(o.peers[o.epoch]))
-	// send req to peer to send the result of proposal, see if it's selected
 }
 
 func (o *Oracle) GetPeers() ([]*OraclePeer, uint64) {
@@ -142,7 +152,7 @@ func (o *Oracle) GetPeers() ([]*OraclePeer, uint64) {
 func (o *Oracle) AddEWTx(tx *message.PendingRequest) {
 	o.txLock.Lock()
 	defer o.txLock.Unlock()
-	log.Println("EW transaction proposed")
+	log.Println("[Debug] [Oracle] EWT added into the pool")
 	o.count += 1
 	tx.Id = o.count
 	o.txs = append(o.txs, tx)
@@ -176,15 +186,31 @@ func constructSeed(seed, role []byte) []byte {
 	return bytes.Join([][]byte{seed, role}, nil)
 }
 
-func (o *Oracle) completeEpoch() {
-	// once oracle peers are ready, ask all of them to fetch jobs and store the result in a merkle
-	// patricia tree
+/*
+
+func (o *Oracle) medianizer(values []float64) float64 {
+	sort.Slice(values, func(i, j int) bool {
+		return values[i] <= values[j]
+	})
+
+
+		for _, v := range a {
+			fmt.Println(v)
+		}
+
+	ind := (len(values) + 1) / 2
+	return values[ind]
 }
+*/
 
 func (o *Oracle) Run() {
 	for {
 
 		time.Sleep(10 * time.Second)
+		if len(o.txs) == 0 {
+			continue
+		}
+
 		o.preparePool()
 
 		var (
@@ -198,82 +224,136 @@ func (o *Oracle) Run() {
 		}
 
 		if len(txs) > 0 {
-			log.Println("Oracle run: ", o.epoch, len(txs), len(o.peers[o.epoch]))
-			o.running = true
-			delete(o.peers, o.epoch)
-			//go o.process(o.epoch, o.peers[o.epoch], txs)
+			log.Printf("[Oracle] Running Epoch %d, Peers %d, Txs %d\n", o.epoch, len(o.peers[o.epoch]), len(o.txs))
+			o.process(o.epoch, o.peers[o.epoch], txs)
 		}
 	}
 }
 
-func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.PendingRequest) *FinalBlock {
-	//log.Println(len(peers), len(txs), epoch)
-	var jobIds []uint64
+func (o *Oracle) fetch_pf(feed_type uint64) (float64, error) {
+	var path string = ""
+	switch feed_type {
+	case 1:
+		log.Println("[Debug][Oracle] ETH Pricefeed request")
+		path = "../pricefeeds/eth.txt"
+
+	case 2:
+		log.Println("[Debug][Oracle] BIT Pricefeed request")
+		path = "../pricefeeds/bit.txt"
+
+	case 3:
+		log.Println("[Debug][Oracle] ALGO Pricefeed request")
+		path = "../pricefeeds/algo.txt"
+
+	default:
+		log.Println("[Debug][Oracle] INVALID Pricefeed request")
+		return 0.0, nil
+	}
+
+	f, err := os.OpenFile(path, os.O_RDONLY|os.O_CREATE, 0644)
+	if err != nil {
+		log.Println("[Debug] [Oracle] Can't open the file")
+		return 0.0, err
+	}
+	scanner := bufio.NewScanner(f)
+	var val float64
+	scanner.Scan()
+	val, err = strconv.ParseFloat(scanner.Text(), 64)
+	return val, err
+}
+
+func (o *Oracle) process(epoch uint64, peers []*OraclePeer, txs []*message.PendingRequest) bool {
+
 	for _, tx := range txs {
-		jobIds = append(jobIds, tx.Id)
-	}
+		req := &client.ReqTx{}
+		req.Deserialize(tx.Data)
+		pf := &client.PriceFeed{}
+		pf.Deserialize(req.Data)
 
-	for i := 1; i <= 5; i++ {
+		log.Printf("[Debug] [Oracle] PriceFeed: %d\n", pf.Type)
 
-		if i == 1 {
-			// commit phase
-			log.Println("Commit phase started")
-			o.commit[epoch] = make(map[cmn.Hash][]byte)
-			for _, p := range peers {
-				p.commit(epoch, txs, o.commit[epoch])
+		point, _ := o.fetch_pf(pf.Type)
+		log.Printf("[Debug] [Oracle] %f\n", point)
+		res := &client.ResTx{}
+		res.Addr = req.Addr
+		res.Pubkey = req.Pubkey
+		res.Data = cmn.Float2Bytes(point)
+
+		id := gossip.NewNodeId(res.Addr)
+		conn, err := id.Dial()
+		if err == nil {
+			_, err = client.SendResTx(conn, res)
+			if err == nil {
+				log.Printf("[Debug] [Oracle] Sending Response to Client: %s\n", id.String())
 			}
-			//time.Sleep(5 * time.Second)
-			log.Println("Commit phase completed")
-		} else if i == 2 {
-			// reveal phase
-			o.reveal[epoch] = make(map[cmn.Hash]*Reveal)
-
-			for _, p := range peers {
-				p.reveal(epoch, jobIds, o.reveal[epoch]) // oracle peers reveal about all jobs for current epoch
-			}
-
-			//time.Sleep(1 * time.Second)
-			log.Println("Reveal phase completed")
-			o.verifyCommitReveal(epoch)
-			log.Println("Verifying phase completed")
-
-		} else if i == 3 {
-			// select a proposer using nonce different nonce, we can also consider max priority approach
-			// of algorand to choose a final proposal from a list of different oracle block proposers
-			log.Println("Proposing block")
-			nonce := uint64(0)
-			for {
-				blkChan := make(chan *FinalBlock, 1)
-				nonce += 1
-				for _, p := range peers {
-					go p.proposeBlock(nonce, o.sortitionSeed, blkChan, epoch, o.results[epoch])
-				}
-				time.Sleep(1 * time.Second)
-				if len(blkChan) == 1 {
-					o.finalBlks[epoch] = <-blkChan
-					delete(o.results, epoch)
-					break
-				}
-			}
-			log.Println("Propose block phase compeleted")
-			log.Println("Final block is ", o.finalBlks[epoch])
-		} else if i == 4 {
-			// dispute phase, out of scope for this term
-			log.Println("Disputing the block")
-			log.Println("Dispute phase completed")
-		} else {
-			// submit the block to all blockchain peers using service
-			blk := o.finalBlks[epoch]
-			log.Println("Confirmed EW transactions ", len(blk.Results))
-			//o.lm.AddOracleBlk(blk)
-			//o.writeBlk(blk)
-			delete(o.finalBlks, epoch)
-			o.running = false
 		}
 	}
 
-	return nil
+	/*
+
+		//log.Println(len(peers), len(txs), epoch)
+		var responses []*msg.PendingRequestRes
+		for _, tx := range txs {
+			//id := tx.Id
+			var values []float64
+
+			for _, p := range peers {
+				val, _ := p.processTx(tx)
+				values = append(values, val)
+			}
+
+			final_point := o.medianizer(values)
+			req := &client.ReqTx{}
+			req.Deserialize(tx.Data)
+
+			res := &client.ResTx{}
+			res.Addr = req.Addr
+			res.Pubkey = req.Pubkey
+			res.Data = cmn.Float2Bytes(final_point)
+
+			prr := &msg.PendingRequestRes{}
+			prr.TxHash = tx.Hash().Bytes()
+			prr.Data, _ = res.Serialize()
+			responses = append(responses, prr)
+
+		}
+
+		blk := OracleBlock{}
+		blk.Epoch = o.epoch
+		blk.Res = responses
+		data, _ := blk.Serialize()
+		h := cmn.BytesToHash(data)
+		SendBlk(data)
+
+		// send the data to all peers and wait for the finalization
+
+		// run the commit phase, asking all peers to commit the txs
+		// run the reveal phase, asking all peers to reveal the random txs
+		// compare the reveal value with commit value using merkle patricia tree roothash
+		// if not match, punish the staker. If match, the value is added to the list of finalized values for this tx
+		// run the medianizer phase, this will finalize the median value and punish the staker who proposed deviated value
+		// compile all response with their corresponding tx response. Make a block. Propose the block
+		// blk is send to blockchain, blockchain peer will verify all the information in blockchain
+		// If the blk is finalized by blockchain peers, txs are confirmed, if not all txs process again in the next round
+		// Once blk is finalized, corresponding responses are send to the clients
+		// move to next epoch. repeat.
+
+		o.commit(epoch, txs, peers)
+		o.reveal(epoch, txs, peers)
+		o.verify(epoch, txs, peers)
+		o.punishers(epoch, txs, peers)
+		o.propose(epoch, txs, peers)
+		o.sendBlk()
+		// wait for the response
+		// if blk is finalized, confirm the corresponding txs
+
+	*/
+
+	return true
+
 }
+
+/*
 
 func (o *Oracle) verifyCommitReveal(epoch uint64) {
 	commit := o.commit[epoch]
@@ -311,34 +391,10 @@ func (o *Oracle) verifyCommitReveal(epoch uint64) {
 	delete(o.reveal, epoch)
 }
 
-/*
-func (o *Oracle) writeBlk(blk *FinalBlock) {
-	log.Println(blk)
-	f, err := os.OpenFile("../logs/oracle.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Println("[Error] Can't open file to write oracle blk")
-		return
-	}
-	log := "Oracle block for epoch " + strconv.Itoa(int(blk.Epoch)) + " Finalized\n"
-	f.WriteString(log)
-	f.Close()
-	f, err = os.OpenFile("../logs/externalData.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		return
-	}
-	results := blk.Results
-	log = ""
-	for _, data := range results {
-		o.confirmedId += 1
-		res := &Response{}
-		proto.Unmarshal(data, res)
-		log += "Job with Id " + strconv.Itoa(o.confirmedId) + " access data point: " + string(res.Data) + "\n"
-		//f.WriteString(log)
-		//f.Write(res.Data)
-		//f.WriteString("\n")
-	}
-	f.WriteString(log)
-	f.Close()
+func (o *Oracle) commit(epoch uint64, txs []*msg.PendingRequest, peers []*OraclePeer) {
+	for _, p := range peers {
 
+	}
 }
+
 */
